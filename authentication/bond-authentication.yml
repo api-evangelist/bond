@@ -1,0 +1,44 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bond.tech/reference/authentication
+docs: https://docs.bond.tech/reference/authentication
+summary:
+  types: [apiKey]
+  api_key_in: [header]
+  oauth2_flows: []
+  note: >-
+    Bond uses a two-part API key: an Identity value and an Authorization value,
+    both sent as request headers. The key identifies the Bond account (brand),
+    not an individual team member. Keys are created and managed in the Bond Portal.
+schemes:
+  - name: Identity
+    type: apiKey
+    in: header
+    parameter: Identity
+    description: >-
+      The Identity portion of the Bond API key (e.g. a UUID). Sent on every
+      request alongside the Authorization header.
+    sources: [https://docs.bond.tech/reference/authentication]
+  - name: Authorization
+    type: apiKey
+    in: header
+    parameter: Authorization
+    description: >-
+      The secret Authorization portion of the Bond API key. Sent on every request
+      alongside the Identity header.
+    sources: [https://docs.bond.tech/reference/authentication]
+required_headers:
+  - name: Identity
+    required: true
+  - name: Authorization
+    required: true
+  - name: content-type
+    required: true
+    values: application/json
+    applies_to: [POST, PATCH, DELETE]
+key_management:
+  portal: https://portal.bond.tech
+  notes: >-
+    An account may hold any number of API keys. All keys currently grant access
+    to every endpoint on the platform. Separate keys exist per environment
+    (sandbox vs production).
