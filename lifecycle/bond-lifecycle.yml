@@ -1,0 +1,26 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bond.tech/reference/versioning
+versioning:
+  scheme: uri-path
+  format: /api/v{major}.{minor}/{resource}
+  current: v0.1
+  docs: https://docs.bond.tech/reference/versioning
+  policy: >-
+    Bond increments API version numbers when an update contains
+    backwards-incompatible changes, and releases new documentation versions
+    aligned with API versions.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No explicit deprecation policy or RFC 8594 Sunset/Deprecation header support is
+    documented publicly; backwards-incompatible changes are handled via new major
+    versions. No Deprecation pointer emitted.
+status_page: https://status.bond.tech/
+changelog: https://docs.bond.tech/changelog
+sla:
+  url: null
+company_status: >-
+  Bond is now part of Atelio by FIS; the standalone Bond platform documentation
+  remains published at docs.bond.tech.

@@ -1,0 +1,104 @@
+reviewer: API Evangelist
+date: '2026-07-23'
+slug: bond
+name: Bond Financial Technologies
+domain: bond.tech
+segment: banking-as-a-service
+country: United States
+summary: >-
+  Bond is a US banking-as-a-service / embedded-finance provider (acquired by FIS
+  in June 2023) with a genuinely deep, still-live first-party developer surface.
+  The public docs at docs.bond.tech expose nine documented API product families
+  covering the full BaaS lifecycle. Authentication is API-key based; there is no
+  single downloadable OpenAPI, but the reference is complete HTML and a public
+  Postman workspace is offered.
+developer_portal:
+  url: https://portal.bond.tech
+  status: 200
+  notes: >-
+    Bond Portal management application (sign-in gated). Public documentation and
+    API reference live at docs.bond.tech (ReadMe-hosted).
+documentation:
+  docs_url: https://docs.bond.tech/docs
+  reference_url: https://docs.bond.tech/reference/intro
+  status: 200
+  llms_txt: https://docs.bond.tech/llms.txt
+  operations_documented: 56
+  notes: >-
+    ReadMe-hosted docs with an llms.txt index. 56 individual operation reference
+    pages enumerated across Customers/KYC, Businesses/Beneficial Owners/KYB,
+    Cards + restrictions, Transactions, Webhooks, and sandbox Simulation.
+    Accounts, Statements, Transfers/ACH, and Credit are documented as extensive
+    product guides rather than standalone reference-operation pages.
+api_products:
+- Customers & KYC
+- Businesses & KYB (beneficial owners)
+- Cards (issuing, restrictions, PCI web SDK)
+- Accounts & Statements (consumer + commercial deposit, credit accounts)
+- Transfers (ACH, account-to-account, Plaid external accounts)
+- Ledger / Transactions
+- Credit (credit-builder + secured charge)
+- Webhooks
+- Simulation (sandbox authorization/settlement/KYC/KYB)
+authentication:
+  model: API key
+  headers:
+  - Identity
+  - Authorization
+  oauth2: false
+  oidc: false
+  mtls: false
+  notes: >-
+    Two-header API-key scheme — an `Identity` key id plus an `Authorization`
+    secret token, both managed in Bond Portal. No OAuth2/OIDC/mTLS documented.
+    Card-management SDK uses PCI-scoped tokenized rendering for sensitive data.
+base_urls:
+  production: https://api.bond.tech/api/v0.1/
+  sandbox: https://sandbox.bond.tech/api/v0.1/
+  production_probe: 401 (endpoint live, auth required)
+downloadable_specs:
+  openapi: none
+  swagger: none
+  postman:
+    type: public workspace / Run in Postman
+    url: https://www.postman.com/bond-technologies/workspace/bond-api
+    status: 200
+  notes: >-
+    No single OpenAPI/Swagger file is publicly downloadable. ReadMe embeds
+    per-operation OpenAPI fragments in the HTML reference and exposes them via
+    llms.txt, but there is no consolidated spec URL. Probes for
+    /openapi.json, /openapi.yaml, and /reference/openapi returned 404/403.
+    A public Postman workspace ("Run in Postman") is the closest machine-readable
+    artifact. No spec harvested to openapi/ — nothing fabricated.
+open_finance_posture:
+  fdx_participant: not documented
+  cfpb_1033: not documented
+  aggregator_access: >-
+    Consumes Plaid on the inbound side for external-account linking/verification
+    before transfers; Bond does not publish an aggregator-facing open-banking
+    data-access API of its own. This is a producer BaaS surface, not a consumer
+    data-sharing endpoint.
+  notes: >-
+    As a US voluntary open-finance participant Bond exposes no mandated contract;
+    its surface is a proprietary first-party BaaS REST API. Bank partnerships are
+    pre-integrated and undisclosed publicly.
+links_verified:
+  website: 200
+  developer_portal: 200
+  docs: 200
+  api_reference: 200
+  github_org: 200 (github.com/bond-tech — 8 public SDK/sample repos)
+  linkedin: 200 (company/bondfintech)
+  blog: 200
+  terms: 200
+  privacy: 200
+  postman: 200
+  status_page: dead (status.bond.tech unreachable — removed from common[])
+  signup: dead (signup.bond.tech unreachable — removed from common[])
+  pricing: 404 (no public pricing — sales-led BaaS)
+spec_provenance: >-
+  All nine apis[] entries derived from docs.bond.tech public developer
+  documentation and llms.txt operation index (fetched 2026-07-23). humanURLs
+  point to live ReadMe reference/guide pages. No OpenAPI harvested (none publicly
+  downloadable); no content invented.
+status: deepened

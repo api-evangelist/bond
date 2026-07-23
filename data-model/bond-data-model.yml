@@ -1,0 +1,99 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bond.tech/reference/intro
+note: >-
+  Entity-relationship graph derived from Bond's object/reference documentation
+  (no OpenAPI is published for machine derivation). Relationships reflect the
+  documented resource model; cardinalities are inferred from the guides.
+identifier_scheme: UUIDv4 across resources (e.g. customer_id, card_id, account_id, transaction_id)
+entities:
+  - name: Customer
+    description: An individual end user of a brand, subject to KYC verification.
+    ref: https://docs.bond.tech/docs/customer-onboarding
+  - name: Business
+    description: A business end user, subject to KYB verification, with beneficial owners.
+    ref: https://docs.bond.tech/docs/business-onboarding-overview
+  - name: BeneficialOwner
+    description: A beneficial owner of a Business, subject to KYC-style verification.
+    ref: https://docs.bond.tech/docs/beneficial-owners
+  - name: Address
+    description: A postal address attached to a Customer, Business, or Beneficial Owner.
+  - name: Account
+    description: A deposit or credit account (consumer or commercial).
+    ref: https://docs.bond.tech/docs/account-overview
+  - name: Card
+    description: A secured deposit, secured charge, debit, or virtual card tied to an account.
+    ref: https://docs.bond.tech/docs/manage-card
+  - name: CardRestriction
+    description: A spend/transaction restriction placed on a Card.
+    ref: https://docs.bond.tech/docs/card-restrictions
+  - name: CreditApplication
+    description: A credit application for a secured charge card, including adverse actions.
+    ref: https://docs.bond.tech/reference/post-credit-applications
+  - name: ExternalAccount
+    description: An external bank account linked via Plaid for funding/transfers.
+    ref: https://docs.bond.tech/docs/managing-external-accounts
+  - name: Transfer
+    description: A movement of funds (ACH or account-to-account) between accounts.
+    ref: https://docs.bond.tech/docs/account-transfers
+  - name: Transaction
+    description: A ledger transaction on an account/card with a lifecycle and states.
+    ref: https://docs.bond.tech/docs/transactions-overview
+  - name: Statement
+    description: A monthly statement for a credit or deposit account.
+    ref: https://docs.bond.tech/docs/statements-1
+  - name: WebhookSubscription
+    description: A subscription to one or more webhook event types.
+    ref: https://docs.bond.tech/reference/post_webhooks
+relationships:
+  - from: Customer
+    type: has_many
+    to: Account
+  - from: Customer
+    type: has_many
+    to: Address
+    via: address
+  - from: Business
+    type: has_many
+    to: BeneficialOwner
+  - from: Business
+    type: has_many
+    to: Account
+  - from: BeneficialOwner
+    type: has_many
+    to: Address
+  - from: Account
+    type: has_many
+    to: Card
+  - from: Account
+    type: has_many
+    to: Transaction
+  - from: Account
+    type: has_many
+    to: Statement
+  - from: Card
+    type: belongs_to
+    to: Account
+    via: account_id
+  - from: Card
+    type: has_many
+    to: CardRestriction
+  - from: Card
+    type: has_many
+    to: Transaction
+  - from: CreditApplication
+    type: belongs_to
+    to: Customer
+    via: customer_id
+  - from: Transfer
+    type: references
+    to: Account
+    via: [from_account, to_account]
+  - from: Transfer
+    type: references
+    to: ExternalAccount
+    via: external_account
+  - from: Transaction
+    type: belongs_to
+    to: Account
+    via: account_id

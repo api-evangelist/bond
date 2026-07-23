@@ -1,0 +1,203 @@
+# Bond API Documentation Documentation
+
+> Bond Financial Technologies Inc. provides software resources that enable you to offer customized banking products to your customers. Bond's extensive API guides will provide you and your developers all the tools and guidance needed to build a world-class financial app.
+
+## Guides
+- [Introduction](https://docs.bond.tech/docs/welcome-introduction.md): Full stack platform to build your own financial products and services.
+- [Quickstart](https://docs.bond.tech/docs/overview.md): Overview of how to sign up to the Bond platform and what you need to do so that a customer can perform their first transaction.
+- [1. Signing into Bond Portal](https://docs.bond.tech/docs/signing-in-to-bond.md): Getting your login to the Bond Portal management application and signing in.
+- [2. Getting your API key](https://docs.bond.tech/docs/getting-your-api-key.md): Getting your Bond API identity and authorization keys.
+- [3. Postman collection](https://docs.bond.tech/docs/postman-collection.md): The Postman collection for testing Bond platform APIs.
+- [Postman Collection](https://docs.bond.tech/docs/using-postman-collections.md): How can you use our Postman collection.
+- [Sandbox vs Production](https://docs.bond.tech/docs/sandbox-vs-production.md): Understand feature support across sandbox and production environments
+- [Webhooks](https://docs.bond.tech/docs/webhook.md): Description of how webhooks work and how webhooks work within the Bond platform.
+- [Webhook events and subscriptions](https://docs.bond.tech/docs/event-subscriptions.md): What type of webhook events do we support and how do you subscribe to these events.
+- [Webhook payload examples](https://docs.bond.tech/docs/webhook-payloads.md): A quick reference for event data sent to your configured webhooks when an event is triggered.
+- [Creating a webhook subscription](https://docs.bond.tech/docs/creating-a-webhook-subscription.md): How to create a new webhook subscription.
+- [Managing subscriptions](https://docs.bond.tech/docs/managing-subscriptions.md): How to manage your webhook subscriptions, for example, creating or updating a subscription.
+- [Accepting webhook requests](https://docs.bond.tech/docs/signatures.md): How do you accept and handle webhook events.
+- [Testing webhooks](https://docs.bond.tech/docs/testing-webhooks.md): How can you test in the sandbox that a webhook is working.
+- [Glossary](https://docs.bond.tech/docs/glossary.md): Glossary of terms that we use.
+- [FAQ](https://docs.bond.tech/docs/faq.md): Frequently asked questions about the Bond platform.
+- [Credit builder card overview](https://docs.bond.tech/docs/credit-builder-card-overview.md)
+- [CBC Quickstart](https://docs.bond.tech/docs/cbc-quickstart.md)
+- [Prerequisites](https://docs.bond.tech/docs/prerequisites.md): What preparations do you need to make before you can create a customer.
+- [Building a secured deposit card](https://docs.bond.tech/docs/building-a-secured-deposit-card.md)
+- [Funding a security deposit account](https://docs.bond.tech/docs/funding-a-security-deposit-account.md): How you can deposit funds into your security deposit account.
+- [Making a payment](https://docs.bond.tech/docs/making-a-payment.md): How to make a payment to the security deposit account.
+- [Onboarding for secured charge cards](https://docs.bond.tech/docs/onboarding-secured-charge-cards.md): Seamlessly take your customers through KYC and credit application approval
+- [Creating a secured charge card](https://docs.bond.tech/docs/creating-a-secured-charge-card.md): How to create a secured charge card, from getting your API keys to making payments.
+- [Instant funding for Credit Builder Cards](https://docs.bond.tech/docs/instant-funding-for-credit-builder-cards.md)
+- [Managing cards](https://docs.bond.tech/docs/manage-card.md): How to manage a card, including changing the card status.
+- [Retrieving card information](https://docs.bond.tech/docs/get-card.md): How to retrieve the information of cards.
+- [Activating a card](https://docs.bond.tech/docs/activating-a-card.md): How to activate a card
+- [Changing a cards status](https://docs.bond.tech/docs/changing-a-cards-status.md): How to activate a card and change its status.
+- [Reissuing a card](https://docs.bond.tech/docs/reissuing-a-card.md): How to reissue a card.
+- [Card reissue FAQ](https://docs.bond.tech/docs/card-reissue-faq.md): What to be aware of when reissuing a card.
+- [Setting card restrictions](https://docs.bond.tech/docs/card-restrictions.md): How to set and manage card restrictions, for example the maximum transaction amount.
+- [Closing a card](https://docs.bond.tech/docs/closing-a-card.md): How to close a card account.
+- [PCI data rendering](https://docs.bond.tech/docs/retrieve-card-details-set-pins-and-reset-pins.md): How to install and use the Bond card management SDK which assists you in handling sensitive customer data.
+- [Instructions: Retrieving & displaying card details](https://docs.bond.tech/docs/retrieve-card-details-instructions.md): Using the Bond card management SDK to retrieve and display a customer's card details.
+- [Instructions: Setting a PIN](https://docs.bond.tech/docs/set-a-cards-pin.md): Using the Bond card management SDK to set a customer's card PIN.
+- [Instructions: Copy data](https://docs.bond.tech/docs/instructions-copy-data.md): Using the Bond card management SDK to retrieve and display a customer's card details.
+- [Integrating the Embedded Bond App](https://docs.bond.tech/docs/integrating-the-embedded-bond-app.md)
+- [Accounts Overview](https://docs.bond.tech/docs/account-overview.md): Overview of our Accounts model.
+- [Account types](https://docs.bond.tech/docs/account-types.md): What account types do we provide.
+- [Account states](https://docs.bond.tech/docs/account-states.md): What state can an account be in and how does this affect the flow of funds
+- [Managing accounts](https://docs.bond.tech/docs/managing-accounts.md): How to manage accounts, for example close an account.
+- [Opening a credit account](https://docs.bond.tech/docs/opening-a-credit-account.md): Overview of opening a credit for a customer.
+- [Showing credit account data](https://docs.bond.tech/docs/showing-credit-account-data.md): Present Credit Account information to your customers
+- [Building consumer banking](https://docs.bond.tech/docs/building-deposit-accounts.md): A step-by-step guide to creating and using consumer deposit accounts
+- [Building commercial banking](https://docs.bond.tech/docs/building-commercial-banking.md): A step-by-step guide to creating and using commercial deposit accounts
+- [Statements](https://docs.bond.tech/docs/statements-1.md): How to build statements for your customer.
+- [Building Statements](https://docs.bond.tech/docs/building-statements.md)
+- [Retrieving deposit account statement data](https://docs.bond.tech/docs/deposit-account-statements.md): How to build a deposit account statement.
+- [KYC State Machine](https://docs.bond.tech/docs/kyc-state-machine.md): A deep-dive into different KYC states
+- [Customer onboarding overview](https://docs.bond.tech/docs/customer-onboarding.md): Overview of the process of adding and verifying a customer.
+- [Creating a customer resource](https://docs.bond.tech/docs/creating-a-customer-resource.md)
+- [Managing customers](https://docs.bond.tech/docs/managing-customers.md): How to retrieve, delete, and update existing customers.
+- [Managing customer addresses](https://docs.bond.tech/docs/managing-customer-addresses.md): How to add, delete, and update existing customer addresses.
+- [Triggering KYC Scenarios](https://docs.bond.tech/docs/trigger-kyc-scenarios.md): How to trigger various KYC scenarios in the sandbox, for example a request for verification documents.
+- [How KYC works](https://docs.bond.tech/docs/kyc.md): Overview of the Know Your Customer verification process, webhook events, Knowledge Based Authentication, and retrieving the KYC status.
+- [Uploading KYC documentation](https://docs.bond.tech/docs/kyc-documentation.md): What methods you can use to upload customer verification documents, and how you can use each method.
+- [How KYB works](https://docs.bond.tech/docs/know-your-business.md): Overview and how you can run the Know Your Business verification process for a business, and what webhook events are generated.
+- [Business onboarding overview](https://docs.bond.tech/docs/business-onboarding-overview.md): Overview of the process of adding and verifying a business.
+- [Triggering KYB Scenarios](https://docs.bond.tech/docs/triggering-kyb-scenarios.md): How to trigger various KYB scenarios in the sandbox, for example rejecting the process.
+- [Creating a business resource](https://docs.bond.tech/docs/creating-a-business-resource.md)
+- [Managing Businesses](https://docs.bond.tech/docs/managing-businesses.md)
+- [Managing business addresses](https://docs.bond.tech/docs/managing-business-addresses.md)
+- [Creating Beneficial Owners](https://docs.bond.tech/docs/beneficial-owners.md)
+- [Managing Beneficial Owners](https://docs.bond.tech/docs/managing-beneficial-owners.md): How to retrieve, delete, and update existing Beneficial Owners.
+- [Managing beneficial owner (BO) addresses](https://docs.bond.tech/docs/managing-beneficial-owner-addresses.md): How to add, delete, and update existing Beneficial Owner addresses.
+- [Verifying Beneficial Owners](https://docs.bond.tech/docs/beneficial-owner-verification.md): Overview of the Know Your Customer verification process, webhook events, and retrieving the KYC status.
+- [Uploading Beneficial Owner documentation](https://docs.bond.tech/docs/beneficial-owner-documentation-upload.md): What methods you can use to upload beneficial owner verification documents, and how you can use each method.
+- [Linking an external account with Plaid](https://docs.bond.tech/docs/linking-an-external-account-without-the-bond-sdk.md): How to link an external account using Plaid and Bond's APIs.
+- [Managing external accounts](https://docs.bond.tech/docs/managing-external-accounts.md): How to list and delete linked external accounts.
+- [Transfers overview](https://docs.bond.tech/docs/account-transfers.md): Overview of performing transfers between accounts.
+- [What is ACH](https://docs.bond.tech/docs/ach-transfers.md): What is an ACH transfer and how do we use them.
+- [ACH return codes](https://docs.bond.tech/docs/ach-return-codes.md): List of possible ACH return codes.
+- [Creating a transfer](https://docs.bond.tech/docs/account-fund-transfers.md): How to perform a fund transfer between accounts.
+- [Transactions overview](https://docs.bond.tech/docs/transactions-overview.md): How does Bond manage transactions and what are the attributes of a transaction.
+- [Transaction lifecycle](https://docs.bond.tech/docs/transaction-lifecycle.md): Overview of the transaction lifecycle.
+- [Transaction states](https://docs.bond.tech/docs/transaction-states.md): Detailed description of the states that a transaction can hold.
+- [Retrieving transactions](https://docs.bond.tech/docs/retrieving-transactions.md): How to retrieve one or more of a customer's transactions and the transaction details.
+- [Payment types](https://docs.bond.tech/docs/payment-types.md): Payment types and details.
+- [Transaction types](https://docs.bond.tech/docs/transaction-types.md): Transaction types and details.
+- [Transaction payloads](https://docs.bond.tech/docs/transaction-payloads.md): A quick reference for response payloads across transaction types.
+- [MCC codes](https://docs.bond.tech/docs/mcc-codes-and-descriptions.md): What is an MCC code and a list of possible values.
+- [What's new in v0.1?](https://docs.bond.tech/docs/whats-new-in-v01.md): What's new and what's changed from v0?
+- [Bond Portal](https://docs.bond.tech/docs/bondos-overview.md): What is Bond Portal?
+- [Developers](https://docs.bond.tech/docs/develop.md): Description of the Bond Portal **Developers** section.
+- [Get started](https://docs.bond.tech/docs/get-started.md): What can you do on the Bond Portal **Get started** page.
+- [API keys](https://docs.bond.tech/docs/api-keys.md): What can you do on the Bond Portal **API Keys** page.
+- [Webhooks](https://docs.bond.tech/docs/bondos-webhooks.md): What can you do on the Bond Portal **Webhooks** page.
+- [Logs](https://docs.bond.tech/docs/logs.md): What can you do on the Bond Portal **Logs** page.
+- [Transactions](https://docs.bond.tech/docs/os-transactions.md): Description of the Bond Portal **Transactions** section.
+- [API Headers](https://docs.bond.tech/docs/api-headers.md): What are request and response API headers, and what do they contain.
+- [Errors](https://docs.bond.tech/docs/overview-1.md): What are error codes and what might they contain.
+- [Error types](https://docs.bond.tech/docs/error-types.md): What types of errors might you receive.
+- [Error codes](https://docs.bond.tech/docs/error-codes.md): What are error codes.
+- [Error code dictionary](https://docs.bond.tech/docs/error-code-dictionary.md): A list of error codes and what they mean.
+- [Error statuses](https://docs.bond.tech/docs/error-statuses.md): What types of error statuses are there.
+- [Error examples](https://docs.bond.tech/docs/error-examples.md): Examples of error codes.
+- [Web SDK Documentation](https://docs.bond.tech/docs/web-sdk-documentation.md): API documentation for the Bond Web SDK
+
+## API Reference
+- [Introduction](https://docs.bond.tech/reference/intro.md): Introduction to our APIs, objects, and environments.
+- [Authentication](https://docs.bond.tech/reference/authentication.md): How does Bond implement API call authentication.
+- [Headers](https://docs.bond.tech/reference/headers.md): What request and response headers are required.
+- [Versioning](https://docs.bond.tech/reference/versioning.md): How to see your version number and when do we change it.
+- [Postman collection](https://docs.bond.tech/reference/postman_collection.md): How can you use our Postman collection.
+- [Status codes and errors](https://docs.bond.tech/reference/status-codes-and-errors.md): What are error codes and what might they contain.
+- [Error types](https://docs.bond.tech/reference/error-types-1.md): What error types does Bond provide.
+- [Error codes](https://docs.bond.tech/reference/error-codes-1.md): What error codes does Bond provide.
+- [Error code dictionary](https://docs.bond.tech/reference/error-code-dictionary-1.md): The error code dictionary.
+- [Error statuses](https://docs.bond.tech/reference/error-statuses-1.md): What error statuses does Bond provide.
+- [Error examples](https://docs.bond.tech/reference/error-examples-1.md): Some error code examples.
+- [Sandbox vs. Production](https://docs.bond.tech/reference/sandbox_production.md): What are the differences between the sandbox and live environments.
+- [Retrieve all customers](https://docs.bond.tech/reference/get_customers.md): Retrieves all customers
+- [Create a customer](https://docs.bond.tech/reference/post_customers.md): Creates a customer
+- [Retrieve a customer](https://docs.bond.tech/reference/get_customers_id.md): Retrieves a customer
+- [Update a customer](https://docs.bond.tech/reference/patch_customers.md): Updates a customer
+- [Delete a customer](https://docs.bond.tech/reference/delete_customers.md): Deletes a customer
+- [Start KYC (Know-Your-Customer)](https://docs.bond.tech/reference/post_verification_kyc.md): Start a KYC verification for a `Customer`
+- [Retrieve KYC Status](https://docs.bond.tech/reference/get_verification_kyc.md): Retrieve the KYC status of a `Customer`
+- [Resume a Persona Inquiry](https://docs.bond.tech/reference/post_resume_payload.md): Obtain a new `session_token` for resuming a Persona inquiry. This is required if the Persona inquiry, inquiry session, or `session_token` has expired. This can also be used if the `session_token` has been lost.
+- [Businesses](https://docs.bond.tech/reference/businesses-1.md)
+- [Retrieve all businesses](https://docs.bond.tech/reference/get_businesses.md): Retrieves all businesses associated with a brand
+- [Create a business](https://docs.bond.tech/reference/post_businesses.md): Creates a business associated with a brand
+- [Retrieve a business](https://docs.bond.tech/reference/get_business.md): Retrieves a business associated with a brand
+- [Delete a business](https://docs.bond.tech/reference/delete_business.md): Deletes a business associated with a brand
+- [Update a business](https://docs.bond.tech/reference/patch_business.md): Updates a business associated with a brand
+- [Business address](https://docs.bond.tech/reference/business-address.md)
+- [Retrieve all business addresses](https://docs.bond.tech/reference/get_business_addresses.md): Retrieves all addresses associated with a business
+- [Create a business address](https://docs.bond.tech/reference/post_business_addresses.md): Creates an address associated with a business
+- [Retrieve a business address](https://docs.bond.tech/reference/get_business_address.md): Retrieves an address associated with a business
+- [Delete a business address](https://docs.bond.tech/reference/delete_business_address.md): Deletes an address associated with a business
+- [Update a business address](https://docs.bond.tech/reference/patch_business_address.md): Updates an address associated with a business
+- [Beneficial owners](https://docs.bond.tech/reference/beneficial-owner.md)
+- [Retrieve all beneficial owners](https://docs.bond.tech/reference/get_beneficial_owners.md): Retrieves all beneficial owners associated with a business
+- [Create a beneficial owner](https://docs.bond.tech/reference/post_beneficial_owners.md): Creates a beneficial owner associated with a business
+- [Retrieve a beneficial owner](https://docs.bond.tech/reference/get_beneficial_owner.md): Retrieves a beneficial owner associated with a business
+- [Delete a beneficial owner](https://docs.bond.tech/reference/delete_beneficial_owner.md): Deletes a beneficial owner associated with a business
+- [Update a beneficial owner](https://docs.bond.tech/reference/patch_beneficial_owner.md): Updates a beneficial owner associated with a business
+- [Retrieve KYC Status](https://docs.bond.tech/reference/get_beneficial_owner_kyc.md): Retrieve the KYC status of a `Beneficial Owner`
+- [Start KYC (Know-Your-Customer)](https://docs.bond.tech/reference/post_beneficial_owner_kyc.md): Start a KYC verification for a `Beneficial Owner`
+- [Beneficial owners address](https://docs.bond.tech/reference/beneficial-owners-address.md)
+- [Retrieve all beneficial owner addresses](https://docs.bond.tech/reference/get_beneficial_owner_addresses.md): Retrieves all addresses associated with a beneficial owner
+- [Create a beneficial owner address](https://docs.bond.tech/reference/post_beneficial_owner_addresses.md): Creates an address associated with a beneficial owner
+- [Retrieve a beneficial owner address](https://docs.bond.tech/reference/get_beneficial_owner_address.md): Retrieves an address associated with a beneficial owner
+- [Delete a beneficial owner address](https://docs.bond.tech/reference/delete_beneficial_owner_address.md): Delete an address associated with a beneficial owner
+- [Update a beneficial owner address](https://docs.bond.tech/reference/patch_beneficial_owner_address.md): Update an address associated with a beneficial owner
+- [KYB](https://docs.bond.tech/reference/kyb.md)
+- [Start v2 KYB (Know-Your-Business)](https://docs.bond.tech/reference/post_kyb_2.md): Start a KYB verification for a `Business` on given program
+- [Resume v2 KYB (Know-Your-Business)](https://docs.bond.tech/reference/post_kyb_resume.md): Resume a KYB verification for a given inquiry
+- [Retrieve KYB Status](https://docs.bond.tech/reference/get_kyb.md): Retrieve the KYB status of a `Business`
+- [Start KYB (Know-Your-Business)](https://docs.bond.tech/reference/post_kyb.md): Start a KYB verification for a `Business`
+- [Cards](https://docs.bond.tech/reference/cards.md)
+- [Create a card](https://docs.bond.tech/reference/post_cards.md): Creates a new card and card account
+- [Retrieve all cards](https://docs.bond.tech/reference/get_cards.md): Get all cards.
+- [Retrieve a card](https://docs.bond.tech/reference/get_cards_id.md): Retrieves info about a card
+- [Update Card](https://docs.bond.tech/reference/patch_cards.md): Updates info about a card
+- [Reissue a card](https://docs.bond.tech/reference/post_cards_reissue.md): Reissues a card
+- [Activate Physical Card](https://docs.bond.tech/reference/post_cards_activate.md): Activate a card
+- [Close a Card](https://docs.bond.tech/reference/post_cards_close.md): Close a card
+- [Card restrictions](https://docs.bond.tech/reference/card-restriction.md)
+- [Retrieve card restrictions](https://docs.bond.tech/reference/get_cards_restrictions.md): Retrieve all restrictions on a card
+- [Create card restriction](https://docs.bond.tech/reference/post_cards_restrictions.md): Create card restriction for a card
+- [Retrieve card restriction by id](https://docs.bond.tech/reference/get_cards_restrictions_id.md): Updatess restriction on a card.
+- [Update card restriction](https://docs.bond.tech/reference/patch_cards_restrictions.md): Updates restriction on a card.
+- [Delete card restriction](https://docs.bond.tech/reference/delete_cards_restrictions.md): Delete the selected restriction on a card
+- [Create credit application](https://docs.bond.tech/reference/post-credit-applications.md): Start a credit application. The optional keys can be changed at any point before the application is submitted.
+- [Get credit applications](https://docs.bond.tech/reference/get-credit-applications.md): Get credit applications.
+- [Get credit application](https://docs.bond.tech/reference/get-credit-applications-id.md): Get a credit application by id.
+- [Patch credit application](https://docs.bond.tech/reference/patch-credit-applications.md): Update an existing credit application. The optional keys can be changed at any point before the application is submitted.
+- [Submit credit application](https://docs.bond.tech/reference/credit-applications-submit.md): Submit a credit application. All fields on the application must be populated before submitting. The customer must have passed KYC for the program in question.
+- [Get adverse actions](https://docs.bond.tech/reference/get-adverse-actions.md): Get adverse actions for a credit application, if it has them.
+- [Create a Transfer](https://docs.bond.tech/reference/post-transfer.md): Create a new transfer.
+- [Get all accounts](https://docs.bond.tech/reference/get-accounts.md): Retrieve a list of accounts
+- [Create an account](https://docs.bond.tech/reference/post-accounts.md): Create an account
+- [Create an account using a processor token](https://docs.bond.tech/reference/post-accounts-ptoken.md): Create an account using a processor token
+- [Get account by id](https://docs.bond.tech/reference/get-accounts-by-id.md)
+- [Update an account](https://docs.bond.tech/reference/patch-accounts.md)
+- [Close an Account](https://docs.bond.tech/reference/close-accounts.md)
+- [Get a statement for an account](https://docs.bond.tech/reference/get-statements-yyyy-mm.md): Get a statement by Year and Month
+- [Get all statements for an account](https://docs.bond.tech/reference/get-statements.md): Get all statements
+- [Transactions](https://docs.bond.tech/reference/transactions.md)
+- [Get transactions](https://docs.bond.tech/reference/get_transactions.md): Get all transactions available to a brand with pagination and optional filtering.
+- [Get a transaction by id](https://docs.bond.tech/reference/get_transaction_id.md): Get details for a single transaction.
+- [Webhooks](https://docs.bond.tech/reference/webhooks.md)
+- [Create webhook subscription](https://docs.bond.tech/reference/post_webhooks.md): Subscribe to webhook events
+- [Get all webhook subscriptions](https://docs.bond.tech/reference/get_webhooks.md): Retrieves a list of all webhook subscriptions
+- [Update a webhook subscription](https://docs.bond.tech/reference/patch_webhooks.md): Updates a webhook subscription
+- [Remove a webhook subscription](https://docs.bond.tech/reference/delete_webhooks.md): Deletes a webhook subscription
+- [Simulate](https://docs.bond.tech/reference/simulate.md)
+- [Simulate Authorization](https://docs.bond.tech/reference/post_authorization.md): Simulate a card transaction
+- [Simulate Settlement](https://docs.bond.tech/reference/post_settle.md): Simulate transaction settlement
+- [Simulate KYC Passed](https://docs.bond.tech/reference/post_simulate_kyc_pass.md)
+- [Simulate KYC Failed](https://docs.bond.tech/reference/post_simulate_kyc_fail.md)
+
+## Changelog
+- [/transfers error updates - Jan 10, 2023](https://docs.bond.tech/changelog/transfers-error-updates-jan-10-2023.md)
+- [Sept 29, 2022](https://docs.bond.tech/changelog/sept-29-2022.md)
+- [Sept 22, 2022](https://docs.bond.tech/changelog/requiring-phone-numbers-to-onboard-customers.md)

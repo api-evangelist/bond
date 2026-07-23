@@ -1,0 +1,52 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bond.tech/reference/intro
+docs:
+  - https://docs.bond.tech/reference/intro
+  - https://docs.bond.tech/reference/headers
+  - https://docs.bond.tech/reference/versioning
+  - https://docs.bond.tech/reference/status-codes-and-errors
+architecture:
+  style: REST
+  data_format: JSON
+  methods: [GET, POST, PATCH, DELETE]
+  base_urls:
+    production: https://api.bond.tech/api/v0.1/
+    sandbox: https://sandbox.bond.tech/api/v0.1/
+authentication:
+  style: two-part-api-key-header
+  headers: [Identity, Authorization]
+  ref: authentication/bond-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    Bond's public documentation does not describe an idempotency-key header or
+    parameter. No Idempotency pointer is emitted (no fabrication).
+pagination:
+  supported: true
+  scope: [transactions]
+  note: >-
+    The transactions endpoint (GET /transactions) supports pagination and optional
+    filtering. Cursor/parameter names are documented per-operation in the API reference.
+versioning:
+  scheme: uri-path
+  format: /api/v{major}.{minor}/{resource}
+  current: v0.1
+  policy: >-
+    Version numbers are incremented when an API update contains
+    backwards-incompatible changes; new documentation versions are released aligned
+    to API versions.
+  ref: lifecycle/bond-lifecycle.yml
+headers:
+  request:
+    - {name: authorization, required: true, note: Identity and Authorization keys}
+    - {name: content-type, required: true, values: application/json, applies_to: [POST, PATCH, DELETE]}
+  note: Header field names are case-insensitive.
+  docs: https://docs.bond.tech/reference/headers
+error_envelope:
+  fields: [Message, Status, Code, Type]
+  format: bond-error-envelope
+  ref: errors/bond-error-codes.yml
+webhooks:
+  ref: asyncapi/bond-webhooks.yml
+  signature_verification: required

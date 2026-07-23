@@ -1,0 +1,23 @@
+generated: '2026-07-18'
+method: searched
+note: >-
+  Probed the /.well-known/ discovery surface on Bond's API and web hosts. No
+  document returned 200, so no raw files were saved and no WellKnown/SecurityTxt
+  pointer is emitted. Absence recorded as valid data.
+hosts:
+  - host: https://api.bond.tech
+    documents:
+      - {path: /.well-known/security.txt, status: 403}
+      - {path: /.well-known/openid-configuration, status: 403}
+      - {path: /.well-known/oauth-authorization-server, status: 403}
+  - host: https://bond.tech
+    documents:
+      - {path: /.well-known/security.txt, status: 301}
+  - host: https://www.bond.tech
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+  - host: https://docs.bond.tech
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /openapi.json, status: 404}
+      - {path: /openapi.yaml, status: 404}

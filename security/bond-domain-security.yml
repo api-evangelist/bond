@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: docs.bond.tech
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  9 10:56:42 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: api.bond.tech
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 22 03:33:13 2026 GMT
+  hsts: null
+domains:
+- domain: bond.tech
+  dnssec: false
+  caa:
+  - 0 issue "amazon.com"
+  - 0 issue "digicert.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog"
+  spf: true
+  dmarc: false

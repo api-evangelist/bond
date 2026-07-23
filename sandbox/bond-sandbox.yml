@@ -1,0 +1,48 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bond.tech/docs/sandbox-vs-production
+docs:
+  - https://docs.bond.tech/docs/sandbox-vs-production
+  - https://docs.bond.tech/docs/trigger-kyc-scenarios
+  - https://docs.bond.tech/docs/triggering-kyb-scenarios
+environments:
+  sandbox:
+    api: https://sandbox.bond.tech/api/v0.1/
+    embedded_token: https://api-sandbox.embedded.bond.tech/api/auth/token
+    embedded_frontend: https://embedded-sandbox.bond.tech
+    real_money: false
+  production:
+    api: https://api.bond.tech/api/v0.1/
+    embedded_token: https://api.embedded.bond.tech/api/auth/token
+    embedded_frontend: https://embedded.bond.tech
+    real_money: true
+separation:
+  model: separate base URLs and API keys per environment
+  note: Requests hit production or sandbox depending on the URL used; sandbox never touches financial networks.
+simulation:
+  kyc:
+    trigger_scenarios: https://docs.bond.tech/docs/trigger-kyc-scenarios
+    note: Various KYC states can be triggered in sandbox using designated scenario SSNs.
+    simulate_pass: POST simulate KYC passed (sandbox only) - https://docs.bond.tech/reference/post_simulate_kyc_pass
+    simulate_fail: POST simulate KYC failed (sandbox only) - https://docs.bond.tech/reference/post_simulate_kyc_fail
+  kyb:
+    trigger_scenarios: https://docs.bond.tech/docs/triggering-kyb-scenarios
+    note: KYB scenarios can be triggered; pass/fail cannot be simulated the way KYC can.
+  card_transactions:
+    simulate_authorization: POST simulate authorization (sandbox only) - https://docs.bond.tech/reference/post_authorization
+    simulate_settlement: POST simulate settlement (sandbox only) - https://docs.bond.tech/reference/post_settle
+  ach:
+    note: In sandbox, ACH transfers settle within an hour; ACH returns are not simulated in sandbox.
+sandbox_only_features:
+  - Simulate KYC passed / failed
+  - Simulate card authorization and settlement
+production_only_features:
+  - ACH returns
+  - Non-standard card transactions (cash withdrawals, purchase returns)
+  - Card issue fees and ATM withdrawal fees
+  - Mobile wallet provisioning (card.wallet.* webhooks)
+test_values:
+  note: >-
+    Bond publishes KYC/KYB trigger scenarios (scenario SSNs / inputs) on its docs
+    pages rather than a fixed table of magic values. Specific scenario inputs are
+    documented at the trigger-scenario pages above; not reproduced verbatim here.

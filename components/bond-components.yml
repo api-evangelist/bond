@@ -1,0 +1,38 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bond.tech/docs/web-sdk-documentation
+docs:
+  - https://docs.bond.tech/docs/web-sdk-documentation
+  - https://docs.bond.tech/docs/retrieve-card-details-set-pins-and-reset-pins
+  - https://docs.bond.tech/docs/integrating-the-embedded-bond-app
+note: >-
+  Bond ships client-side / embeddable surfaces distinct from server SDKs. These
+  handle PCI-sensitive card data in the browser and provide a prebuilt embedded
+  banking UI so brands do not touch raw PAN/PIN data.
+components:
+  - family: Card Management SDK
+    kind: web-sdk
+    description: >-
+      Browser SDK for handling sensitive customer card data (retrieve and display
+      card details, set and reset PINs) without the sensitive data touching the
+      brand's own systems.
+    docs: https://docs.bond.tech/docs/retrieve-card-details-set-pins-and-reset-pins
+    flows:
+      - Retrieve & display card details
+      - Set a card PIN
+      - Copy card data
+  - family: Web SDK
+    kind: web-sdk
+    description: General-purpose Bond Web SDK for embedding Bond capabilities in a web front end.
+    docs: https://docs.bond.tech/docs/web-sdk-documentation
+  - family: Embedded Bond App
+    kind: embedded-ui
+    description: >-
+      Prebuilt embeddable banking application (hosted front end + token-based auth)
+      that brands integrate to deliver account, card, and payment experiences.
+    docs: https://docs.bond.tech/docs/integrating-the-embedded-bond-app
+    endpoints:
+      token_production: https://api.embedded.bond.tech/api/auth/token
+      token_sandbox: https://api-sandbox.embedded.bond.tech/api/auth/token
+      frontend_production: https://embedded.bond.tech
+      frontend_sandbox: https://embedded-sandbox.bond.tech

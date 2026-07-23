@@ -1,0 +1,93 @@
+generated: '2026-07-18'
+method: searched
+type: Webhooks
+source: https://docs.bond.tech/docs/event-subscriptions
+spec_type: Webhooks
+transport: HTTPS POST (JSON) to a subscriber-configured callback URL
+delivery:
+  subscribe: POST /webhooks (create a subscription per event type)
+  signature: Requests are signed; verify the signature in the request headers before handling. All webhook
+    requests originate from the bond.tech domain and must be whitelisted.
+  ack: Return HTTP 200 or 201 to acknowledge.
+  docs: https://docs.bond.tech/docs/signatures
+payload_example:
+  event: kyc.verification.success
+  customer_id: 931e2341-c3eb-4681-97d4-f6e09d90da14
+  occurred_at: '2021-10-20T10:27:20.154286+00:00'
+event_count: 35
+events:
+- event: account.autopay.changed
+  description: Embedded app user has changed autopay status.
+- event: account.autopay.failed
+  description: Embedded app user autopay has failed to process.
+- event: account.autopay.processed
+  description: Embedded app user autopay has been successfully processed.
+- event: account.autopay.scheduled
+  description: Embedded app user autopay has been scheduled.
+- event: account.history.ready
+  description: Used when retrieving an external account history for the first time.
+- event: account.statements.generated
+  description: Embedded app user statement is ready for download.
+- event: account.statements.ready
+  description: Monthly statement for a credit or deposit account is now ready.
+- event: card.created
+  description: Card has been created.
+- event: card.status.active
+  description: Card status is now `Active`.
+- event: card.status.closed
+  description: Card status is now `Closed`.
+- event: card.status.inactive
+  description: Card status is now `Inactive`.
+- event: card.status.reissue
+  description: Card status is now `Reissue`.
+- event: card.wallet.add
+  description: Card was successfully added to a mobile wallet.
+- event: card.wallet.add_failure
+  description: Card failed to be added to a mobile wallet.
+- event: credit.application.created
+  description: The credit application has been created.
+- event: credit.application.submitted
+  description: Credit application has been submitted.
+- event: credit.application.approved
+  description: Credit application has been approved.
+- event: credit.application.adverse_action
+  description: A credit application adverse action has been generated.
+- event: credit.application.resubmit_required
+  description: For a secured charge account, the credit application KYC has failed or timed out. The application
+    needs to be resubmitted with the same `application_id`.
+- event: customer.updated
+  description: A customer has updated their personal information.
+- event: develop.api_key.created
+  description: A new API key has been created.
+- event: kyb.verification.error
+  description: KYB failed due to server error.
+- event: kyb.verification.initiated
+  description: KYB process has been initiated.
+- event: kyb.verification.rejected
+  description: KYB failed due to low confidence in identity validation.
+- event: kyb.verification.warning
+  description: Run KYB again.
+- event: kyb.verification.under_review
+  description: KYB inquiry has been completed.
+- event: kyc.verification.document_required
+  description: KYC requires further information to continue. This includes a documents field that indicates
+    the types of documents required.
+- event: kyc.verification.error
+  description: KYC failed due to server error.
+- event: kyc.verification.failure
+  description: KYC failed due to low confidence in identity validation.
+- event: kyc.verification.reenter_information
+  description: "This is optional and will be sent at the same time as `kyc.verification.document_required`.\
+    \  \n  \nThe customer may have entered incorrect information that can cause KY failure. Reentering\
+    \ this information may resolve the issue. This includes an `incorrect_information` field that identifies\
+    \ exactly what should be checked by the customer."
+- event: kyc.verification.success
+  description: KYC passed.
+- event: kyc.verification.timeout
+  description: The system timed out trying to verify the information. Run KYC again.
+- event: kyc.verification.under_review
+  description: KYC documents submitted are being reviewed.
+- event: portal.data_export
+  description: A user has downloaded a report of transactions from Bond Portal.
+- event: transactions
+  description: Sent on every new transaction or transaction update.

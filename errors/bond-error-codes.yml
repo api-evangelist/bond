@@ -1,0 +1,329 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bond.tech/docs/error-code-dictionary
+format: bond-error-envelope
+envelope:
+  fields:
+  - Message
+  - Status
+  - Code
+  - Type
+  example:
+    Message: Card 940627e1-c5c6-4ebc-9ddf-6062a10dfa28 does not exist.
+    Status: 404
+    Code: card_dne
+    Type: Request Error
+error_types:
+- type: Request Error
+  cause: Errors relating to a request to the server; resolvable by the end user.
+  resolution: Fix the issue with the request detailed in the error message.
+- type: Server Error
+  cause: Errors relating to issues with Bond's internal servers.
+  resolution: Contact Bond support.
+- type: Process Error
+  cause: Errors relating to the execution of a backend process.
+  resolution: Contact Bond support.
+statuses:
+- 200
+- 201
+- 400
+- 403
+- 404
+- 424
+- 500
+- 503
+- 504
+count: 144
+problems:
+- code: account_data_err
+  message: An issue writing data associated with the account being created. This may result in the account
+    being created, but not yet being recorded in the system.
+- code: acc_dne
+  message: A reference to an account that does not exist in the Bond system.
+- code: account_dne
+  message: A reference to an account that does not exist in the Bond system.
+- code: account_history_schema
+  message: Error processing accounts history request.
+- code: account_not_linked_error
+  message: Account needs to finish linking with external vendor.
+- code: account_patch_schema
+  message: Schema on the pacth account route is malformed.
+- code: account_post_schema
+  message: Schema on the account external/migrate account is malformed.
+- code: activate_card_data
+  message: An issue writing data associated with the card being activated. This may result in the card
+    being active, but not yet activated in the Bond system.
+- code: apr_decline
+  message: The APR specified does not permit this action.
+- code: auth_err
+  message: Unauthorized to access the relevant resources.
+- code: business_dne
+  message: Business ID does not exist.
+- code: card_active
+  message: Card is already activated.
+- code: card_account_dne
+  message: Card account does not exist in the Bond System.
+- code: card_dne
+  message: Card does not exist in the Bond system.
+- code: card_fraud
+  message: Card is closed due to a fraud investigation.
+- code: card_program_dne
+  message: Card program does not exist in the Bond system.
+- code: card_status_dne
+  message: Card status does not exist in the Bond system.
+- code: closed_card
+  message: Card is closed.
+- code: create_account_schema
+  message: Schema on the account being created route is malformed.
+- code: create_card_account_data
+  message: Unable to create a card account.
+- code: create_card_data
+  message: Problem writing data associated with the card being created. This may result in the card being
+    created, but not yet recorded in the system.
+- code: create_card_program
+  message: Problem writing data associated with the card program being created. Program not found in baas_config.
+- code: create_card_schema
+  message: Schema on the create card route is malformed.
+- code: create_customer_schema
+  message: Schema on the create customer route is malformed.
+- code: create_dispute_error
+  message: Error occurred while creating dispute.
+- code: create_dispute_schema
+  message: Schema on the create dispute route is malformed.
+- code: create_hosted_schema
+  message: Schema on the create hosted route is malformed.
+- code: create_kyc_schema
+  message: Schema on the create KYC route is malformed.
+- code: create_more_schema
+  message: Schema on the create more customer route is malformed.
+- code: create_rest_data
+  message: Unable to create new restriction. Contact Support.
+- code: create_transfer_data
+  message: Problem writing data associated with the transfer being created. This may result in the transfer
+    being created, but not yet recorded in the system.
+- code: create_transfer_schema
+  message: Schema on the create transfer route is malformed.
+- code: customer_bsa
+  message: BSA does not exist for this customer.
+- code: customer_dne
+  message: Customer that does not exist in the Bond system.
+- code: customer_invalid_uuid4
+  message: Invalid uuid for customer service.
+- code: data_err_rdc
+  message: Error saving check data
+- code: del_rest_data
+  message: Unable to delete restriction.
+- code: delete_customer_schema
+  message: Schema on the delete customer route is malformed.
+- code: delete_related_schema
+  message: Schema on the delete related customer route is malformed.
+- code: duplicate_account
+  message: An account with these credentials already exists.
+- code: edit_account_schema
+  message: Schema on the edit account route is malformed.
+- code: edit_customer_schema
+  message: Schema on the edit customer route is malformed.
+- code: email_args_schema
+  message: Invalid arguements passed for email statements
+- code: email_error
+  message: Unauthorized email domain attempt to approve a KYC.
+- code: expired_card
+  message: Card referenced has expired.
+- code: ext_acc_unknown
+  message: Could not query external accounts for Account id.
+- code: get_customer_schema
+  message: Schema on the get customer route is malformed.
+- code: get_kyc_schema
+  message: Schema on the KYC retrieval route is malformed.
+- code: idempotency_key_exists
+  message: '"A request was made with this idempotency key in the past 24 hours'
+- code: inactive_card
+  message: Card referenced is no longer active.
+- code: input_error
+  message: Schema is malformed.
+- code: insufficient_funds
+  message: Not enough funds available in the account to execute the action.
+- code: invalid_aac
+  message: AAC is incorrect.
+- code: invalid_account_id
+  message: No access_token found for this linked_account_id.
+- code: invalid_account_status
+  message: Cannot reinitialize account due to account verification status.
+- code: invalid_amount
+  message: Amount specified is not acceptable.
+- code: invalid_bank_info
+  message: Invalid bank information.
+- code: invalid_bin
+  message: BIN is invalid.
+- code: invalid_card
+  message: Invalid parent card provided
+- code: invalid_date
+  message: Date in the field specified is invalid.
+- code: invalid_parameter
+  message: Parameter referenced in transfer is invalid.
+- code: invalid_program
+  message: Card program referenced is invalid.
+- code: invalid_reference
+  message: Object reference is incorrect.
+- code: invalid_request
+  message: Invalid request arguments.
+- code: invalid_transfer_date
+  message: Date selected for the transfer is not acceptable.
+- code: invalid_transfer_status
+  message: Unable to cancel the transfer.
+- code: kyc_customer
+  message: A successfully KYC'd customer may not have their information changed.
+- code: kyb_dne
+  message: Business id has not passed KYB
+- code: kyc_dne
+  message: KYC result could not be found.
+- code: kyc_error
+  message: An error occurred while initiating KYC.
+- code: kyc_init_fail
+  message: Failure in the initialization of the KYC process. Contact Support.
+- code: kyc_reinit_fail
+  message: Failure in the reinitialization of the KYC process. Contact Support.
+- code: kyc_requests
+  message: Not allowed to manually add additional KYC requests.
+- code: kyc_retries
+  message: Excessive KYC retries attempted.
+- code: kyc_webhook_schema
+  message: Schema in the KYC webhook route is malformed.
+- code: large_amount
+  message: Transfer amount is too high.
+- code: linked_closed
+  message: Linked account is closed.
+- code: linked_dne
+  message: External account does not exist.
+- code: list_external_accounts_schema
+  message: Schema on the list external account route is malformed.
+- code: load_funds_dis
+  message: Load Funds not enabled on this account.
+- code: max_cards
+  message: Maximum number of cards for the given program has been reached.
+- code: migrate_account_schema
+  message: Schema on the migrate account route is malformed.
+- code: no_card_for_customer
+  message: No cards for customer with this id.
+- code: no_trans
+  message: Card does not have any transactions.
+- code: no_trans_set
+  message: Card has no transactions for the given search criteria.
+- code: person_id_dup
+  message: A person with this ID already exists.
+- code: preactive_card
+  message: Card has not yet been activated.
+- code: processor_error
+  message: Failed perform action with processor.
+- code: program_not_configured
+  message: Parent/Child card creation not supported by program_id.
+- code: program_mismatch
+  message: Program ID must match parent card's program ID
+- code: process_connection
+  message: i2c connection timed out.
+- code: query_params
+  message: There are no accounts in this query set.
+- code: rest_dne
+  message: The restriction reference does not exist.
+- code: replace_rest_data
+  message: Unable to replace restriction. Contact Support.
+- code: restriction_types
+  message: Missing restriction type.
+- code: restriction_payload_schema
+  message: Schema error for restrictions api.
+- code: resource_conflict
+  message: Error with corresponding resource while performing this action.
+- code: request_err
+  message: Could fetch account.
+- code: rdc_cred_err
+  message: Remote Deposit Failure.
+- code: rdc_process_err
+  message: Check processing failed.
+- code: rdc_schema
+  message: Schema on the RDC is malformed.
+- code: routing_invalid
+  message: Routing number is invalid.
+- code: server_error
+  message: Error while performing action on account.
+- code: service_disabled
+  message: Service not enabled for Debit/Prepaid Cards.
+- code: statement_args_schema
+  message: Invalid arguments passed when requesting statements
+- code: statement_dne
+  message: Statement does not exist.
+- code: too_many_trans
+  message: Max 250 transactions allowed. Reduce search scope.
+- code: transfer_dne
+  message: Transfer referenced does not exist in the Bond system.
+- code: transfer_ref_dne
+  message: Transfer process referenced is not found. Similar to `transfer_dne`.
+- code: token_exchange_post_schema
+  message: Error validating Plaid tokens.
+- code: unknown
+  message: Uknown processor error. Contact Support.
+- code: unknown_activate_card
+  message: Unknown error on the activate card route.
+- code: unknown_create_account
+  message: Unknown error on the create account route.
+- code: unknown_create_card
+  message: Unknown error on the create card route.
+- code: unknown_create_customer
+  message: Unknown error on the create customer route.
+- code: unknown_create_hosted
+  message: Unknown error on the create hosted flow route.
+- code: unknown_create_more
+  message: Unknown error on the create more customer route.
+- code: unknown_create_transfer
+  message: Unknown error on the create transfer route.
+- code: unknown_customer_auth
+  message: Unknown error with authorization.
+- code: unknown_delete_account
+  message: Unknown error on the delete account route.
+- code: unknown_delete_customer
+  message: Unknown error on the delete customer route.
+- code: unknown_delete_related
+  message: Unknown error on the delete related customer route.
+- code: unknown_edit_account
+  message: Unknown error on the edit account route.
+- code: unknown_edit_customer
+  message: Unknown error on the edit customer route.
+- code: unknown_get_customer
+  message: Unknown error on the get customer route.
+- code: unknown_get_card_restr
+  message: Unknown error on the get card restrictions route.
+- code: unknown_get_card_status
+  message: Unknown error on the get card status route.
+- code: unknown_get_card
+  message: Unknown error on the get card route.
+- code: unknown_get_payment_history
+  message: Unknown error on the get card payment history route.
+- code: unknown_get_transfer
+  message: Unknown error in the get transfer route.
+- code: unknown_kyc_get
+  message: Unknown error when retrieving KYC results.
+- code: unknown_kyc_webhook
+  message: Unknown error on the KYC webhook route.
+- code: unknown_query_card_profile
+  message: Unknown error on the get card profile route.
+- code: unknown_rdc
+  message: Unknown error on check deposit could not deposit check
+- code: unknown_reissue_card
+  message: Unknown error on the re-issue card route.
+- code: unknown_reset_card_pin
+  message: Could not reset card pin.
+- code: unknown_set_card_restr
+  message: Unknown error on the set card restrictions route.
+- code: unknown_spec_card
+  message: Could not query external account.
+- code: unknown_start_kyc
+  message: Unknown error on the start KYC route.
+- code: unknown_update_card_profile
+  message: Unknown error on the update card profile route.
+- code: unknown_update_card_status
+  message: Unknown error on the update card status route.
+- code: unknown_verify_card
+  message: Unknown error on the verify card route.
+- code: user_ref_dne
+  message: User does not exist.
+- code: webhooks_err
+  message: Webhook related error.

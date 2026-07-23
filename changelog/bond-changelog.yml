@@ -1,0 +1,31 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bond.tech/changelog
+docs: https://docs.bond.tech/changelog
+scheme: dated
+current_version: v0.1
+note: >-
+  Recent window captured from Bond's public changelog index (docs.bond.tech/changelog)
+  and the "What's new in v0.1" release notes. Bond's active development largely
+  predates its acquisition by FIS (Atelio).
+entries:
+  - date: '2023-01-10'
+    title: /transfers error updates
+    url: https://docs.bond.tech/changelog/transfers-error-updates-jan-10-2023
+    type: change
+    highlights: Updated error responses on the /transfers endpoint.
+  - date: '2022-09-29'
+    title: Sept 29, 2022 update
+    url: https://docs.bond.tech/changelog/sept-29-2022
+    type: change
+  - date: '2022-09-22'
+    title: Requiring phone numbers to onboard customers
+    url: https://docs.bond.tech/changelog/requiring-phone-numbers-to-onboard-customers
+    type: change
+    breaking: true
+    highlights: Phone numbers are now required when onboarding customers.
+  - version: v0.1
+    title: What's new in v0.1
+    url: https://docs.bond.tech/docs/whats-new-in-v01
+    type: release
+    highlights: Major version release with changes from v0.

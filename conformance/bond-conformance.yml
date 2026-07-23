@@ -1,0 +1,35 @@
+generated: '2026-07-18'
+method: derived
+source: https://docs.bond.tech/reference/intro
+note: >-
+  Cross-cutting standards conformance derived from Bond's public documentation.
+  This is an assertion of technical conventions, not a published compliance
+  program; no Compliance pointer is emitted (Bond publishes no verified
+  SOC 2 / ISO / PCI certification page in the surface probed).
+standards:
+  - id: rest
+    conforms: true
+    evidence: API is organized around REST using standard HTTP methods (docs/reference/intro).
+  - id: json
+    conforms: true
+    evidence: JSON is the primary request/response data format.
+  - id: oauth2
+    conforms: false
+    evidence: Authentication is a two-part API key (Identity + Authorization headers), not OAuth2.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a custom envelope (Message/Status/Code/Type), not application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: The transactions endpoint supports pagination and filtering.
+  - id: webhooks
+    conforms: true
+    evidence: Signed webhook subscriptions with ~35 documented event types.
+  - id: nacha-ach
+    conforms: true
+    evidence: ACH transfers use the standard NACHA return-code set (R01-R77).
+  - id: kyc-kyb
+    conforms: true
+    evidence: KYC (Know Your Customer) and KYB (Know Your Business) identity verification flows are implemented.

@@ -1,0 +1,135 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bond.tech/docs/ach-return-codes
+note: Bond is a banking-as-a-service / money-movement provider; its transaction failure surface is the
+  NACHA ACH return-code set (returned on ACH transfers), not card-network decline codes. Captured here
+  as the payments-decline analog.
+envelope_field: ach_return_code
+count: 63
+decline_codes:
+- code: R01
+  meaning: Insufficient Funds
+- code: R02
+  meaning: Account Closed
+- code: R03
+  meaning: No Account/Unable to Locate Account
+- code: R04
+  meaning: Invalid Account number
+- code: R05
+  meaning: Unauthorized Corporate Debit to Consumer Account
+- code: R06
+  meaning: Returned per ODFI Request
+- code: R07
+  meaning: Authorization Revoked By Customer
+- code: R08
+  meaning: Payment Stopped
+- code: R09
+  meaning: Uncollected Funds
+- code: R10
+  meaning: Customer Advises Not Authorized
+- code: R11
+  meaning: Check Truncation Entry Return (Specify)
+- code: R12
+  meaning: Account Sold to Another DFI
+- code: R13
+  meaning: Invalid ACH Routing Number
+- code: R14
+  meaning: Rep. Payee Deceased/Incapacitated
+- code: R15
+  meaning: Beneficiary or Account Holder Deceased
+- code: R16
+  meaning: Account Frozen/Entry returned per OFAC instruction
+- code: R17
+  meaning: File Record Edit Criteria (Specify) (Not Currently Supported by CU*BASE)
+- code: R18
+  meaning: Improper Effective Entry Date
+- code: R19
+  meaning: Amount Field Error
+- code: R20
+  meaning: Non-Transaction Account
+- code: R21
+  meaning: Invalid Company Identification
+- code: R22
+  meaning: Invalid Individual ID Number
+- code: R23
+  meaning: Credit Entry Refused by Receiver
+- code: R24
+  meaning: Duplicate Entry
+- code: R25
+  meaning: Addenda Error
+- code: R26
+  meaning: Mandatory Field Error
+- code: R27
+  meaning: Trace number error
+- code: R28
+  meaning: Routing number or check digit error
+- code: R29
+  meaning: Corporate Customer Advises Not Authorized
+- code: R30
+  meaning: RDFI not participant in check truncation program
+- code: R31
+  meaning: Permissible Return Entry (CCD, CTX)
+- code: R32
+  meaning: RDFI non-settlement
+- code: R33
+  meaning: Return of XCK Entry
+- code: R35
+  meaning: Return of improper debit entry
+- code: R36
+  meaning: Return of improper credit entry
+- code: R37
+  meaning: Source Document Presented for Payment (ARC, POP, BOC)
+- code: R38
+  meaning: Stop Payment on Source Document (ARC, BOC)
+- code: R39
+  meaning: Improper Source Document (ARC, POP, BOC)
+- code: R40
+  meaning: Return of ENR Entry by Federal Government Agency
+- code: R41
+  meaning: Invalid Transaction Code
+- code: R42
+  meaning: Routing Number/Check Digit error
+- code: R43
+  meaning: Invalid DFI Account number
+- code: R44
+  meaning: Invalid individual ID Number/Identification number
+- code: R45
+  meaning: Invalid Individual Name/Company Name
+- code: R46
+  meaning: Invalid Representative Payee Indicator
+- code: R47
+  meaning: Duplicate Enrollment
+- code: R50
+  meaning: State Law Affecting RCK Acceptance
+- code: R51
+  meaning: Item related to RCK entry is ineligible or RCK entry is improper
+- code: R52
+  meaning: Stop Payment on Item (RCK)
+- code: R53
+  meaning: Item and RCK entry presented for payment
+- code: R61
+  meaning: Misrouted Return
+- code: R62
+  meaning: Return of erroneous or reversing debit
+- code: R67
+  meaning: Duplicate return
+- code: R68
+  meaning: Untimely return
+- code: R69
+  meaning: Field Error(s)
+- code: R70
+  meaning: Permissible return entry not accepted/return not requested by ODFI
+- code: R71
+  meaning: Misrouted dishonored return
+- code: R72
+  meaning: Untimely dishonored return
+- code: R73
+  meaning: Timely Original Return
+- code: R74
+  meaning: Corrected Return
+- code: R75
+  meaning: Return not a duplicate
+- code: R76
+  meaning: No errors found
+- code: R77
+  meaning: Non-acceptance of R62 Dishonored Return
