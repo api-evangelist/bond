@@ -271,9 +271,15 @@ apis:
   - type: Sandbox
     url: sandbox/bond-sandbox.yml
 common:
+- type: TrustCenter
+  url: security/bond-trust-center.yml
+- type: Compliance
+  url: https://www.bond.tech/security
 - type: Website
   url: https://www.bond.tech
 - type: DeveloperPortal
+  url: https://portal.bond.tech
+- type: Login
   url: https://portal.bond.tech
 - type: Documentation
   url: https://docs.bond.tech/docs

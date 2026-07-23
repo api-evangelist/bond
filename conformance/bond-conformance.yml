@@ -1,12 +1,20 @@
-generated: '2026-07-18'
-method: derived
+generated: '2026-07-23'
+method: searched
 source: https://docs.bond.tech/reference/intro
+compliance_source: https://www.bond.tech/security
 note: >-
-  Cross-cutting standards conformance derived from Bond's public documentation.
-  This is an assertion of technical conventions, not a published compliance
-  program; no Compliance pointer is emitted (Bond publishes no verified
-  SOC 2 / ISO / PCI certification page in the surface probed).
+  Cross-cutting standards conformance derived from Bond's public documentation,
+  plus a published compliance program confirmed on Bond's security page
+  (https://www.bond.tech/security lists SOC 2 and PCI DSS). A Compliance pointer
+  is emitted to that page; certifications are also captured in
+  security/bond-trust-center.yml.
 standards:
+  - id: soc2
+    conforms: true
+    evidence: Bond's security page publishes SOC 2 attestation.
+  - id: pci-dss
+    conforms: true
+    evidence: Bond's security page publishes PCI DSS compliance for card data handling.
   - id: rest
     conforms: true
     evidence: API is organized around REST using standard HTTP methods (docs/reference/intro).
