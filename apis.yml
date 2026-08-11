@@ -17,6 +17,17 @@ description: >-
   Surfaced originally as a portfolio company of Canaan Partners and enriched here
   from Bond's public developer documentation.
 url: https://raw.githubusercontent.com/api-evangelist/bond/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-11'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: sales-led
