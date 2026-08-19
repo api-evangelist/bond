@@ -45,7 +45,7 @@ image: https://cdn.prod.website-files.com/5ede8b305ed324245dbaf418/60f9b479c42dd
 x-source: vc-portfolio
 x-backed-by:
 - canaan-partners
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-23'
 tags:
