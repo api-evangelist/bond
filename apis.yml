@@ -150,6 +150,13 @@ apis:
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
   - United States
+  - Account
+  - Deposit Accounts
+  - Statements
+  - Banking as a Service
+  - Commercial Banking
+  tags_raw:
+  - United States
   - Accounts
   - Deposit Accounts
   - Statements
@@ -198,6 +205,13 @@ apis:
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
   - United States
+  - Transaction
+  - Ledger
+  - Payments
+  - Reporting
+  - Embedded Finance
+  tags_raw:
+  - United States
   - Transactions
   - Ledger
   - Payments
@@ -243,6 +257,13 @@ apis:
   humanURL: https://docs.bond.tech/reference/get_webhooks
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
+  - United States
+  - Webhook
+  - Event
+  - Notification
+  - Real-Time
+  - Integration
+  tags_raw:
   - United States
   - Webhooks
   - Events
