@@ -1,21 +1,15 @@
 aid: bond
 name: Bond
 kind: company
-description: >-
-  Bond Financial Technologies is an enterprise-grade banking-as-a-service (BaaS)
-  and embedded finance platform that lets software companies and fintechs embed
-  financial products directly into their applications through a single REST API.
-  The platform covers consumer and commercial deposit accounts, credit-builder
-  and secured charge cards, debit and virtual card issuing and management, money
-  movement (ACH and account-to-account transfers, external-account linking via
-  Plaid), a transaction ledger, statements, identity verification (KYC, KYB, and
-  beneficial-owner verification powered by Persona), webhook event subscriptions,
-  and a full sandbox with simulation endpoints for authorizations, settlements,
-  and KYC/KYB scenarios. Bond exposes API-key authenticated endpoints under
-  api.bond.tech with pre-integrated bank partnerships. Bond was acquired by FIS
-  in June 2023; its developer documentation remains live at docs.bond.tech.
-  Surfaced originally as a portfolio company of Canaan Partners and enriched here
-  from Bond's public developer documentation.
+description: Bond Financial Technologies is an enterprise-grade banking-as-a-service (BaaS) and embedded finance
+  platform that lets software companies and fintechs embed financial products directly into their applications through
+  a single REST API. The platform covers consumer and commercial deposit accounts, credit-builder and secured charge
+  cards, debit and virtual card issuing and management, money movement (ACH and account-to-account transfers, external-account
+  linking via Plaid), a transaction ledger, statements, identity verification (KYC, KYB, and beneficial-owner verification
+  powered by Persona), webhook event subscriptions, and a full sandbox with simulation endpoints for authorizations,
+  settlements, and KYC/KYB scenarios. Bond exposes API-key authenticated endpoints under api.bond.tech with pre-integrated
+  bank partnerships. Bond was acquired by FIS in June 2023; its developer documentation remains live at docs.bond.tech.
+  Surfaced originally as a portfolio company of Canaan Partners and enriched here from Bond's public developer documentation.
 url: https://raw.githubusercontent.com/api-evangelist/bond/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
@@ -66,13 +60,10 @@ tags:
 apis:
 - aid: bond:bond-customers-kyc-api
   name: Bond Customers & KYC API
-  description: >-
-    Create, retrieve, update, and delete individual consumer customer resources
-    for a brand and run Know-Your-Customer (KYC) identity verification against
-    them. Endpoints start and retrieve KYC status, resume Persona inquiries with
-    fresh session tokens, and manage customer addresses. This is the identity
-    foundation every downstream account, card, and transfer flow builds on in
-    Bond's United States banking-as-a-service platform.
+  description: Create, retrieve, update, and delete individual consumer customer resources for a brand and run Know-Your-Customer
+    (KYC) identity verification against them. Endpoints start and retrieve KYC status, resume Persona inquiries
+    with fresh session tokens, and manage customer addresses. This is the identity foundation every downstream account,
+    card, and transfer flow builds on in Bond's United States banking-as-a-service platform.
   humanURL: https://docs.bond.tech/reference/get_customers
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -91,13 +82,10 @@ apis:
     url: authentication/bond-authentication.yml
 - aid: bond:bond-businesses-kyb-api
   name: Bond Businesses & KYB API
-  description: >-
-    Manage commercial customer entities for embedded business banking — create
-    and update businesses, business addresses, and beneficial owners with their
-    addresses, then run Know-Your-Business (KYB) and beneficial-owner KYC
-    verification (v1 and v2 KYB, plus resume flows). Supports the full commercial
-    onboarding and compliance path required to open business deposit and card
-    accounts in the United States.
+  description: Manage commercial customer entities for embedded business banking — create and update businesses,
+    business addresses, and beneficial owners with their addresses, then run Know-Your-Business (KYB) and beneficial-owner
+    KYC verification (v1 and v2 KYB, plus resume flows). Supports the full commercial onboarding and compliance
+    path required to open business deposit and card accounts in the United States.
   humanURL: https://docs.bond.tech/reference/get_businesses
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -114,13 +102,10 @@ apis:
     url: https://docs.bond.tech/docs/business-onboarding-overview
 - aid: bond:bond-cards-api
   name: Bond Cards API
-  description: >-
-    Issue and manage physical, virtual, debit, secured charge, and credit-builder
-    cards. Create cards and card accounts, retrieve and update card details,
-    reissue and activate physical cards, close cards, and set and manage card
-    restrictions such as maximum transaction amounts. A companion card-management
-    web SDK handles PCI-scoped rendering of card numbers and PIN set/reset without
-    the sensitive data touching your servers.
+  description: Issue and manage physical, virtual, debit, secured charge, and credit-builder cards. Create cards
+    and card accounts, retrieve and update card details, reissue and activate physical cards, close cards, and set
+    and manage card restrictions such as maximum transaction amounts. A companion card-management web SDK handles
+    PCI-scoped rendering of card numbers and PIN set/reset without the sensitive data touching your servers.
   humanURL: https://docs.bond.tech/reference/get_cards
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -139,13 +124,10 @@ apis:
     url: https://docs.bond.tech/docs/web-sdk-documentation
 - aid: bond:bond-accounts-statements-api
   name: Bond Accounts & Statements API
-  description: >-
-    Open and manage consumer and commercial deposit accounts, credit accounts,
-    and security-deposit accounts, with documented account types, account states,
-    and account lifecycle management. Generate and retrieve deposit-account and
-    credit-account statements for customers. These flows sit on top of Bond's
-    pre-integrated partner-bank relationships and back the consumer and commercial
-    banking products brands build in the United States.
+  description: Open and manage consumer and commercial deposit accounts, credit accounts, and security-deposit accounts,
+    with documented account types, account states, and account lifecycle management. Generate and retrieve deposit-account
+    and credit-account statements for customers. These flows sit on top of Bond's pre-integrated partner-bank relationships
+    and back the consumer and commercial banking products brands build in the United States.
   humanURL: https://docs.bond.tech/docs/account-overview
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -169,13 +151,10 @@ apis:
     url: https://docs.bond.tech/docs/statements-1
 - aid: bond:bond-transfers-api
   name: Bond Transfers API
-  description: >-
-    Move money between accounts with ACH transfers and account-to-account fund
-    transfers, and link and manage external bank accounts using Plaid before
-    initiating transfers. Documents the ACH transfer model, funding of
-    security-deposit accounts, external-account linking and removal, and the
-    complete set of ACH return codes brands must handle in the United States
-    payments environment.
+  description: Move money between accounts with ACH transfers and account-to-account fund transfers, and link and
+    manage external bank accounts using Plaid before initiating transfers. Documents the ACH transfer model, funding
+    of security-deposit accounts, external-account linking and removal, and the complete set of ACH return codes
+    brands must handle in the United States payments environment.
   humanURL: https://docs.bond.tech/docs/account-transfers
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -194,13 +173,10 @@ apis:
     url: errors/bond-ach-return-codes.yml
 - aid: bond:bond-ledger-transactions-api
   name: Bond Ledger (Transactions) API
-  description: >-
-    Retrieve all transactions available to a brand with pagination and optional
-    filtering, and fetch details for a single transaction by id. Documents the
-    transaction lifecycle and states, payment types, transaction types, response
-    payload references, and MCC (merchant category) codes so brands can present
-    accurate, real-time ledger and spend data to their United States banking
-    customers.
+  description: Retrieve all transactions available to a brand with pagination and optional filtering, and fetch
+    details for a single transaction by id. Documents the transaction lifecycle and states, payment types, transaction
+    types, response payload references, and MCC (merchant category) codes so brands can present accurate, real-time
+    ledger and spend data to their United States banking customers.
   humanURL: https://docs.bond.tech/reference/get_transactions
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -224,13 +200,10 @@ apis:
     url: https://docs.bond.tech/docs/transactions-overview
 - aid: bond:bond-credit-api
   name: Bond Credit API
-  description: >-
-    Open and service credit accounts for credit-builder and secured charge card
-    programs — submit credit applications, surface credit-account data to
-    customers, handle instant funding for credit-builder cards, and manage
-    adverse-action notices required under United States fair-lending regulation.
-    Documented as a distinct product area alongside Bond's deposit and card
-    offerings within the embedded-finance platform.
+  description: Open and service credit accounts for credit-builder and secured charge card programs — submit credit
+    applications, surface credit-account data to customers, handle instant funding for credit-builder cards, and
+    manage adverse-action notices required under United States fair-lending regulation. Documented as a distinct
+    product area alongside Bond's deposit and card offerings within the embedded-finance platform.
   humanURL: https://docs.bond.tech/docs/opening-a-credit-account
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -247,13 +220,10 @@ apis:
     url: https://docs.bond.tech/docs/credit-builder-card-overview
 - aid: bond:bond-webhooks-api
   name: Bond Webhooks API
-  description: >-
-    Subscribe to and manage webhook event notifications so applications react in
-    real time to KYC/KYB status changes, card events, transactions, and account
-    activity. Create, retrieve, update, and delete webhook subscriptions, choose
-    the events you receive, verify inbound request signatures, and test delivery
-    in the sandbox. This is the event backbone for Bond's asynchronous banking
-    workflows in the United States.
+  description: Subscribe to and manage webhook event notifications so applications react in real time to KYC/KYB
+    status changes, card events, transactions, and account activity. Create, retrieve, update, and delete webhook
+    subscriptions, choose the events you receive, verify inbound request signatures, and test delivery in the sandbox.
+    This is the event backbone for Bond's asynchronous banking workflows in the United States.
   humanURL: https://docs.bond.tech/reference/get_webhooks
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -279,13 +249,10 @@ apis:
     url: asyncapi/bond-webhooks.yml
 - aid: bond:bond-simulation-api
   name: Bond Simulation (Sandbox) API
-  description: >-
-    Sandbox-only endpoints for deterministically testing banking flows before
-    going live — simulate a card transaction authorization, simulate transaction
-    settlement, and force KYC pass or fail outcomes, plus documented triggers for
-    KYC and KYB scenarios such as document-request and rejection paths. Lets
-    United States fintech developers exercise the full lifecycle without touching
-    real money or real identity providers.
+  description: Sandbox-only endpoints for deterministically testing banking flows before going live — simulate a
+    card transaction authorization, simulate transaction settlement, and force KYC pass or fail outcomes, plus documented
+    triggers for KYC and KYB scenarios such as document-request and rejection paths. Lets United States fintech
+    developers exercise the full lifecycle without touching real money or real identity providers.
   humanURL: https://docs.bond.tech/reference/post_authorization
   baseURL: https://sandbox.bond.tech/api/v0.1/
   tags:
@@ -359,6 +326,8 @@ common:
   url: data-model/bond-data-model.yml
 - type: Conformance
   url: conformance/bond-conformance.yml
+- type: Website
+  url: https://bond.tech/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -368,8 +337,6 @@ x-enrichment:
   date: '2026-07-23'
   status: deepened
   pass: local-v2
-  note: >-
-    Expanded from a single stub API entry to nine real documented API product
-    families harvested from docs.bond.tech; verified live developer portal and
-    API reference; no single downloadable OpenAPI (ReadMe HTML reference +
-    public Postman workspace only).
+  note: Expanded from a single stub API entry to nine real documented API product families harvested from docs.bond.tech;
+    verified live developer portal and API reference; no single downloadable OpenAPI (ReadMe HTML reference + public
+    Postman workspace only).
