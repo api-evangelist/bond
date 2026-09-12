@@ -2,17 +2,10 @@
   "repo": "bond",
   "feeds": [
     {
-      "source": "https://www.bond.tech/contact",
-      "error": "HTTPError"
-    },
-    {
       "source": "https://www.linkedin.com/company/bondfintech",
-      "feed_url": "https://www.linkedin.com/company/bondfintech",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "error": "HTTPError"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-08-30T22:33:40Z"
+  "fetched": "2026-09-06T19:17:18Z"
 }
