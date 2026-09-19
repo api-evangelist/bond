@@ -90,6 +90,13 @@ apis:
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
   - United States
+  - Business
+  - KYB
+  - Beneficial Owners
+  - Compliance
+  - Commercial Banking
+  tags_raw:
+  - United States
   - Businesses
   - KYB
   - Beneficial Owners
