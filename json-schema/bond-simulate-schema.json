@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-simulate-schema.json",
+  "title": "simulate",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-simulation-openapi.yml#/components/schemas/simulate",
+  "type": "object",
+  "x-internal": false,
+  "properties": {
+    "card_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": ""
+    },
+    "amount": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Transaction amount as a decimal string using two digits of precision, e.g., \"10.00\"."
+    },
+    "transaction_datetime": {
+      "type": "string",
+      "description": "Date and time of transaction \nYYYY-MM-DD HH:MM"
+    },
+    "currency": {
+      "type": "string",
+      "minLength": 1,
+      "description": "ISO currency of simulated transaction"
+    },
+    "merchant_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "merchant name to be returned in transaction"
+    },
+    "merchant_city": {
+      "type": "string",
+      "minLength": 1,
+      "description": "merchant city to be returned in transaction"
+    },
+    "merchant_state": {
+      "type": "string",
+      "minLength": 1,
+      "description": "merchant state to be returned in transaction"
+    },
+    "merchant_zip_code": {
+      "type": "string",
+      "minLength": 1,
+      "description": "merchant zip code be returned in transaction\nzip code in 5-digit (12345)"
+    },
+    "mcc": {
+      "type": "string",
+      "minLength": 1,
+      "description": "merchant category code to be returned in transaction\nmcc code in 4-digit (1234)"
+    },
+    "mid": {
+      "type": "string",
+      "minLength": 1,
+      "description": "merchant identifier to be return in the transaction in X-digit (xxxx)"
+    }
+  },
+  "required": [
+    "card_id",
+    "amount",
+    "currency",
+    "merchant_name",
+    "merchant_city",
+    "merchant_state",
+    "merchant_zip_code",
+    "mcc",
+    "mid"
+  ]
+}

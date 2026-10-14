@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-kycpost-payload-schema.json",
+  "title": "KYCPostPayload",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-business-openapi.yml#/components/schemas/KYCPostPayload",
+  "required": [
+    "email",
+    "ip",
+    "phone",
+    "phone_country_code",
+    "program_id",
+    "ssn"
+  ],
+  "type": "object",
+  "properties": {
+    "dob": {
+      "type": "string",
+      "description": "Date of birth in YYYY-MM-DD format.",
+      "format": "string"
+    },
+    "program_id": {
+      "type": "string",
+      "description": "String in acceptable UUID format that corresponds to a valid `Program` program_id."
+    },
+    "ssn": {
+      "type": "string",
+      "description": "Must be in ######### or ###-##-#### format"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Numbers only or dash-separated are acceptable"
+    },
+    "phone_country_code": {
+      "type": "string",
+      "description": "Must be a string of 1-3 digits"
+    },
+    "email": {
+      "type": "string",
+      "description": "Must be a valid email address"
+    },
+    "ip": {
+      "type": "string",
+      "description": "Must be dot separated"
+    },
+    "kyc_retry_request": {
+      "type": "boolean",
+      "description": "If failure threshold has been reached, set this to `true` to request further attempts"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/bond-accounts-openapi.yml
+- openapi/bond-business-openapi.yml
+- openapi/bond-cards-openapi.yml
+- openapi/bond-credit-openapi.yml
+- openapi/bond-customer-openapi.yml
+- openapi/bond-ledger-openapi.yml
+- openapi/bond-simulation-openapi.yml
+- openapi/bond-transfers-openapi.yml
+- openapi/bond-webhooks-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: HTTPValidationError
+coverage:
+  operations: 71
+  statuses_declared: 2
+problems:
+- status: 404
+  title: Not Found
+  description: Account not found
+  operations: 1
+  media_types: []
+  schema: null
+- status: 422
+  title: Unprocessable Content
+  description: Validation Error
+  operations: 4
+  media_types:
+  - application/json
+  schema: HTTPValidationError

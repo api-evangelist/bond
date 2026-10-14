@@ -1,0 +1,2936 @@
+[
+ {
+  "page": "https://docs.bond.tech/reference/post_cards.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards": {
+     "post": {
+      "summary": "Create a card",
+      "description": "Creates a new card and card account",
+      "operationId": "post_cards",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/card-write-post"
+         },
+         "examples": {
+          "Create Card": {
+           "value": {
+            "account_id": "1c667427-5521-4ffd-ac59-16ab73dc133e",
+            "card_design_id": "12",
+            "card_mailing_address": {
+             "street": "345 California St.",
+             "street2": "Suite 600",
+             "city": "San Francisco",
+             "state": "CA",
+             "zip_code": 94104
+            }
+           }
+          }
+         }
+        }
+       },
+       "required": true
+      },
+      "tags": [
+       "Cards"
+      ],
+      "responses": {
+       "201": {
+        "description": "Created",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/card"
+          },
+          "examples": {
+           "card response": {
+            "value": {
+             "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+             "date_updated": "2020-08-16T19:39:34Z",
+             "date_created": "2020-08-15T19:39:34Z",
+             "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+             "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+             "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+             "last_four": "6270",
+             "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+             "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+             "status": "active",
+             "card_design_id": null
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "card-write-post": {
+      "type": "object",
+      "x-examples": {
+       "card": {
+        "account_id": "1c667427-5521-4ffd-ac59-16ab73dc133e",
+        "card_design_id": "12",
+        "card_mailing_address": {
+         "street": "345 California St.",
+         "street2": "Suite 600",
+         "city": "San Francisco",
+         "state": "CA",
+         "zip_code": 94104
+        }
+       }
+      },
+      "title": "card-write-post",
+      "description": "POST",
+      "properties": {
+       "account_id": {
+        "type": "string",
+        "example": "1c667427-5521-4ffd-ac59-16ab73dc133e",
+        "description": "account_id for which the card will be associated to"
+       },
+       "credit_limit": {
+        "type": "string",
+        "example": "100.00",
+        "description": "credit_limit for the card. Provide only when creating commercial secured cards."
+       },
+       "card_design_id": {
+        "type": "string",
+        "example": "12",
+        "description": "The visual design of card.\nPlease contact Support to start creating card designs."
+       },
+       "card_mailing_address": {
+        "$ref": "#/components/schemas/address-write"
+       }
+      },
+      "required": [
+       "account_id"
+      ]
+     },
+     "card": {
+      "description": "",
+      "x-examples": {
+       "individual card [secured credit]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "business card": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "individual card [prepaid,unsecured]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-16T19:39:34Z"
+       }
+      },
+      "title": "card",
+      "type": "object",
+      "properties": {
+       "card_id": {
+        "type": "string",
+        "example": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "readOnly": true
+       },
+       "customer_id": {
+        "type": "string",
+        "example": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "nullable": true
+       },
+       "account_id": {
+        "type": "string",
+        "example": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "nullable": true,
+        "readOnly": true
+       },
+       "business_id": {
+        "type": "string",
+        "example": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "nullable": true
+       },
+       "card_number": {
+        "type": "string",
+        "example": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "readOnly": true
+       },
+       "cvv": {
+        "type": "string",
+        "example": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "readOnly": true
+       },
+       "expiry_date": {
+        "type": "string",
+        "example": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "readOnly": true
+       },
+       "last_four": {
+        "type": "string",
+        "example": "6270",
+        "readOnly": true
+       },
+       "status": {
+        "type": "string",
+        "example": "active",
+        "enum": [
+         "active",
+         "inactive",
+         "closed"
+        ]
+       },
+       "card_design_id": {
+        "type": "string",
+        "example": "12",
+        "description": "The visual design of card.\nPlease contact Support to start creating card designs.",
+        "default": null
+       },
+       "date_updated": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_created": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_physical_card_activated": {
+        "type": "string"
+       }
+      }
+     },
+     "address-write": {
+      "type": "object",
+      "description": "",
+      "title": "Address-write",
+      "x-examples": {
+       "example": {
+        "street": "345 California Ave.",
+        "street2": "Suite 600",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": 12345,
+        "country": "US"
+       }
+      },
+      "properties": {
+       "street": {
+        "type": "string",
+        "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "345 California Ave."
+       },
+       "street2": {
+        "type": "string",
+        "description": "Has a 40-character limit, inclusive. Must start with an alphanumeric, and may only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "Suite 600"
+       },
+       "city": {
+        "type": "string",
+        "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+        "example": "San Francisco",
+        "minLength": 2,
+        "maxLength": 40
+       },
+       "state": {
+        "type": "string",
+        "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.",
+        "example": "CA"
+       },
+       "zip_code": {
+        "type": "string",
+        "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.",
+        "example": "12345-1234"
+       },
+       "country": {
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.",
+        "example": "US"
+       }
+      },
+      "required": [
+       "street",
+       "city",
+       "state",
+       "zip_code",
+       "country"
+      ]
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_cards.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards": {
+     "get": {
+      "summary": "Retrieve all cards",
+      "operationId": "get_cards",
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "description": "",
+           "type": "object",
+           "properties": {
+            "page": {
+             "type": "integer"
+            },
+            "pages": {
+             "type": "integer"
+            },
+            "count": {
+             "type": "integer"
+            },
+            "has_more": {
+             "type": "boolean"
+            },
+            "cards": {
+             "type": "array",
+             "uniqueItems": true,
+             "minItems": 1,
+             "items": {
+              "$ref": "#/components/schemas/card"
+             }
+            }
+           },
+           "required": [
+            "page",
+            "pages",
+            "count",
+            "cards"
+           ]
+          },
+          "examples": {
+           "example": {
+            "value": {
+             "page": 1,
+             "pages": 1,
+             "count": 5,
+             "has_more": false,
+             "cards": [
+              {
+               "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+               "date_updated": "2020-08-16T19:39:34Z",
+               "date_created": "2020-08-15T19:39:34Z",
+               "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+               "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+               "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+               "last_four": "6270",
+               "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+               "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+               "status": "active",
+               "card_design_id": null
+              }
+             ]
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "description": "Get all cards.",
+      "parameters": [
+       {
+        "schema": {
+         "type": "string"
+        },
+        "in": "query",
+        "name": "customer_id",
+        "description": "UUID (36 characters)"
+       },
+       {
+        "schema": {
+         "type": "string"
+        },
+        "in": "query",
+        "name": "business_id",
+        "description": "UUID (36 characters)"
+       },
+       {
+        "schema": {
+         "type": "string"
+        },
+        "in": "query",
+        "name": "show_closed",
+        "description": "Possible values: true/false. Default false"
+       },
+       {
+        "description": "Page number",
+        "required": false,
+        "schema": {
+         "title": "Page",
+         "type": "integer",
+         "description": "Page number",
+         "default": 1
+        },
+        "name": "page",
+        "in": "query"
+       },
+       {
+        "description": "Items per page",
+        "required": false,
+        "schema": {
+         "title": "Count",
+         "type": "integer",
+         "description": "Items per page",
+         "default": 10
+        },
+        "name": "count",
+        "in": "query"
+       },
+       {
+        "schema": {
+         "type": "string"
+        },
+        "in": "query",
+        "name": "order_by",
+        "description": "By date created. Possible values: desc/asc"
+       }
+      ],
+      "tags": [
+       "Cards"
+      ]
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "card": {
+      "description": "",
+      "x-examples": {
+       "individual card [secured credit]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "business card": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "individual card [prepaid,unsecured]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-16T19:39:34Z"
+       }
+      },
+      "title": "card",
+      "type": "object",
+      "properties": {
+       "card_id": {
+        "type": "string",
+        "example": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "readOnly": true
+       },
+       "customer_id": {
+        "type": "string",
+        "example": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "nullable": true
+       },
+       "account_id": {
+        "type": "string",
+        "example": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "nullable": true,
+        "readOnly": true
+       },
+       "business_id": {
+        "type": "string",
+        "example": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "nullable": true
+       },
+       "card_number": {
+        "type": "string",
+        "example": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "readOnly": true
+       },
+       "cvv": {
+        "type": "string",
+        "example": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "readOnly": true
+       },
+       "expiry_date": {
+        "type": "string",
+        "example": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "readOnly": true
+       },
+       "last_four": {
+        "type": "string",
+        "example": "6270",
+        "readOnly": true
+       },
+       "status": {
+        "type": "string",
+        "example": "active",
+        "enum": [
+         "active",
+         "inactive",
+         "closed"
+        ]
+       },
+       "card_design_id": {
+        "type": "string",
+        "example": "12",
+        "description": "The visual design of card.\nPlease contact Support to start creating card designs.",
+        "default": null
+       },
+       "date_updated": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_created": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_physical_card_activated": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_cards_id.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards/{card_id}": {
+     "parameters": [
+      {
+       "name": "card_id",
+       "in": "path",
+       "required": true,
+       "schema": {
+        "type": "string"
+       }
+      }
+     ],
+     "get": {
+      "summary": "Retrieve a card",
+      "description": "Retrieves info about a card",
+      "operationId": "get_cards_id",
+      "tags": [
+       "Cards"
+      ],
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/card"
+          },
+          "examples": {
+           "card response": {
+            "value": {
+             "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+             "date_updated": "2020-08-16T19:39:34Z",
+             "date_created": "2020-08-15T19:39:34Z",
+             "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+             "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+             "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+             "last_four": "6270",
+             "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+             "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+             "status": "active",
+             "card_design_id": null
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "card": {
+      "description": "",
+      "x-examples": {
+       "individual card [secured credit]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "business card": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "individual card [prepaid,unsecured]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-16T19:39:34Z"
+       }
+      },
+      "title": "card",
+      "type": "object",
+      "properties": {
+       "card_id": {
+        "type": "string",
+        "example": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "readOnly": true
+       },
+       "customer_id": {
+        "type": "string",
+        "example": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "nullable": true
+       },
+       "account_id": {
+        "type": "string",
+        "example": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "nullable": true,
+        "readOnly": true
+       },
+       "business_id": {
+        "type": "string",
+        "example": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "nullable": true
+       },
+       "card_number": {
+        "type": "string",
+        "example": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "readOnly": true
+       },
+       "cvv": {
+        "type": "string",
+        "example": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "readOnly": true
+       },
+       "expiry_date": {
+        "type": "string",
+        "example": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "readOnly": true
+       },
+       "last_four": {
+        "type": "string",
+        "example": "6270",
+        "readOnly": true
+       },
+       "status": {
+        "type": "string",
+        "example": "active",
+        "enum": [
+         "active",
+         "inactive",
+         "closed"
+        ]
+       },
+       "card_design_id": {
+        "type": "string",
+        "example": "12",
+        "description": "The visual design of card.\nPlease contact Support to start creating card designs.",
+        "default": null
+       },
+       "date_updated": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_created": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_physical_card_activated": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/patch_cards.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards/{card_id}": {
+     "parameters": [
+      {
+       "name": "card_id",
+       "in": "path",
+       "required": true,
+       "schema": {
+        "type": "string"
+       }
+      }
+     ],
+     "patch": {
+      "summary": "Update Card",
+      "operationId": "patch_cards",
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/card"
+          },
+          "examples": {
+           "patch response": {
+            "value": {
+             "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+             "date_updated": "2020-08-16T19:39:34Z",
+             "date_created": "2020-08-15T19:39:34Z",
+             "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+             "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+             "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+             "last_four": "6270",
+             "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+             "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+             "status": "active",
+             "card_design_id": null
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "description": "Updates info about a card",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/card-write-patch"
+         },
+         "examples": {
+          "example": {
+           "value": {
+            "status": "active"
+           }
+          }
+         }
+        }
+       }
+      },
+      "tags": [
+       "Cards"
+      ]
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "card-write-patch": {
+      "type": "object",
+      "x-examples": {
+       "card": {
+        "status": "active"
+       }
+      },
+      "title": "card-write-patch",
+      "description": "PATCH",
+      "properties": {
+       "status": {
+        "type": "string",
+        "enum": [
+         "active",
+         "inactive"
+        ]
+       }
+      }
+     },
+     "card": {
+      "description": "",
+      "x-examples": {
+       "individual card [secured credit]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "business card": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "individual card [prepaid,unsecured]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-16T19:39:34Z"
+       }
+      },
+      "title": "card",
+      "type": "object",
+      "properties": {
+       "card_id": {
+        "type": "string",
+        "example": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "readOnly": true
+       },
+       "customer_id": {
+        "type": "string",
+        "example": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "nullable": true
+       },
+       "account_id": {
+        "type": "string",
+        "example": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "nullable": true,
+        "readOnly": true
+       },
+       "business_id": {
+        "type": "string",
+        "example": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "nullable": true
+       },
+       "card_number": {
+        "type": "string",
+        "example": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "readOnly": true
+       },
+       "cvv": {
+        "type": "string",
+        "example": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "readOnly": true
+       },
+       "expiry_date": {
+        "type": "string",
+        "example": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "readOnly": true
+       },
+       "last_four": {
+        "type": "string",
+        "example": "6270",
+        "readOnly": true
+       },
+       "status": {
+        "type": "string",
+        "example": "active",
+        "enum": [
+         "active",
+         "inactive",
+         "closed"
+        ]
+       },
+       "card_design_id": {
+        "type": "string",
+        "example": "12",
+        "description": "The visual design of card.\nPlease contact Support to start creating card designs.",
+        "default": null
+       },
+       "date_updated": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_created": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_physical_card_activated": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_cards_reissue.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards/{card_id}/reissue": {
+     "parameters": [
+      {
+       "name": "card_id",
+       "in": "path",
+       "required": true,
+       "schema": {
+        "type": "string"
+       }
+      }
+     ],
+     "post": {
+      "responses": {
+       "200": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/card"
+          },
+          "examples": {
+           "successful response": {
+            "value": {
+             "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+             "date_updated": "2020-08-16T19:39:34Z",
+             "date_created": "2020-08-15T19:39:34Z",
+             "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+             "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+             "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+             "last_four": "6270",
+             "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+             "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+             "status": "reissue",
+             "card_design_id": null
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "summary": "Reissue a card",
+      "description": "Reissues a card",
+      "operationId": "post_cards_reissue",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/card-reissue"
+         }
+        }
+       },
+       "required": true
+      },
+      "tags": [
+       "Cards"
+      ]
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "card": {
+      "description": "",
+      "x-examples": {
+       "individual card [secured credit]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "business card": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "individual card [prepaid,unsecured]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-16T19:39:34Z"
+       }
+      },
+      "title": "card",
+      "type": "object",
+      "properties": {
+       "card_id": {
+        "type": "string",
+        "example": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "readOnly": true
+       },
+       "customer_id": {
+        "type": "string",
+        "example": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "nullable": true
+       },
+       "account_id": {
+        "type": "string",
+        "example": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "nullable": true,
+        "readOnly": true
+       },
+       "business_id": {
+        "type": "string",
+        "example": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "nullable": true
+       },
+       "card_number": {
+        "type": "string",
+        "example": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "readOnly": true
+       },
+       "cvv": {
+        "type": "string",
+        "example": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "readOnly": true
+       },
+       "expiry_date": {
+        "type": "string",
+        "example": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "readOnly": true
+       },
+       "last_four": {
+        "type": "string",
+        "example": "6270",
+        "readOnly": true
+       },
+       "status": {
+        "type": "string",
+        "example": "active",
+        "enum": [
+         "active",
+         "inactive",
+         "closed"
+        ]
+       },
+       "card_design_id": {
+        "type": "string",
+        "example": "12",
+        "description": "The visual design of card.\nPlease contact Support to start creating card designs.",
+        "default": null
+       },
+       "date_updated": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_created": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_physical_card_activated": {
+        "type": "string"
+       }
+      }
+     },
+     "card-reissue": {
+      "type": "object",
+      "properties": {
+       "reissue_type": {
+        "type": "string",
+        "enum": [
+         "same_card_number",
+         "same_card_number_updated_expiry",
+         "new_card_number"
+        ]
+       },
+       "card_mailing_address": {
+        "$ref": "#/components/schemas/address-write"
+       }
+      },
+      "required": [
+       "reissue_type"
+      ],
+      "x-examples": {
+       "example": {
+        "reissue_type": "same_card_number",
+        "card_mailing_address": {
+         "street": "345 California St.",
+         "street2": "Suite 600",
+         "city": "San Francisco",
+         "state": "CA",
+         "zip_code": 94104
+        }
+       }
+      },
+      "title": "card-reissue"
+     },
+     "address-write": {
+      "type": "object",
+      "description": "",
+      "title": "Address-write",
+      "x-examples": {
+       "example": {
+        "street": "345 California Ave.",
+        "street2": "Suite 600",
+        "city": "San Francisco",
+        "state": "CA",
+        "zip_code": 12345,
+        "country": "US"
+       }
+      },
+      "properties": {
+       "street": {
+        "type": "string",
+        "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "345 California Ave."
+       },
+       "street2": {
+        "type": "string",
+        "description": "Has a 40-character limit, inclusive. Must start with an alphanumeric, and may only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "Suite 600"
+       },
+       "city": {
+        "type": "string",
+        "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+        "example": "San Francisco",
+        "minLength": 2,
+        "maxLength": 40
+       },
+       "state": {
+        "type": "string",
+        "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.",
+        "example": "CA"
+       },
+       "zip_code": {
+        "type": "string",
+        "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.",
+        "example": "12345-1234"
+       },
+       "country": {
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.",
+        "example": "US"
+       }
+      },
+      "required": [
+       "street",
+       "city",
+       "state",
+       "zip_code",
+       "country"
+      ]
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_cards_activate.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards/{card_id}/activate": {
+     "parameters": [
+      {
+       "name": "card_id",
+       "in": "path",
+       "required": true,
+       "schema": {
+        "type": "string"
+       }
+      }
+     ],
+     "post": {
+      "summary": "Activate Physical Card",
+      "operationId": "post_cards_activate",
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/card"
+          },
+          "examples": {
+           "successful response": {
+            "value": {
+             "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+             "date_updated": "2020-08-16T19:39:34Z",
+             "date_created": "2020-08-15T19:39:34Z",
+             "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+             "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+             "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+             "last_four": "6270",
+             "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+             "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+             "status": "active",
+             "card_design_id": null
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "tags": [
+       "Cards"
+      ],
+      "description": "Activate a card"
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "card": {
+      "description": "",
+      "x-examples": {
+       "individual card [secured credit]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "business card": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "individual card [prepaid,unsecured]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-16T19:39:34Z"
+       }
+      },
+      "title": "card",
+      "type": "object",
+      "properties": {
+       "card_id": {
+        "type": "string",
+        "example": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "readOnly": true
+       },
+       "customer_id": {
+        "type": "string",
+        "example": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "nullable": true
+       },
+       "account_id": {
+        "type": "string",
+        "example": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "nullable": true,
+        "readOnly": true
+       },
+       "business_id": {
+        "type": "string",
+        "example": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "nullable": true
+       },
+       "card_number": {
+        "type": "string",
+        "example": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "readOnly": true
+       },
+       "cvv": {
+        "type": "string",
+        "example": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "readOnly": true
+       },
+       "expiry_date": {
+        "type": "string",
+        "example": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "readOnly": true
+       },
+       "last_four": {
+        "type": "string",
+        "example": "6270",
+        "readOnly": true
+       },
+       "status": {
+        "type": "string",
+        "example": "active",
+        "enum": [
+         "active",
+         "inactive",
+         "closed"
+        ]
+       },
+       "card_design_id": {
+        "type": "string",
+        "example": "12",
+        "description": "The visual design of card.\nPlease contact Support to start creating card designs.",
+        "default": null
+       },
+       "date_updated": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_created": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_physical_card_activated": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_cards_close.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards/{card_id}/close": {
+     "parameters": [
+      {
+       "name": "card_id",
+       "in": "path",
+       "required": true,
+       "schema": {
+        "type": "string"
+       }
+      }
+     ],
+     "post": {
+      "summary": "Close a Card",
+      "operationId": "post_cards_close",
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/card"
+          },
+          "examples": {
+           "Card Closed": {
+            "value": {
+             "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+             "date_updated": "2020-08-16T19:39:34Z",
+             "date_created": "2020-08-15T19:39:34Z",
+             "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+             "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+             "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+             "last_four": "6270",
+             "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+             "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+             "status": "closed",
+             "card_design_id": null
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "tags": [
+       "Cards"
+      ],
+      "description": "Close a card"
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "card": {
+      "description": "",
+      "x-examples": {
+       "individual card [secured credit]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "business card": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-15T19:39:34Z",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_physical_card_activated": "2020-10-15T19:39:34Z"
+       },
+       "individual card [prepaid,unsecured]": {
+        "card_id": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "customer_id": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "account_id": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "business_id": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "program_id": "7f555932-153f-452c-95cc-aaa96f6d2dec",
+        "expiry_date": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "last_four": "6270",
+        "card_number": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "cvv": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "status": "active",
+        "card_design_id": "12",
+        "date_updated": "2020-08-16T19:39:34Z",
+        "date_created": "2020-08-16T19:39:34Z"
+       }
+      },
+      "title": "card",
+      "type": "object",
+      "properties": {
+       "card_id": {
+        "type": "string",
+        "example": "057c6074-a02d-4a5a-bad9-bbc64b047df7",
+        "readOnly": true
+       },
+       "customer_id": {
+        "type": "string",
+        "example": "c8940088-21e8-451c-987c-0a0398db3ee5",
+        "nullable": true
+       },
+       "account_id": {
+        "type": "string",
+        "example": "26bdeb70-157c-4c44-a04a-3727793b9779",
+        "nullable": true,
+        "readOnly": true
+       },
+       "business_id": {
+        "type": "string",
+        "example": "f65f3ff2-ff5a-46a0-a277-b5892aa5a690",
+        "nullable": true
+       },
+       "card_number": {
+        "type": "string",
+        "example": "tok_live_q7kwTYb5YCYznpgRHHTs9p",
+        "readOnly": true
+       },
+       "cvv": {
+        "type": "string",
+        "example": "tok_live_c94od3AsFWYQ1ecaaMYtFU",
+        "readOnly": true
+       },
+       "expiry_date": {
+        "type": "string",
+        "example": "tok_live_7g3eARzeEBJw89rJRCHqHv",
+        "readOnly": true
+       },
+       "last_four": {
+        "type": "string",
+        "example": "6270",
+        "readOnly": true
+       },
+       "status": {
+        "type": "string",
+        "example": "active",
+        "enum": [
+         "active",
+         "inactive",
+         "closed"
+        ]
+       },
+       "card_design_id": {
+        "type": "string",
+        "example": "12",
+        "description": "The visual design of card.\nPlease contact Support to start creating card designs.",
+        "default": null
+       },
+       "date_updated": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_created": {
+        "type": "string",
+        "example": "2020-08-16T19:39:34Z"
+       },
+       "date_physical_card_activated": {
+        "type": "string"
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_cards_restrictions.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards/{card_id}/restrictions": {
+     "parameters": [
+      {
+       "schema": {
+        "type": "string"
+       },
+       "name": "card_id",
+       "in": "path",
+       "required": true
+      }
+     ],
+     "get": {
+      "summary": "Retrieve card restrictions",
+      "operationId": "get_cards_restrictions",
+      "description": "Retrieve all restrictions on a card",
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "description": "",
+           "type": "object",
+           "x-examples": {
+            "example-1": {
+             "card": "8d8b0aa0-5eec-4eab-923d-2bd777c9a07d",
+             "restrictions": [
+              {
+               "uuid": "5fb767a2-f3f7-4a9b-9f5f-63bf87a8553a",
+               "card_id": "8d8b0aa0-5eec-4eab-923d-2bd777c9a07d",
+               "restriction_type": "amount",
+               "max_amount": "100.00",
+               "date_created": "2020-05-29T14:59:38.386850",
+               "date_updated": "2020-06-29T14:59:38.386930"
+              }
+             ]
+            }
+           },
+           "properties": {
+            "card": {
+             "type": "string",
+             "minLength": 1
+            },
+            "restrictions": {
+             "type": "array",
+             "uniqueItems": true,
+             "minItems": 1,
+             "items": {
+              "type": "object",
+              "properties": {
+               "uuid": {
+                "type": "string",
+                "minLength": 1,
+                "format": "uuid",
+                "example": "846b9f2a-0e34-4783-ac74-83bb89781a05"
+               },
+               "card_id": {
+                "type": "string",
+                "minLength": 1,
+                "format": "uuid",
+                "example": "a593e8c1-bcd3-4747-a903-2a829fa4e3fe"
+               },
+               "restriction_type": {
+                "type": "string",
+                "minLength": 1,
+                "example": "amount",
+                "enum": [
+                 "amount"
+                ]
+               },
+               "max_amount": {
+                "type": "string",
+                "minLength": 1,
+                "example": "100.00"
+               },
+               "date_created": {
+                "type": "string",
+                "minLength": 1,
+                "example": "2020-06-29T14:59:38.386930"
+               },
+               "date_updated": {
+                "type": "string",
+                "minLength": 1,
+                "example": "2020-06-29T14:59:38.386930"
+               }
+              },
+              "required": [
+               "uuid",
+               "card_id",
+               "restriction_type",
+               "max_amount",
+               "date_created",
+               "date_updated"
+              ]
+             }
+            }
+           },
+           "required": [
+            "card",
+            "restrictions"
+           ]
+          }
+         }
+        }
+       }
+      },
+      "tags": [
+       "Card restrictions"
+      ]
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_cards_restrictions.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards/{card_id}/restrictions": {
+     "parameters": [
+      {
+       "schema": {
+        "type": "string"
+       },
+       "name": "card_id",
+       "in": "path",
+       "required": true
+      }
+     ],
+     "post": {
+      "summary": "Create card restriction",
+      "operationId": "post_cards_restrictions",
+      "description": "Create card restriction for a card",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/card-restriction-write"
+         },
+         "examples": {
+          "example": {
+           "value": {
+            "restriction_type": "amount",
+            "max_amount": "100.00"
+           }
+          }
+         }
+        }
+       }
+      },
+      "tags": [
+       "Card restrictions"
+      ],
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/card-restriction"
+          },
+          "examples": {
+           "example": {
+            "value": {
+             "uuid": "b7492825-adce-4164-b8ba-5676943b6237",
+             "card_id": "dab45fde-3450-4fbf-b671-9605756c1c8c",
+             "restriction_type": "amount",
+             "max_amount": "string",
+             "date_created": "2020-06-29T14:59:38.386930",
+             "date_updated": "2020-06-30T14:59:38.386930"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "card-restriction-write": {
+      "description": "",
+      "type": "object",
+      "x-examples": {
+       "example-1": {
+        "uuid": "da4ab5b1-77d4-4c25-b791-1f01ff7bce27",
+        "card_id": "8d8b0aa0-5eec-4eab-923d-2bd777c9a07d",
+        "restriction_type": "amount",
+        "max_amount": "100.00",
+        "date_created": "2020-05-29T14:59:38.386850",
+        "date_updated": "2020-06-29T14:59:38.386930"
+       }
+      },
+      "title": "card-restriction-write",
+      "properties": {
+       "restriction_type": {
+        "type": "string",
+        "minLength": 1,
+        "description": "The type of restriction",
+        "enum": [
+         "amount"
+        ],
+        "example": "amount"
+       },
+       "max_amount": {
+        "type": "string",
+        "minLength": 1,
+        "description": "purchase amount limit\n`(decimal format, allows for two decimal places. Maximum amount is 100,000)`",
+        "example": "100.00"
+       }
+      },
+      "required": [
+       "restriction_type",
+       "max_amount"
+      ]
+     },
+     "card-restriction": {
+      "title": "card-restriction",
+      "description": "Example response",
+      "type": "object",
+      "properties": {
+       "uuid": {
+        "type": "string",
+        "minLength": 1,
+        "format": "uuid",
+        "example": "b7492825-adce-4164-b8ba-5676943b6237"
+       },
+       "card_id": {
+        "type": "string",
+        "minLength": 1,
+        "format": "uuid",
+        "example": "dab45fde-3450-4fbf-b671-9605756c1c8c"
+       },
+       "restriction_type": {
+        "type": "string",
+        "minLength": 1,
+        "enum": [
+         "amount"
+        ],
+        "example": "amount"
+       },
+       "max_amount": {
+        "type": "string",
+        "minLength": 1
+       },
+       "date_created": {
+        "type": "string",
+        "minLength": 1,
+        "example": "2020-06-29T14:59:38.386930"
+       },
+       "date_updated": {
+        "type": "string",
+        "minLength": 1,
+        "example": "2020-06-30T14:59:38.386930"
+       }
+      },
+      "required": [
+       "uuid",
+       "card_id",
+       "restriction_type",
+       "max_amount",
+       "date_created",
+       "date_updated"
+      ],
+      "x-examples": {
+       "example": {
+        "uuid": "b7492825-adce-4164-b8ba-5676943b6237",
+        "card_id": "dab45fde-3450-4fbf-b671-9605756c1c8c",
+        "restriction_type": "amount",
+        "max_amount": "string",
+        "date_created": "2020-06-29T14:59:38.386930",
+        "date_updated": "2020-06-30T14:59:38.386930"
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_cards_restrictions_id.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards/{card_id}/restrictions/{restriction_id}": {
+     "parameters": [
+      {
+       "schema": {
+        "type": "string"
+       },
+       "name": "card_id",
+       "in": "path",
+       "required": true
+      },
+      {
+       "schema": {
+        "type": "string"
+       },
+       "name": "restriction_id",
+       "in": "path",
+       "required": true
+      }
+     ],
+     "get": {
+      "summary": "Retrieve card restriction by id",
+      "operationId": "get_cards_restrictions_id",
+      "description": "Updatess restriction on a card.",
+      "tags": [
+       "Card restrictions"
+      ],
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/card-restriction"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "card-restriction": {
+      "title": "card-restriction",
+      "description": "Example response",
+      "type": "object",
+      "properties": {
+       "uuid": {
+        "type": "string",
+        "minLength": 1,
+        "format": "uuid",
+        "example": "b7492825-adce-4164-b8ba-5676943b6237"
+       },
+       "card_id": {
+        "type": "string",
+        "minLength": 1,
+        "format": "uuid",
+        "example": "dab45fde-3450-4fbf-b671-9605756c1c8c"
+       },
+       "restriction_type": {
+        "type": "string",
+        "minLength": 1,
+        "enum": [
+         "amount"
+        ],
+        "example": "amount"
+       },
+       "max_amount": {
+        "type": "string",
+        "minLength": 1
+       },
+       "date_created": {
+        "type": "string",
+        "minLength": 1,
+        "example": "2020-06-29T14:59:38.386930"
+       },
+       "date_updated": {
+        "type": "string",
+        "minLength": 1,
+        "example": "2020-06-30T14:59:38.386930"
+       }
+      },
+      "required": [
+       "uuid",
+       "card_id",
+       "restriction_type",
+       "max_amount",
+       "date_created",
+       "date_updated"
+      ],
+      "x-examples": {
+       "example": {
+        "uuid": "b7492825-adce-4164-b8ba-5676943b6237",
+        "card_id": "dab45fde-3450-4fbf-b671-9605756c1c8c",
+        "restriction_type": "amount",
+        "max_amount": "string",
+        "date_created": "2020-06-29T14:59:38.386930",
+        "date_updated": "2020-06-30T14:59:38.386930"
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/patch_cards_restrictions.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards/{card_id}/restrictions/{restriction_id}": {
+     "parameters": [
+      {
+       "schema": {
+        "type": "string"
+       },
+       "name": "card_id",
+       "in": "path",
+       "required": true
+      },
+      {
+       "schema": {
+        "type": "string"
+       },
+       "name": "restriction_id",
+       "in": "path",
+       "required": true
+      }
+     ],
+     "patch": {
+      "summary": "Update card restriction",
+      "operationId": "patch_cards_restrictions",
+      "description": "Updates restriction on a card.",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/card-restriction-write"
+         },
+         "examples": {
+          "example": {
+           "value": {
+            "restriction_type": "amount",
+            "max_amount": "100.00"
+           }
+          }
+         }
+        }
+       },
+       "description": ""
+      },
+      "tags": [
+       "Card restrictions"
+      ],
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/card-restriction"
+          },
+          "examples": {
+           "example": {
+            "value": {
+             "uuid": "b7492825-adce-4164-b8ba-5676943b6237",
+             "card_id": "dab45fde-3450-4fbf-b671-9605756c1c8c",
+             "restriction_type": "amount",
+             "max_amount": "string",
+             "date_created": "2020-06-29T14:59:38.386930",
+             "date_updated": "2020-06-30T14:59:38.386930"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "card-restriction-write": {
+      "description": "",
+      "type": "object",
+      "x-examples": {
+       "example-1": {
+        "uuid": "da4ab5b1-77d4-4c25-b791-1f01ff7bce27",
+        "card_id": "8d8b0aa0-5eec-4eab-923d-2bd777c9a07d",
+        "restriction_type": "amount",
+        "max_amount": "100.00",
+        "date_created": "2020-05-29T14:59:38.386850",
+        "date_updated": "2020-06-29T14:59:38.386930"
+       }
+      },
+      "title": "card-restriction-write",
+      "properties": {
+       "restriction_type": {
+        "type": "string",
+        "minLength": 1,
+        "description": "The type of restriction",
+        "enum": [
+         "amount"
+        ],
+        "example": "amount"
+       },
+       "max_amount": {
+        "type": "string",
+        "minLength": 1,
+        "description": "purchase amount limit\n`(decimal format, allows for two decimal places. Maximum amount is 100,000)`",
+        "example": "100.00"
+       }
+      },
+      "required": [
+       "restriction_type",
+       "max_amount"
+      ]
+     },
+     "card-restriction": {
+      "title": "card-restriction",
+      "description": "Example response",
+      "type": "object",
+      "properties": {
+       "uuid": {
+        "type": "string",
+        "minLength": 1,
+        "format": "uuid",
+        "example": "b7492825-adce-4164-b8ba-5676943b6237"
+       },
+       "card_id": {
+        "type": "string",
+        "minLength": 1,
+        "format": "uuid",
+        "example": "dab45fde-3450-4fbf-b671-9605756c1c8c"
+       },
+       "restriction_type": {
+        "type": "string",
+        "minLength": 1,
+        "enum": [
+         "amount"
+        ],
+        "example": "amount"
+       },
+       "max_amount": {
+        "type": "string",
+        "minLength": 1
+       },
+       "date_created": {
+        "type": "string",
+        "minLength": 1,
+        "example": "2020-06-29T14:59:38.386930"
+       },
+       "date_updated": {
+        "type": "string",
+        "minLength": 1,
+        "example": "2020-06-30T14:59:38.386930"
+       }
+      },
+      "required": [
+       "uuid",
+       "card_id",
+       "restriction_type",
+       "max_amount",
+       "date_created",
+       "date_updated"
+      ],
+      "x-examples": {
+       "example": {
+        "uuid": "b7492825-adce-4164-b8ba-5676943b6237",
+        "card_id": "dab45fde-3450-4fbf-b671-9605756c1c8c",
+        "restriction_type": "amount",
+        "max_amount": "string",
+        "date_created": "2020-06-29T14:59:38.386930",
+        "date_updated": "2020-06-30T14:59:38.386930"
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/delete_cards_restrictions.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/cards/{card_id}/restrictions/{restriction_id}": {
+     "parameters": [
+      {
+       "schema": {
+        "type": "string"
+       },
+       "name": "card_id",
+       "in": "path",
+       "required": true
+      },
+      {
+       "schema": {
+        "type": "string"
+       },
+       "name": "restriction_id",
+       "in": "path",
+       "required": true
+      }
+     ],
+     "delete": {
+      "summary": "Delete card restriction",
+      "operationId": "delete_cards_restrictions",
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "type": "object",
+           "properties": {
+            "Status": {
+             "type": "string",
+             "example": "Card Restriction Removed",
+             "readOnly": true
+            }
+           }
+          },
+          "examples": {
+           "example": {
+            "value": {
+             "Status": "Card Restriction Removed"
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "description": "Delete the selected restriction on a card",
+      "tags": [
+       "Card restrictions"
+      ]
+     }
+    }
+   },
+   "info": {
+    "title": "Cards",
+    "version": "1",
+    "description": "Cards API"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 238
+    }
+   }
+  }
+ }
+]

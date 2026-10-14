@@ -1,0 +1,521 @@
+{
+  "@context": {
+    "@vocab": "https://bond.tech/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "bond": "https://bond.tech/schema#",
+    "account-credit": "bond:account-credit",
+    "credit_limit": {
+      "@id": "bond:credit_limit",
+      "@type": "xsd:integer"
+    },
+    "security_deposit_account_id": {
+      "@id": "bond:security_deposit_account_id",
+      "@type": "xsd:string"
+    },
+    "account-security-deposit": "bond:account-security-deposit",
+    "credit_account_id": {
+      "@id": "bond:credit_account_id",
+      "@type": "xsd:string"
+    },
+    "account-write": "bond:account-write",
+    "customer_id": {
+      "@id": "bond:customer_id",
+      "@type": "xsd:string"
+    },
+    "business_id": {
+      "@id": "bond:business_id",
+      "@type": "xsd:string"
+    },
+    "program_id": {
+      "@id": "bond:program_id",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "bond:type",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "bond:description",
+      "@type": "xsd:string"
+    },
+    "account-patch": "bond:account-patch",
+    "status": {
+      "@id": "bond:status",
+      "@type": "xsd:string"
+    },
+    "AddressGet": "bond:AddressGet",
+    "address_id": {
+      "@id": "bond:address_id",
+      "@type": "xsd:string"
+    },
+    "address_type": {
+      "@id": "bond:address_type",
+      "@type": "xsd:string"
+    },
+    "street": {
+      "@id": "bond:street",
+      "@type": "xsd:string"
+    },
+    "street2": {
+      "@id": "bond:street2",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "bond:city",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "bond:state",
+      "@type": "xsd:string"
+    },
+    "zip_code": {
+      "@id": "bond:zip_code",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "bond:country",
+      "@type": "xsd:string"
+    },
+    "is_primary": {
+      "@id": "bond:is_primary",
+      "@type": "xsd:boolean"
+    },
+    "date_created": {
+      "@id": "bond:date_created",
+      "@type": "xsd:string"
+    },
+    "date_updated": {
+      "@id": "bond:date_updated",
+      "@type": "xsd:string"
+    },
+    "BusinessesGetSerializer": "bond:BusinessesGetSerializer",
+    "brand_business_id": {
+      "@id": "bond:brand_business_id",
+      "@type": "xsd:string"
+    },
+    "ein": {
+      "@id": "bond:ein",
+      "@type": "xsd:string"
+    },
+    "phone": {
+      "@id": "bond:phone",
+      "@type": "xsd:string"
+    },
+    "email": {
+      "@id": "bond:email",
+      "@type": "xsd:string"
+    },
+    "website": {
+      "@id": "bond:website",
+      "@type": "xsd:string"
+    },
+    "legal_business_name": {
+      "@id": "bond:legal_business_name",
+      "@type": "xsd:string"
+    },
+    "dba_business_name": {
+      "@id": "bond:dba_business_name",
+      "@type": "xsd:string"
+    },
+    "business_type": {
+      "@id": "bond:business_type",
+      "@type": "xsd:string"
+    },
+    "industry_type": {
+      "@id": "bond:industry_type",
+      "@type": "xsd:string"
+    },
+    "number_of_employees": {
+      "@id": "bond:number_of_employees",
+      "@type": "xsd:string"
+    },
+    "addresses": {
+      "@id": "bond:addresses",
+      "@container": "@list"
+    },
+    "beneficial_owners": {
+      "@id": "bond:beneficial_owners",
+      "@container": "@list"
+    },
+    "BeneficialOwnerGetSerializer": "bond:BeneficialOwnerGetSerializer",
+    "dob": {
+      "@id": "bond:dob",
+      "@type": "xsd:string"
+    },
+    "first_name": {
+      "@id": "bond:first_name",
+      "@type": "xsd:string"
+    },
+    "middle_name": {
+      "@id": "bond:middle_name",
+      "@type": "xsd:string"
+    },
+    "last_name": {
+      "@id": "bond:last_name",
+      "@type": "xsd:string"
+    },
+    "Address": "bond:Address",
+    "BusinessesPostSerializer": "bond:BusinessesPostSerializer",
+    "date_established": {
+      "@id": "bond:date_established",
+      "@type": "xsd:string"
+    },
+    "BeneficialOwnerPostSerializer": "bond:BeneficialOwnerPostSerializer",
+    "BusinessesPatchSerializer": "bond:BusinessesPatchSerializer",
+    "BeneficialOwnerPatchSerializer": "bond:BeneficialOwnerPatchSerializer",
+    "KYCPostPayload": "bond:KYCPostPayload",
+    "ssn": {
+      "@id": "bond:ssn",
+      "@type": "xsd:string"
+    },
+    "phone_country_code": {
+      "@id": "bond:phone_country_code",
+      "@type": "xsd:string"
+    },
+    "ip": {
+      "@id": "bond:ip",
+      "@type": "xsd:string"
+    },
+    "kyc_retry_request": {
+      "@id": "bond:kyc_retry_request",
+      "@type": "xsd:boolean"
+    },
+    "BeneficialOwnerAddressPatchSerializer": "bond:BeneficialOwnerAddressPatchSerializer",
+    "KYBPostSerializer": "bond:KYBPostSerializer",
+    "card-write-post": "bond:card-write-post",
+    "account_id": {
+      "@id": "bond:account_id",
+      "@type": "xsd:string"
+    },
+    "card_design_id": {
+      "@id": "bond:card_design_id",
+      "@type": "xsd:string"
+    },
+    "card_mailing_address": {
+      "@id": "bond:card_mailing_address",
+      "@type": "@id"
+    },
+    "card": "bond:card",
+    "card_id": {
+      "@id": "bond:card_id",
+      "@type": "xsd:string"
+    },
+    "card_number": {
+      "@id": "bond:card_number",
+      "@type": "xsd:string"
+    },
+    "cvv": {
+      "@id": "bond:cvv",
+      "@type": "xsd:string"
+    },
+    "expiry_date": {
+      "@id": "bond:expiry_date",
+      "@type": "xsd:string"
+    },
+    "last_four": {
+      "@id": "bond:last_four",
+      "@type": "xsd:string"
+    },
+    "date_physical_card_activated": {
+      "@id": "bond:date_physical_card_activated",
+      "@type": "xsd:string"
+    },
+    "address-write": "bond:address-write",
+    "card-write-patch": "bond:card-write-patch",
+    "card-reissue": "bond:card-reissue",
+    "reissue_type": {
+      "@id": "bond:reissue_type",
+      "@type": "xsd:string"
+    },
+    "card-restriction-write": "bond:card-restriction-write",
+    "restriction_type": {
+      "@id": "bond:restriction_type",
+      "@type": "xsd:string"
+    },
+    "max_amount": {
+      "@id": "bond:max_amount",
+      "@type": "xsd:string"
+    },
+    "card-restriction": "bond:card-restriction",
+    "uuid": {
+      "@id": "bond:uuid",
+      "@type": "xsd:string"
+    },
+    "credit-application-write": "bond:credit-application-write",
+    "applicant": {
+      "@id": "bond:applicant"
+    },
+    "credit-application": "bond:credit-application",
+    "application_id": {
+      "@id": "bond:application_id",
+      "@type": "xsd:string"
+    },
+    "application_status": {
+      "@id": "bond:application_status",
+      "@type": "xsd:string"
+    },
+    "accounts": {
+      "@id": "bond:accounts"
+    },
+    "CreditApplicationGetMultiple": "bond:CreditApplicationGetMultiple",
+    "has_more": {
+      "@id": "bond:has_more",
+      "@type": "xsd:boolean"
+    },
+    "data": {
+      "@id": "bond:data",
+      "@container": "@list"
+    },
+    "credit-application-patch": "bond:credit-application-patch",
+    "AdverseActionsGet": "bond:AdverseActionsGet",
+    "id": {
+      "@id": "bond:id",
+      "@type": "xsd:string"
+    },
+    "service": {
+      "@id": "bond:service",
+      "@type": "xsd:string"
+    },
+    "reasons": {
+      "@id": "bond:reasons",
+      "@container": "@list"
+    },
+    "customer": "bond:customer",
+    "brand_person_id": {
+      "@id": "bond:brand_person_id",
+      "@type": "xsd:string"
+    },
+    "bond_brand_id": {
+      "@id": "bond:bond_brand_id",
+      "@type": "xsd:string"
+    },
+    "address": "bond:address",
+    "customer-write": "bond:customer-write",
+    "customer-patch": "bond:customer-patch",
+    "ACH": "bond:ACH",
+    "external_account_id": {
+      "@id": "bond:external_account_id",
+      "@type": "xsd:string"
+    },
+    "class_code": {
+      "@id": "bond:class_code",
+      "@type": "xsd:string"
+    },
+    "direction": {
+      "@id": "bond:direction",
+      "@type": "xsd:string"
+    },
+    "network": {
+      "@id": "bond:network",
+      "@type": "xsd:string"
+    },
+    "failure_reason": {
+      "@id": "bond:failure_reason",
+      "@type": "xsd:string"
+    },
+    "return_code": {
+      "@id": "bond:return_code",
+      "@type": "xsd:string"
+    },
+    "Card": "bond:Card",
+    "mcc": {
+      "@id": "bond:mcc",
+      "@type": "xsd:string"
+    },
+    "mcc_description": {
+      "@id": "bond:mcc_description",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "bond:currency",
+      "@type": "xsd:string"
+    },
+    "exchange_rate": {
+      "@id": "bond:exchange_rate",
+      "@type": "xsd:decimal"
+    },
+    "merchant_id": {
+      "@id": "bond:merchant_id",
+      "@type": "xsd:string"
+    },
+    "merchant_name": {
+      "@id": "bond:merchant_name",
+      "@type": "xsd:string"
+    },
+    "merchant_city": {
+      "@id": "bond:merchant_city",
+      "@type": "xsd:string"
+    },
+    "merchant_state": {
+      "@id": "bond:merchant_state",
+      "@type": "xsd:string"
+    },
+    "merchant_country": {
+      "@id": "bond:merchant_country",
+      "@type": "xsd:string"
+    },
+    "merchant_postal_code": {
+      "@id": "bond:merchant_postal_code",
+      "@type": "xsd:string"
+    },
+    "cardholder_presence": {
+      "@id": "bond:cardholder_presence",
+      "@type": "xsd:boolean"
+    },
+    "statement_descriptor": {
+      "@id": "bond:statement_descriptor",
+      "@type": "xsd:string"
+    },
+    "arn": {
+      "@id": "bond:arn",
+      "@type": "xsd:string"
+    },
+    "fraud_rule_triggered": {
+      "@id": "bond:fraud_rule_triggered",
+      "@type": "xsd:string"
+    },
+    "merchant_currency": {
+      "@id": "bond:merchant_currency",
+      "@type": "xsd:string"
+    },
+    "merchant_amount": {
+      "@id": "bond:merchant_amount",
+      "@type": "xsd:string"
+    },
+    "HTTPValidationError": "bond:HTTPValidationError",
+    "detail": {
+      "@id": "bond:detail",
+      "@container": "@list"
+    },
+    "PaginatedTransactions": "bond:PaginatedTransactions",
+    "page": {
+      "@id": "bond:page",
+      "@type": "xsd:integer"
+    },
+    "pages": {
+      "@id": "bond:pages",
+      "@type": "xsd:integer"
+    },
+    "count": {
+      "@id": "bond:count",
+      "@type": "xsd:integer"
+    },
+    "next_page": {
+      "@id": "bond:next_page",
+      "@type": "xsd:integer"
+    },
+    "transactions": {
+      "@id": "bond:transactions",
+      "@container": "@list"
+    },
+    "TransactionSchema": "bond:TransactionSchema",
+    "transaction_id": {
+      "@id": "bond:transaction_id",
+      "@type": "xsd:string"
+    },
+    "payment_type": {
+      "@id": "bond:payment_type",
+      "@type": "xsd:string"
+    },
+    "transaction_type": {
+      "@id": "bond:transaction_type",
+      "@type": "xsd:string"
+    },
+    "previous_transaction_id": {
+      "@id": "bond:previous_transaction_id",
+      "@type": "xsd:string"
+    },
+    "amount": {
+      "@id": "bond:amount",
+      "@type": "xsd:string"
+    },
+    "created_time": {
+      "@id": "bond:created_time",
+      "@type": "xsd:dateTime"
+    },
+    "updated_time": {
+      "@id": "bond:updated_time",
+      "@type": "xsd:dateTime"
+    },
+    "details": {
+      "@id": "bond:details"
+    },
+    "ValidationError": "bond:ValidationError",
+    "loc": {
+      "@id": "bond:loc",
+      "@container": "@list"
+    },
+    "msg": {
+      "@id": "bond:msg",
+      "@type": "xsd:string"
+    },
+    "simulate": "bond:simulate",
+    "transaction_datetime": {
+      "@id": "bond:transaction_datetime",
+      "@type": "xsd:string"
+    },
+    "merchant_zip_code": {
+      "@id": "bond:merchant_zip_code",
+      "@type": "xsd:string"
+    },
+    "mid": {
+      "@id": "bond:mid",
+      "@type": "xsd:string"
+    },
+    "settle": "bond:settle",
+    "kyc": "bond:kyc",
+    "transfer-ach": "bond:transfer-ach",
+    "ach": {
+      "@id": "bond:ach"
+    },
+    "transfer-write": "bond:transfer-write",
+    "origination_account_id": {
+      "@id": "bond:origination_account_id",
+      "@type": "xsd:string"
+    },
+    "destination_account_id": {
+      "@id": "bond:destination_account_id",
+      "@type": "xsd:string"
+    },
+    "webhook": "bond:webhook",
+    "webhook_subscription": {
+      "@id": "bond:webhook_subscription"
+    },
+    "webhook-post": "bond:webhook-post",
+    "url": {
+      "@id": "bond:url",
+      "@type": "xsd:string"
+    },
+    "events": {
+      "@id": "bond:events",
+      "@container": "@list"
+    },
+    "version": {
+      "@id": "bond:version",
+      "@type": "xsd:string"
+    },
+    "all-webhooks": "bond:all-webhooks",
+    "secret": {
+      "@id": "bond:secret",
+      "@type": "xsd:string"
+    },
+    "creted_time": {
+      "@id": "bond:creted_time",
+      "@type": "xsd:string"
+    },
+    "webhook-patch": "bond:webhook-patch"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Bond API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Bond's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-14) from openapi/bond-accounts-openapi.yml, openapi/bond-business-openapi.yml, openapi/bond-cards-openapi.yml.",
+  "dcterms:created": "2026-10-14",
+  "dcterms:source": [
+    "openapi/bond-accounts-openapi.yml",
+    "openapi/bond-business-openapi.yml",
+    "openapi/bond-cards-openapi.yml",
+    "openapi/bond-credit-openapi.yml",
+    "openapi/bond-customer-openapi.yml"
+  ]
+}

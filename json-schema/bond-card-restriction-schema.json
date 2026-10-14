@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-card-restriction-schema.json",
+  "title": "card-restriction",
+  "description": "Example response",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-cards-openapi.yml#/components/schemas/card-restriction",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "minLength": 1,
+      "format": "uuid"
+    },
+    "card_id": {
+      "type": "string",
+      "minLength": 1,
+      "format": "uuid"
+    },
+    "restriction_type": {
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "amount"
+      ]
+    },
+    "max_amount": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date_created": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date_updated": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "uuid",
+    "card_id",
+    "restriction_type",
+    "max_amount",
+    "date_created",
+    "date_updated"
+  ]
+}

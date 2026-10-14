@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-card-reissue-schema.json",
+  "title": "card-reissue",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-cards-openapi.yml#/components/schemas/card-reissue",
+  "type": "object",
+  "properties": {
+    "reissue_type": {
+      "type": "string",
+      "enum": [
+        "same_card_number",
+        "same_card_number_updated_expiry",
+        "new_card_number"
+      ]
+    },
+    "card_mailing_address": {
+      "$ref": "#/$defs/address-write"
+    }
+  },
+  "required": [
+    "reissue_type"
+  ],
+  "$defs": {
+    "address-write": {
+      "type": "object",
+      "description": "",
+      "title": "Address-write",
+      "properties": {
+        "street": {
+          "type": "string",
+          "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`"
+        },
+        "street2": {
+          "type": "string",
+          "description": "Has a 40-character limit, inclusive. Must start with an alphanumeric, and may only contain alphanumerics and the special characters `. , _ - #`"
+        },
+        "city": {
+          "type": "string",
+          "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+          "minLength": 2,
+          "maxLength": 40
+        },
+        "state": {
+          "type": "string",
+          "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address."
+        },
+        "zip_code": {
+          "type": "string",
+          "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address."
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit."
+        }
+      },
+      "required": [
+        "street",
+        "city",
+        "state",
+        "zip_code",
+        "country"
+      ]
+    }
+  }
+}

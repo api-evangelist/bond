@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-paginated-transactions-schema.json",
+  "title": "PaginatedTransactions",
+  "description": "Intended to work together with api.data.pagination.PaginationResult.\nSubclasses may contain an `items` field which is a list of data items.",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-ledger-openapi.yml#/components/schemas/PaginatedTransactions",
+  "type": "object",
+  "properties": {
+    "page": {
+      "type": "integer",
+      "title": "Page",
+      "default": 1
+    },
+    "pages": {
+      "type": "integer",
+      "title": "Pages",
+      "default": 1
+    },
+    "count": {
+      "type": "integer",
+      "title": "Count",
+      "default": 10
+    },
+    "next_page": {
+      "title": "Next Page",
+      "type": "integer"
+    },
+    "transactions": {
+      "title": "Transactions",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/TransactionSchema"
+      }
+    }
+  },
+  "required": [
+    "transactions"
+  ],
+  "$defs": {
+    "ACH": {
+      "title": "ACH",
+      "required": [
+        "card_id",
+        "external_account_id",
+        "class_code",
+        "direction",
+        "network",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "card_id": {
+          "title": "Card Id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "external_account_id": {
+          "title": "External Account Id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "class_code": {
+          "title": "Class Code",
+          "type": "string"
+        },
+        "direction": {
+          "title": "Direction",
+          "type": "string"
+        },
+        "network": {
+          "title": "Network",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "failure_reason": {
+          "title": "Failure Reason",
+          "type": "string"
+        },
+        "return_code": {
+          "title": "Return Code",
+          "type": "string"
+        }
+      }
+    },
+    "Card": {
+      "title": "Card",
+      "type": "object",
+      "description": "",
+      "properties": {
+        "card_id": {
+          "type": "string",
+          "title": "Card Id",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "mcc": {
+          "type": "string",
+          "title": "Mcc",
+          "readOnly": true
+        },
+        "mcc_description": {
+          "type": "string",
+          "title": "Mcc Description",
+          "readOnly": true
+        },
+        "currency": {
+          "type": "string",
+          "title": "Currency",
+          "readOnly": true
+        },
+        "exchange_rate": {
+          "type": "number",
+          "title": "Exchange Rate",
+          "readOnly": true
+        },
+        "merchant_id": {
+          "type": "string",
+          "title": "Merchant Id",
+          "readOnly": true
+        },
+        "merchant_name": {
+          "type": "string",
+          "title": "Merchant Name",
+          "readOnly": true
+        },
+        "merchant_city": {
+          "type": "string",
+          "title": "Merchant City",
+          "readOnly": true
+        },
+        "merchant_state": {
+          "type": "string",
+          "title": "Merchant State",
+          "readOnly": true
+        },
+        "merchant_country": {
+          "type": "string",
+          "title": "Merchant Country",
+          "readOnly": true
+        },
+        "merchant_postal_code": {
+          "type": "string",
+          "title": "Merchant Postal Code",
+          "readOnly": true
+        },
+        "cardholder_presence": {
+          "title": "Cardholder Presence",
+          "type": "boolean"
+        },
+        "statement_descriptor": {
+          "type": "string",
+          "title": "Statement Descriptor",
+          "readOnly": true
+        },
+        "arn": {
+          "type": "string",
+          "title": "Arn",
+          "readOnly": true
+        },
+        "fraud_rule_triggered": {
+          "type": "string",
+          "title": "Fraud Rule Triggered",
+          "readOnly": true
+        },
+        "merchant_currency": {
+          "type": "string",
+          "readOnly": true
+        },
+        "merchant_amount": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "card_id",
+        "mcc_description",
+        "statement_descriptor"
+      ]
+    },
+    "TransactionSchema": {
+      "title": "TransactionSchema",
+      "type": "object",
+      "properties": {
+        "transaction_id": {
+          "title": "Transaction Id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "bond_brand_id": {
+          "title": "Bond Brand Id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "customer_id": {
+          "title": "Customer Id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "account_id": {
+          "title": "Account Id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "payment_type": {
+          "type": "string",
+          "title": "Payment Type",
+          "readOnly": true
+        },
+        "transaction_type": {
+          "type": "string",
+          "title": "Transaction Type",
+          "readOnly": true
+        },
+        "previous_transaction_id": {
+          "title": "Previous Transaction Id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "state": {
+          "type": "string",
+          "title": "State",
+          "readOnly": true
+        },
+        "amount": {
+          "type": "string",
+          "title": "Amount"
+        },
+        "currency": {
+          "type": "string",
+          "title": "Currency"
+        },
+        "created_time": {
+          "title": "Created Time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_time": {
+          "title": "Updated Time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "details": {
+          "title": "Details",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ACH"
+            },
+            {
+              "$ref": "#/$defs/Card"
+            }
+          ]
+        }
+      },
+      "required": [
+        "transaction_id",
+        "bond_brand_id",
+        "customer_id",
+        "account_id",
+        "payment_type",
+        "amount",
+        "created_time",
+        "updated_time"
+      ]
+    }
+  }
+}

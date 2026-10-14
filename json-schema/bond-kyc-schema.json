@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-kyc-schema.json",
+  "title": "kyc",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-simulation-openapi.yml#/components/schemas/kyc",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string",
+      "description": "Bond customer_id"
+    },
+    "program_id": {
+      "type": "string",
+      "description": "program_id for card program"
+    }
+  },
+  "required": [
+    "customer_id",
+    "program_id"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-businesses-patch-serializer-schema.json",
+  "title": "BusinessesPatchSerializer",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-business-openapi.yml#/components/schemas/BusinessesPatchSerializer",
+  "type": "object",
+  "properties": {
+    "brand_business_id": {
+      "type": "string",
+      "description": "The brand's UUID for the business."
+    },
+    "ein": {
+      "type": "string",
+      "description": "The Tax Identification Number"
+    },
+    "legal_business_name": {
+      "type": "string",
+      "description": "The legal business name"
+    },
+    "dba_business_name": {
+      "type": "string",
+      "description": "The doing-business-as name (trade name)"
+    },
+    "business_type": {
+      "type": "string",
+      "description": "The business type",
+      "enum": [
+        "cooperative",
+        "limited_liability_company",
+        "sole_proprietorship",
+        "partnership",
+        "limited_partnership",
+        "corporation",
+        "nonprofit_organization"
+      ]
+    },
+    "date_established": {
+      "type": "string",
+      "description": "Date of incorporation in YYYY-MM-DD format",
+      "format": "string"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Phone number"
+    },
+    "email": {
+      "type": "string",
+      "description": "Business contact email"
+    },
+    "website": {
+      "type": "string",
+      "description": "The official website"
+    },
+    "industry_type": {
+      "type": "string",
+      "description": "Type of business conducted"
+    },
+    "number_of_employees": {
+      "type": "string",
+      "description": "Description of number of employees at firm, as a range or value"
+    }
+  }
+}

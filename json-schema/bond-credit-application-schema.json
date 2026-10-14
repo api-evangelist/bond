@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-credit-application-schema.json",
+  "title": "credit-application",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-credit-openapi.yml#/components/schemas/credit-application",
+  "type": "object",
+  "properties": {
+    "application_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "program_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date_created": {
+      "type": "string"
+    },
+    "date_updated": {
+      "type": "string"
+    },
+    "application_status": {
+      "type": "string",
+      "enum": [
+        "created",
+        "submitted",
+        "resubmit_required",
+        "approved",
+        "denied"
+      ],
+      "readOnly": true
+    },
+    "applicant": {
+      "type": "object",
+      "required": [
+        "currency"
+      ],
+      "properties": {
+        "customer_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "employment_status": {
+          "type": "string",
+          "minLength": 6,
+          "enum": [
+            "employed",
+            "self_employed",
+            "unemployed",
+            "retired",
+            "student",
+            "other"
+          ]
+        },
+        "address_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "total_annual_income": {
+          "type": "integer",
+          "description": "Total annual income in cents"
+        },
+        "monthly_housing_payment": {
+          "type": "integer",
+          "description": "Monthly housing payment in cents"
+        },
+        "terms_accepted": {
+          "type": "boolean"
+        },
+        "currency": {
+          "type": "string",
+          "enum": [
+            "USD"
+          ]
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "middle_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "date_of_birth": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "street2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "zip_code": {
+          "type": "string"
+        },
+        "ssn": {
+          "type": "string",
+          "description": "Tokenized value"
+        },
+        "email": {
+          "type": "string",
+          "description": "Must be a valid email address"
+        }
+      }
+    },
+    "accounts": {
+      "type": "object",
+      "properties": {
+        "security_deposit_account_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      }
+    }
+  },
+  "required": [
+    "program_id",
+    "date_created",
+    "date_updated",
+    "application_status",
+    "applicant"
+  ]
+}

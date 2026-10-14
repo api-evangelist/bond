@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-account-write-schema.json",
+  "title": "account-write",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-accounts-openapi.yml#/components/schemas/account-write",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string",
+      "description": "customer_id is required for consumer accounts\n<b>required for consumer accounts</b>"
+    },
+    "business_id": {
+      "type": "string",
+      "description": "business_id is required for commercial accounts\n<b>required for commercial accounts</b>"
+    },
+    "program_id": {
+      "type": "string",
+      "description": "represents the program set up with a Bond bank partner. "
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "deposit",
+        "security_deposit"
+      ],
+      "description": "designates what type of account will be created; security_deposit is only manually created for commercial secured credit; consumer secured credit is automatically created on approval"
+    },
+    "description": {
+      "type": "string",
+      "description": "label for account\n<b>optional</b> "
+    }
+  },
+  "required": [
+    "customer_id",
+    "business_id",
+    "program_id",
+    "type"
+  ]
+}

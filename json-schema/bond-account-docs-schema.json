@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-account-docs-schema.json",
+  "title": "account",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-accounts-openapi.yml#/components/schemas/account-docs",
+  "allOf": [
+    {
+      "properties": {
+        "account_id": {
+          "type": "string"
+        },
+        "program_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "customer_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "business_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "deposit",
+            "credit",
+            "security_deposit",
+            "external"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive",
+            "frozen",
+            "closed"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "routing_number": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "readOnly": true
+        },
+        "account_number": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "readOnly": true
+        },
+        "cards": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          },
+          "readOnly": true
+        },
+        "date_updated": {
+          "type": "string",
+          "readOnly": true
+        },
+        "date_created": {
+          "type": "string",
+          "readOnly": true
+        },
+        "balance": {
+          "type": "object",
+          "properties": {
+            "current_balance": {
+              "type": "number",
+              "readOnly": true,
+              "description": "Funds that have posted to the account, some or all of it may be available to be transferred out of the account.\nFor credit accounts, the current balance is amount of funds that have been spent on the credit card."
+            },
+            "available_balance": {
+              "type": "number",
+              "readOnly": true,
+              "description": "Funds that are available to be transferred out of the account and includes any pending transactions.\nFor credit accounts, the available balance is the current balance plus the pending transactions."
+            },
+            "locked_balance": {
+              "type": "number",
+              "readOnly": true,
+              "description": "Funds that are reserved to, for example, pay off the balance of a secured charge card. "
+            },
+            "previous_statement_balance": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The current balance of the account as of the most recent statement generation date."
+            },
+            "currency": {
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "credit": {
+          "$ref": "#/$defs/account-credit"
+        }
+      }
+    },
+    {
+      "properties": {
+        "deposit": {
+          "$ref": "#/$defs/account-deposit"
+        }
+      }
+    },
+    {
+      "properties": {
+        "security_deposit": {
+          "$ref": "#/$defs/account-security-deposit"
+        }
+      }
+    }
+  ],
+  "type": "object",
+  "$defs": {
+    "account-credit": {
+      "type": "object",
+      "title": "account-credit",
+      "properties": {
+        "credit_limit": {
+          "type": "integer",
+          "readOnly": true
+        },
+        "security_deposit_account_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "account-deposit": {
+      "title": "account-deposit",
+      "x-stoplight": {
+        "id": "qn18lhs28ly7m"
+      },
+      "type": "object"
+    },
+    "account-security-deposit": {
+      "type": "object",
+      "title": "account-security-deposit",
+      "properties": {
+        "credit_account_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

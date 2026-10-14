@@ -1,0 +1,369 @@
+[
+ {
+  "page": "https://docs.bond.tech/reference/post-transfer.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "info": {
+    "title": "Transfers",
+    "version": "1.0",
+    "description": "Transfer API"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0.1"
+    }
+   ],
+   "paths": {
+    "/transfers": {
+     "post": {
+      "summary": "Create a Transfer",
+      "operationId": "post-transfer",
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "$ref": "#/components/schemas/transfer"
+          },
+          "examples": {
+           "ACH Post Response": {
+            "value": {
+             "date_created": "2020-10-09T17:14:09.686688",
+             "date_updated": "2020-10-09T17:14:09.686688",
+             "date_settled": "2020-10-13T17:14:09.686688",
+             "transfer_id": "4ead6cdc-77eb-45fa-9959-3f166385a60a",
+             "transaction_id": "0fec1e58-b197-4052-99cf-2218496c5482",
+             "origination_account_id": "6f0e7dcb-6073-42df-bf02-ce71bd5fac3b",
+             "destination_account_id": "225641a5-f6e4-4ae1-b5e0-326e6b98842e",
+             "description": "PAYROLL",
+             "amount": 1000,
+             "status": "submitted",
+             "ach": {
+              "ach_class_code": "WEB",
+              "same_day": true
+             }
+            }
+           },
+           "Account POST Response": {
+            "value": {
+             "date_created": "2020-10-09T17:14:09.686688",
+             "date_updated": "2020-10-09T17:14:09.686688",
+             "date_settled": "2020-10-13T17:14:09.686688",
+             "transfer_id": "4ead6cdc-77eb-45fa-9959-3f166385a60a",
+             "transaction_id": "0fec1e58-b197-4052-99cf-2218496c5482",
+             "origination_account_id": "6f0e7dcb-6073-42df-bf02-ce71bd5fac3b",
+             "destination_account_id": "225641a5-f6e4-4ae1-b5e0-326e6b98842e",
+             "description": "PAYROLL",
+             "amount": 1000
+            }
+           }
+          }
+         }
+        }
+       },
+       "404": {
+        "description": "Account not found"
+       },
+       "422": {
+        "description": "Unable to process transfer. Account is inactive, has transfers disabled, insufficient funds, or otherwise exceeds limit."
+       }
+      },
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/transfer-write"
+         },
+         "examples": {
+          "ACH POST": {
+           "value": {
+            "origination_account_id": "6f0e7dcb-6073-42df-bf02-ce71bd5fac3b",
+            "destination_account_id": "225641a5-f6e4-4ae1-b5e0-326e6b98842e",
+            "description": "PAYROLL",
+            "amount": 1000,
+            "ach": {
+             "class_code": "WEB",
+             "same_day": true
+            }
+           }
+          },
+          "Account POST": {
+           "value": {
+            "origination_account_id": "6f0e7dcb-6073-42df-bf02-ce71bd5fac3b",
+            "destination_account_id": "225641a5-f6e4-4ae1-b5e0-326e6b98842e",
+            "description": "PAYROLL",
+            "amount": 1000
+           }
+          }
+         }
+        }
+       },
+       "description": "Post the necessary fields for the API to create a new transfer."
+      },
+      "description": "Create a new transfer.",
+      "tags": [
+       "Transfer"
+      ]
+     },
+     "parameters": []
+    }
+   },
+   "components": {
+    "schemas": {
+     "transfer": {
+      "description": "",
+      "x-examples": {
+       "ACH Post Response": {
+        "date_created": "2020-10-09T17:14:09.686688",
+        "date_updated": "2020-10-09T17:14:09.686688",
+        "date_settled": "2020-10-13T17:14:09.686688",
+        "transfer_id": "4ead6cdc-77eb-45fa-9959-3f166385a60a",
+        "transaction_id": "0fec1e58-b197-4052-99cf-2218496c5482",
+        "origination_account_id": "6f0e7dcb-6073-42df-bf02-ce71bd5fac3b",
+        "destination_account_id": "225641a5-f6e4-4ae1-b5e0-326e6b98842e",
+        "description": "PAYROLL",
+        "amount": 1000,
+        "status": "submitted",
+        "ach": {
+         "ach_class_code": "WEB",
+         "same_day": false
+        }
+       },
+       "Account POST Response": {
+        "date_created": "2020-10-09T17:14:09.686688",
+        "date_updated": "2020-10-09T17:14:09.686688",
+        "date_settled": "2020-10-13T17:14:09.686688",
+        "transfer_id": "4ead6cdc-77eb-45fa-9959-3f166385a60a",
+        "transaction_id": "0fec1e58-b197-4052-99cf-2218496c5482",
+        "origination_account_id": "6f0e7dcb-6073-42df-bf02-ce71bd5fac3b",
+        "destination_account_id": "225641a5-f6e4-4ae1-b5e0-326e6b98842e",
+        "description": "PAYROLL",
+        "amount": 1000,
+        "status": "submitted"
+       }
+      },
+      "allOf": [
+       {
+        "type": "object",
+        "properties": {
+         "transfer_id": {
+          "type": "string",
+          "example": "f46e97f2-a582-4918-8992-fb10da9573d9"
+         },
+         "transaction_id": {
+          "type": "string",
+          "example": "7e7205c6-82c9-4789-adef-c07104025b39"
+         },
+         "created_time": {
+          "type": "string",
+          "description": "System defined based on the date this transfer was created",
+          "example": "2022-08-24T14:15:22Z"
+         },
+         "updated_time": {
+          "type": "string",
+          "description": "System defined based on any updates that were made to this transfer",
+          "example": "2022-08-24T14:18:22Z"
+         },
+         "settled_time": {
+          "type": "string",
+          "description": "System defined based on the date this transfer settles.",
+          "example": "2022-08-25T12:15:23Z"
+         },
+         "origination_account_id": {
+          "type": "string",
+          "minLength": 1,
+          "example": "6f0e7dcb-6073-42df-bf02-ce71bd5fac3b",
+          "description": "account_id for the origination Account"
+         },
+         "destination_account_id": {
+          "type": "string",
+          "minLength": 1,
+          "example": "225641a5-f6e4-4ae1-b5e0-326e6b98842e",
+          "description": "account_id for the destination Account"
+         },
+         "description": {
+          "type": "string",
+          "minLength": 1,
+          "example": "PAYROLL",
+          "description": "Description for what the transfer is about, for ACH this is the memo field."
+         },
+         "amount": {
+          "type": "integer",
+          "example": 1000,
+          "description": "Amount in cents"
+         },
+         "status": {
+          "type": "string",
+          "enum": [
+           "submitted"
+          ],
+          "default": "submitted",
+          "readOnly": true
+         }
+        },
+        "required": [
+         "created_time",
+         "updated_time",
+         "settled_time",
+         "origination_account_id",
+         "destination_account_id",
+         "amount"
+        ]
+       },
+       {
+        "oneOf": [
+         {
+          "$ref": "#/components/schemas/transfer-ach"
+         }
+        ]
+       }
+      ],
+      "title": "transfer"
+     },
+     "transfer-ach": {
+      "description": "",
+      "type": "object",
+      "x-examples": {
+       "ach": {
+        "ach": {
+         "ach_class_code": "WEB",
+         "same_day": false
+        }
+       }
+      },
+      "properties": {
+       "ach": {
+        "type": "object",
+        "required": [
+         "ach_class_code",
+         "same_day"
+        ],
+        "properties": {
+         "ach_class_code": {
+          "type": "string",
+          "minLength": 1,
+          "enum": [
+           "CCD",
+           "PPD",
+           "WEB"
+          ],
+          "description": "ACH Standard Entry Class (SEC) code"
+         },
+         "same_day": {
+          "type": "boolean",
+          "default": false
+         }
+        }
+       }
+      },
+      "required": [
+       "ach"
+      ]
+     },
+     "transfer-write": {
+      "x-examples": {
+       "ACH POST Example": {
+        "origination_account_id": "6f0e7dcb-6073-42df-bf02-ce71bd5fac3b",
+        "destination_account_id": "225641a5-f6e4-4ae1-b5e0-326e6b98842e",
+        "description": "PAYROLL",
+        "amount": 100000,
+        "ach": {
+         "class_code": "WEB",
+         "same_day": true
+        }
+       }
+      },
+      "type": "object",
+      "title": "",
+      "properties": {
+       "origination_account_id": {
+        "type": "string",
+        "example": "6f0e7dcb-6073-42df-bf02-ce71bd5fac3b"
+       },
+       "destination_account_id": {
+        "type": "string",
+        "example": "225641a5-f6e4-4ae1-b5e0-326e6b98842e"
+       },
+       "description": {
+        "type": "string",
+        "example": "PAYROLL"
+       },
+       "amount": {
+        "type": "integer",
+        "example": 100000,
+        "description": "Transfer amount as an integer amount in cents\n\"$10.00\" is `1000`.\nOnly currency in USD is supported."
+       },
+       "ach": {
+        "type": "object",
+        "description": "ACH object is only required if the origination or destination account is an External account",
+        "properties": {
+         "class_code": {
+          "type": "string",
+          "enum": [
+           "CCD",
+           "PPD",
+           "WEB"
+          ],
+          "description": "ACH Standard Entry Class (SEC) code. Supported SEC codes are:\n\nCCD - Cash Concentration or Disbursement,\nPPD - Prearranged Payment and Deposit,\nWEB - Internet-Initiated Entry.\n\nConditionally required for ACH transfers."
+         },
+         "same_day": {
+          "type": "boolean",
+          "description": "ACH transfer network, false = standard \ntrue = same-day-ach."
+         }
+        },
+        "required": [
+         "class_code",
+         "same_day"
+        ]
+       }
+      },
+      "required": [
+       "origination_account_id",
+       "destination_account_id",
+       "amount"
+      ]
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    }
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 117,
+     "2": 144,
+     "3": 95,
+     "4": 215,
+     "5": 250,
+     "6": 166,
+     "7": 0,
+     "8": 167,
+     "9": 84,
+     "10": 199,
+     "11": 63
+    }
+   }
+  }
+ }
+]

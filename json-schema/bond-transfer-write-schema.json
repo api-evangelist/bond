@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-transfer-write-schema.json",
+  "title": "transfer-write",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-transfers-openapi.yml#/components/schemas/transfer-write",
+  "type": "object",
+  "properties": {
+    "origination_account_id": {
+      "type": "string"
+    },
+    "destination_account_id": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "integer",
+      "description": "Transfer amount as an integer amount in cents\n\"$10.00\" is `1000`.\nOnly currency in USD is supported."
+    },
+    "ach": {
+      "type": "object",
+      "description": "ACH object is only required if the origination or destination account is an External account",
+      "properties": {
+        "class_code": {
+          "type": "string",
+          "enum": [
+            "CCD",
+            "PPD",
+            "WEB"
+          ],
+          "description": "ACH Standard Entry Class (SEC) code. Supported SEC codes are:\n\nCCD - Cash Concentration or Disbursement,\nPPD - Prearranged Payment and Deposit,\nWEB - Internet-Initiated Entry.\n\nConditionally required for ACH transfers."
+        },
+        "same_day": {
+          "type": "boolean",
+          "description": "ACH transfer network, false = standard \ntrue = same-day-ach."
+        }
+      },
+      "required": [
+        "class_code",
+        "same_day"
+      ]
+    }
+  },
+  "required": [
+    "origination_account_id",
+    "destination_account_id",
+    "amount"
+  ]
+}

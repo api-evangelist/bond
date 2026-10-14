@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-credit-application-patch-schema.json",
+  "title": "credit-application-patch",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-credit-openapi.yml#/components/schemas/credit-application-patch",
+  "type": "object",
+  "properties": {
+    "applicant": {
+      "type": "object",
+      "properties": {
+        "employment_status": {
+          "type": "string",
+          "minLength": 1,
+          "enum": [
+            "employed",
+            "self_employed",
+            "unemployed",
+            "retired",
+            "student",
+            "other"
+          ]
+        },
+        "total_annual_income": {
+          "type": "integer",
+          "description": "Total annual income in cents"
+        },
+        "monthly_housing_payment": {
+          "type": "integer",
+          "description": "Monthly housing payment in cents"
+        }
+      }
+    }
+  }
+}

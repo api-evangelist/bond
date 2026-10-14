@@ -1,0 +1,221 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-mcp-candidate.py
+source:
+- openapi/bond-accounts-openapi.yml
+- openapi/bond-business-openapi.yml
+- openapi/bond-cards-openapi.yml
+- openapi/bond-credit-openapi.yml
+- openapi/bond-customer-openapi.yml
+- openapi/bond-ledger-openapi.yml
+- openapi/bond-simulation-openapi.yml
+- openapi/bond-transfers-openapi.yml
+- openapi/bond-webhooks-openapi.yml
+status: candidate
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+note: No MCP server was found. No probe result in the dossier. Candidate tools below are derived from the 71 operation(s) in the provider's own
+  OpenAPI (40 listed); they describe what a server WOULD expose, not one that exists.
+tools:
+- name: get_accounts
+  operationId: get-accounts
+  method: GET
+  path: /accounts
+  description: Get all accounts
+- name: get_businesses
+  operationId: get_businesses
+  method: GET
+  path: /businesses
+  description: Retrieve all businesses
+- name: post_cards
+  operationId: post_cards
+  method: POST
+  path: /cards
+  description: Create a card
+- name: post_credit_applications
+  operationId: post-credit-applications
+  method: POST
+  path: /credit/applications
+  description: Create credit application
+- name: get_customers
+  operationId: get_customers
+  method: GET
+  path: /customers
+  description: Retrieve all customers
+- name: get_transactions
+  operationId: get_transactions
+  method: GET
+  path: /transactions
+  description: Get transactions
+- name: post_authorization
+  operationId: post_authorization
+  method: POST
+  path: /simulate/authorization
+  description: Simulate Authorization
+- name: post_transfer
+  operationId: post-transfer
+  method: POST
+  path: /transfers
+  description: Create a Transfer
+- name: post_webhooks
+  operationId: post_webhooks
+  method: POST
+  path: /webhooks
+  description: Create webhook subscription
+- name: post_accounts
+  operationId: post-accounts
+  method: POST
+  path: /accounts
+  description: Create an account
+- name: post_businesses
+  operationId: post_businesses
+  method: POST
+  path: /businesses
+  description: Create a business
+- name: get_cards
+  operationId: get_cards
+  method: GET
+  path: /cards
+  description: Retrieve all cards
+- name: get_credit_applications
+  operationId: get-credit-applications
+  method: GET
+  path: /credit/applications
+  description: Get credit applications
+- name: post_customers
+  operationId: post_customers
+  method: POST
+  path: /customers/
+  description: Create a customer
+- name: get_transaction_id
+  operationId: get_transaction_id
+  method: GET
+  path: /transactions/{transaction_id}
+  description: Get a transaction by id
+- name: post_simulate_kyc_fail
+  operationId: post_simulate_kyc_fail
+  method: POST
+  path: /simulate/kyc-fail
+  description: Simulate KYC Failed
+- name: get_webhooks
+  operationId: get_webhooks
+  method: GET
+  path: /webhooks
+  description: Get all webhook subscriptions
+- name: post_accounts_ptoken
+  operationId: post-accounts-ptoken
+  method: POST
+  path: /accounts/processor_tokens
+  description: Create an account using a processor token
+- name: get_business
+  operationId: get_business
+  method: GET
+  path: /businesses/{business_id}
+  description: Retrieve a business
+- name: get_cards_id
+  operationId: get_cards_id
+  method: GET
+  path: /cards/{card_id}
+  description: Retrieve a card
+- name: get_credit_applications_id
+  operationId: get-credit-applications-id
+  method: GET
+  path: /credit/applications/{application_id}
+  description: Get credit application
+- name: get_customers_id
+  operationId: get_customers_id
+  method: GET
+  path: /customers/{customer_id}
+  description: Retrieve a customer
+- name: post_simulate_kyc_pass
+  operationId: post_simulate_kyc_pass
+  method: POST
+  path: /simulate/kyc-pass
+  description: Simulate KYC Passed
+- name: patch_webhooks
+  operationId: patch_webhooks
+  method: PATCH
+  path: /webhooks/{webhook_id}
+  description: Update a webhook subscription
+- name: get_accounts_by_id
+  operationId: get-accounts-by-id
+  method: GET
+  path: /accounts/{account_id}
+  description: Get account by id
+- name: delete_business
+  operationId: delete_business
+  method: DELETE
+  path: /businesses/{business_id}
+  description: Delete a business
+- name: patch_cards
+  operationId: patch_cards
+  method: PATCH
+  path: /cards/{card_id}
+  description: Update Card
+- name: patch_credit_applications
+  operationId: patch-credit-applications
+  method: PATCH
+  path: /credit/applications/{application_id}
+  description: Patch credit application
+- name: patch_customers
+  operationId: patch_customers
+  method: PATCH
+  path: /customers/{customer_id}
+  description: Update a customer
+- name: post_settle
+  operationId: post_settle
+  method: POST
+  path: /simulate/settlement
+  description: Simulate Settlement
+- name: delete_webhooks
+  operationId: delete_webhooks
+  method: DELETE
+  path: /webhooks/{webhook_id}
+  description: Remove a webhook subscription
+- name: patch_accounts
+  operationId: patch-accounts
+  method: PATCH
+  path: /accounts/{account_id}
+  description: Update an account
+- name: patch_business
+  operationId: patch_business
+  method: PATCH
+  path: /businesses/{business_id}
+  description: Update a business
+- name: post_cards_activate
+  operationId: post_cards_activate
+  method: POST
+  path: /cards/{card_id}/activate
+  description: Activate Physical Card
+- name: get_adverse_actions
+  operationId: get-adverse-actions
+  method: GET
+  path: /credit/applications/{application_id}/adverse-actions
+  description: Get adverse actions
+- name: delete_customers
+  operationId: delete_customers
+  method: DELETE
+  path: /customers/{customer_id}
+  description: Delete a customer
+- name: close_accounts
+  operationId: close-accounts
+  method: POST
+  path: /accounts/{account_id}/close
+  description: Close an Account
+- name: get_business_addresses
+  operationId: get_business_addresses
+  method: GET
+  path: /businesses/{business_id}/addresses
+  description: Retrieve all business addresses
+- name: post_cards_close
+  operationId: post_cards_close
+  method: POST
+  path: /cards/{card_id}/close
+  description: Close a Card
+- name: credit_applications_submit
+  operationId: credit-applications-submit
+  method: POST
+  path: /credit/applications/{application_id}/submit
+  description: Submit credit application

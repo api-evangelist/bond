@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-card-schema.json",
+  "title": "card",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-cards-openapi.yml#/components/schemas/card",
+  "type": "object",
+  "properties": {
+    "card_id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "customer_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "account_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "readOnly": true
+    },
+    "business_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "card_number": {
+      "type": "string",
+      "readOnly": true
+    },
+    "cvv": {
+      "type": "string",
+      "readOnly": true
+    },
+    "expiry_date": {
+      "type": "string",
+      "readOnly": true
+    },
+    "last_four": {
+      "type": "string",
+      "readOnly": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "closed"
+      ]
+    },
+    "card_design_id": {
+      "type": "string",
+      "description": "The visual design of card.\nPlease contact Support to start creating card designs.",
+      "default": null
+    },
+    "date_updated": {
+      "type": "string"
+    },
+    "date_created": {
+      "type": "string"
+    },
+    "date_physical_card_activated": {
+      "type": "string"
+    }
+  }
+}

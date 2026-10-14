@@ -1,0 +1,345 @@
+generated: '2026-10-14'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/bond-accounts-openapi.yml
+- openapi/bond-business-openapi.yml
+- openapi/bond-cards-openapi.yml
+- openapi/bond-credit-openapi.yml
+- openapi/bond-customer-openapi.yml
+vocabulary:
+  name: Bond Domain Vocabulary
+  description: 'Terms declared by Bond''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions. Derived,
+    not authored.'
+  version: '2026-10-14'
+  terms:
+  - term: account-credit
+    definition: 'Object declared by the contract with fields: credit_limit, security_deposit_account_id.'
+    tags:
+    - Object
+    source: openapi/bond-accounts-openapi.yml#/components/schemas/account-credit
+  - term: account-security-deposit
+    definition: 'Object declared by the contract with fields: credit_account_id.'
+    tags:
+    - Object
+    source: openapi/bond-accounts-openapi.yml#/components/schemas/account-security-deposit
+  - term: account-write
+    definition: 'Object declared by the contract with fields: customer_id, business_id, program_id, type, description.'
+    tags:
+    - Object
+    source: openapi/bond-accounts-openapi.yml#/components/schemas/account-write
+  - term: account-patch
+    definition: 'Object declared by the contract with fields: status.'
+    tags:
+    - Object
+    source: openapi/bond-accounts-openapi.yml#/components/schemas/account-patch
+  - term: AddressGet
+    definition: 'Object declared by the contract with fields: address_id, address_type, street, street2, city, state, zip_code, country, is_primary,
+      date_created, date_updated.'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/AddressGet
+  - term: BusinessesGetSerializer
+    definition: 'Object declared by the contract with fields: business_id, brand_business_id, ein, phone, email, website, legal_business_name,
+      dba_business_name, business_type, date_updated, date_created, industry_type. (3 more)'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/BusinessesGetSerializer
+  - term: BeneficialOwnerGetSerializer
+    definition: 'Object declared by the contract with fields: dob, first_name, middle_name, last_name, date_created, date_updated, addresses.'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/BeneficialOwnerGetSerializer
+  - term: Address
+    definition: 'Object declared by the contract with fields: address_type, street, street2, city, state, zip_code, country, is_primary.'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/Address
+  - term: BusinessesPostSerializer
+    definition: 'Object declared by the contract with fields: brand_business_id, ein, legal_business_name, dba_business_name, business_type, date_established,
+      phone, email, website, industry_type, number_of_employees, addresses. (1 more)'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/BusinessesPostSerializer
+  - term: BeneficialOwnerPostSerializer
+    definition: 'Object declared by the contract with fields: dob, first_name, middle_name, last_name, addresses.'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/BeneficialOwnerPostSerializer
+  - term: BusinessesPatchSerializer
+    definition: 'Object declared by the contract with fields: brand_business_id, ein, legal_business_name, dba_business_name, business_type, date_established,
+      phone, email, website, industry_type, number_of_employees.'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/BusinessesPatchSerializer
+  - term: BeneficialOwnerPatchSerializer
+    definition: 'Object declared by the contract with fields: dob, first_name, middle_name, last_name.'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/BeneficialOwnerPatchSerializer
+  - term: KYCPostPayload
+    definition: 'Object declared by the contract with fields: dob, program_id, ssn, phone, phone_country_code, email, ip, kyc_retry_request.'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/KYCPostPayload
+  - term: BeneficialOwnerAddressPatchSerializer
+    definition: 'Object declared by the contract with fields: address_type, street, street2, city, state, zip_code, country, is_primary.'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/BeneficialOwnerAddressPatchSerializer
+  - term: KYBPostSerializer
+    definition: 'Object declared by the contract with fields: business_id, program_id.'
+    tags:
+    - Object
+    source: openapi/bond-business-openapi.yml#/components/schemas/KYBPostSerializer
+  - term: card-write-post
+    definition: POST
+    tags:
+    - Object
+    source: openapi/bond-cards-openapi.yml#/components/schemas/card-write-post
+  - term: card
+    definition: 'Object declared by the contract with fields: card_id, customer_id, account_id, business_id, card_number, cvv, expiry_date, last_four,
+      status, card_design_id, date_updated, date_created. (1 more)'
+    tags:
+    - Object
+    source: openapi/bond-cards-openapi.yml#/components/schemas/card
+  - term: Address-write
+    definition: 'Object declared by the contract with fields: street, street2, city, state, zip_code, country.'
+    tags:
+    - Object
+    source: openapi/bond-cards-openapi.yml#/components/schemas/address-write
+  - term: card-write-patch
+    definition: PATCH
+    tags:
+    - Object
+    source: openapi/bond-cards-openapi.yml#/components/schemas/card-write-patch
+  - term: card-reissue
+    definition: 'Object declared by the contract with fields: reissue_type, card_mailing_address.'
+    tags:
+    - Object
+    source: openapi/bond-cards-openapi.yml#/components/schemas/card-reissue
+  - term: card-restriction-write
+    definition: 'Object declared by the contract with fields: restriction_type, max_amount.'
+    tags:
+    - Object
+    source: openapi/bond-cards-openapi.yml#/components/schemas/card-restriction-write
+  - term: card-restriction
+    definition: Example response
+    tags:
+    - Object
+    source: openapi/bond-cards-openapi.yml#/components/schemas/card-restriction
+  - term: credit-application-write
+    definition: 'Object declared by the contract with fields: program_id, applicant.'
+    tags:
+    - Object
+    source: openapi/bond-credit-openapi.yml#/components/schemas/credit-application-write
+  - term: credit-application
+    definition: 'Object declared by the contract with fields: application_id, program_id, date_created, date_updated, application_status, applicant,
+      accounts.'
+    tags:
+    - Object
+    source: openapi/bond-credit-openapi.yml#/components/schemas/credit-application
+  - term: CreditApplicationGetMultiple
+    definition: 'Object declared by the contract with fields: has_more, data.'
+    tags:
+    - Object
+    source: openapi/bond-credit-openapi.yml#/components/schemas/CreditApplicationGetMultiple
+  - term: credit-application-patch
+    definition: 'Object declared by the contract with fields: applicant.'
+    tags:
+    - Object
+    source: openapi/bond-credit-openapi.yml#/components/schemas/credit-application-patch
+  - term: AdverseActionsGet
+    definition: 'Object declared by the contract with fields: id, application_id, date_created, date_updated, service, reasons.'
+    tags:
+    - Object
+    source: openapi/bond-credit-openapi.yml#/components/schemas/AdverseActionsGet
+  - term: Customer
+    definition: 'Object declared by the contract with fields: customer_id, brand_person_id, bond_brand_id, business_id, dob, first_name, middle_name,
+      last_name, ssn, phone, phone_country_code, email. (2 more)'
+    tags:
+    - Object
+    source: openapi/bond-customer-openapi.yml#/components/schemas/customer
+  - term: Address
+    definition: 'Object declared by the contract with fields: address_id, address_type, street, street2, city, state, zip_code, country, is_primary,
+      date_created.'
+    tags:
+    - Object
+    source: openapi/bond-customer-openapi.yml#/components/schemas/address
+  - term: customer-write
+    definition: 'Object declared by the contract with fields: brand_person_id, business_id, dob, first_name, middle_name, last_name, ssn, phone,
+      phone_country_code, email, addresses.'
+    tags:
+    - Object
+    source: openapi/bond-customer-openapi.yml#/components/schemas/customer-write
+  - term: customer-patch
+    definition: 'Object declared by the contract with fields: dob, first_name, middle_name, last_name, phone, phone_country_code, email, ssn,
+      addresses.'
+    tags:
+    - Object
+    source: openapi/bond-customer-openapi.yml#/components/schemas/customer-patch
+  - term: ACH
+    definition: 'Object declared by the contract with fields: card_id, external_account_id, class_code, direction, network, description, failure_reason,
+      return_code.'
+    tags:
+    - Object
+    source: openapi/bond-ledger-openapi.yml#/components/schemas/ACH
+  - term: Card
+    definition: 'Object declared by the contract with fields: card_id, mcc, mcc_description, currency, exchange_rate, merchant_id, merchant_name,
+      merchant_city, merchant_state, merchant_country, merchant_postal_code, cardholder_presence. (5 more)'
+    tags:
+    - Object
+    source: openapi/bond-ledger-openapi.yml#/components/schemas/Card
+  - term: HTTPValidationError
+    definition: 'Object declared by the contract with fields: detail.'
+    tags:
+    - Object
+    source: openapi/bond-ledger-openapi.yml#/components/schemas/HTTPValidationError
+  - term: PaginatedTransactions
+    definition: Intended to work together with api.data.pagination.PaginationResult. Subclasses may contain an `items` field which is a list of
+      data items.
+    tags:
+    - Object
+    source: openapi/bond-ledger-openapi.yml#/components/schemas/PaginatedTransactions
+  - term: TransactionSchema
+    definition: 'Object declared by the contract with fields: transaction_id, bond_brand_id, customer_id, account_id, payment_type, transaction_type,
+      previous_transaction_id, state, amount, currency, created_time, updated_time. (1 more)'
+    tags:
+    - Object
+    source: openapi/bond-ledger-openapi.yml#/components/schemas/TransactionSchema
+  - term: ValidationError
+    definition: 'Object declared by the contract with fields: loc, msg, type.'
+    tags:
+    - Object
+    source: openapi/bond-ledger-openapi.yml#/components/schemas/ValidationError
+  - term: simulate
+    definition: 'Object declared by the contract with fields: card_id, amount, transaction_datetime, currency, merchant_name, merchant_city, merchant_state,
+      merchant_zip_code, mcc, mid.'
+    tags:
+    - Object
+    source: openapi/bond-simulation-openapi.yml#/components/schemas/simulate
+  - term: settle
+    definition: 'Object declared by the contract with fields: transaction_id, amount.'
+    tags:
+    - Object
+    source: openapi/bond-simulation-openapi.yml#/components/schemas/settle
+  - term: kyc
+    definition: 'Object declared by the contract with fields: customer_id, program_id.'
+    tags:
+    - Object
+    source: openapi/bond-simulation-openapi.yml#/components/schemas/kyc
+  - term: transfer-ach
+    definition: 'Object declared by the contract with fields: ach.'
+    tags:
+    - Object
+    source: openapi/bond-transfers-openapi.yml#/components/schemas/transfer-ach
+  - term: transfer-write
+    definition: 'Object declared by the contract with fields: origination_account_id, destination_account_id, description, amount, ach.'
+    tags:
+    - Object
+    source: openapi/bond-transfers-openapi.yml#/components/schemas/transfer-write
+  - term: webhook
+    definition: 'Object declared by the contract with fields: webhook_subscription.'
+    tags:
+    - Object
+    source: openapi/bond-webhooks-openapi.yml#/components/schemas/webhook
+  - term: webhook-post
+    definition: 'Object declared by the contract with fields: url, description, events, version, status.'
+    tags:
+    - Object
+    source: openapi/bond-webhooks-openapi.yml#/components/schemas/webhook-post
+  - term: all-webhook
+    definition: 'Object declared by the contract with fields: id, url, description, events, version, secret, status, creted_time, updated_time.'
+    tags:
+    - Object
+    source: openapi/bond-webhooks-openapi.yml#/components/schemas/all-webhooks
+  - term: webhook-patch
+    definition: 'Object declared by the contract with fields: url, description, events, version, status.'
+    tags:
+    - Object
+    source: openapi/bond-webhooks-openapi.yml#/components/schemas/webhook-patch
+  - term: Accounts
+    definition: 'Resource group in the contract; its operation GET /accounts: Get all accounts'
+    tags:
+    - Resource Group
+    source: openapi/bond-accounts-openapi.yml
+  - term: Statements
+    definition: 'Resource group in the contract; its operation GET /accounts/{account_id}/statements: Get all statements'
+    tags:
+    - Resource Group
+    source: openapi/bond-accounts-openapi.yml
+  - term: Businesses
+    definition: 'Resource group in the contract; its operation GET /businesses: Retrieves all businesses associated with a brand'
+    tags:
+    - Resource Group
+    source: openapi/bond-business-openapi.yml
+  - term: Business address
+    definition: 'Resource group in the contract; its operation GET /businesses/{business_id}/addresses: Retrieves all addresses associated with
+      a business'
+    tags:
+    - Resource Group
+    source: openapi/bond-business-openapi.yml
+  - term: Beneficial owners
+    definition: 'Resource group in the contract; its operation GET /businesses/{business_id}/beneficial_owners: Retrieves all beneficial owners
+      associated with a business'
+    tags:
+    - Resource Group
+    source: openapi/bond-business-openapi.yml
+  - term: Beneficial owners address
+    definition: 'Resource group in the contract; its operation GET /businesses/{business_id}/beneficial_owners/{beneficial_owner_id}/addresses:
+      Retrieves all addresses associated with a beneficial owner'
+    tags:
+    - Resource Group
+    source: openapi/bond-business-openapi.yml
+  - term: KYB
+    definition: 'Resource group in the contract; its operation GET /businesses/{business_id}/verification-kyb: Retrieve the KYB status of a `Business`'
+    tags:
+    - Resource Group
+    source: openapi/bond-business-openapi.yml
+  - term: Cards
+    definition: 'Resource group in the contract; its operation POST /cards: Creates a new card and card account'
+    tags:
+    - Resource Group
+    source: openapi/bond-cards-openapi.yml
+  - term: Card restrictions
+    definition: 'Resource group in the contract; its operation GET /cards/{card_id}/restrictions: Retrieve all restrictions on a card'
+    tags:
+    - Resource Group
+    source: openapi/bond-cards-openapi.yml
+  - term: Credit
+    definition: 'Resource group in the contract; its operation POST /credit/applications: Start a credit application.'
+    tags:
+    - Resource Group
+    source: openapi/bond-credit-openapi.yml
+  - term: Customers
+    definition: 'Resource group in the contract; its operation GET /customers: Retrieves all customers'
+    tags:
+    - Resource Group
+    source: openapi/bond-customer-openapi.yml
+  - term: KYC
+    definition: 'Resource group in the contract; its operation POST /customers/{customer_id}/inquiries/{inquiry_id}/resume: Obtain a new `session_token`
+      for resuming a Persona inquiry.'
+    tags:
+    - Resource Group
+    source: openapi/bond-customer-openapi.yml
+  - term: Transactions
+    definition: 'Resource group in the contract; its operation GET /transactions: Get all transactions available to a brand with pagination and
+      optional filtering.'
+    tags:
+    - Resource Group
+    source: openapi/bond-ledger-openapi.yml
+  - term: Simulate
+    definition: 'Resource group in the contract; its operation POST /simulate/authorization: Simulate a card transaction'
+    tags:
+    - Resource Group
+    source: openapi/bond-simulation-openapi.yml
+  - term: Transfer
+    definition: 'Resource group in the contract; its operation POST /transfers: Create a new transfer.'
+    tags:
+    - Resource Group
+    source: openapi/bond-transfers-openapi.yml
+  - term: Webhooks
+    definition: 'Resource group in the contract; its operation POST /webhooks: Subscribe to webhook events'
+    tags:
+    - Resource Group
+    source: openapi/bond-webhooks-openapi.yml

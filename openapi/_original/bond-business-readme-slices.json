@@ -1,0 +1,5477 @@
+[
+ {
+  "page": "https://docs.bond.tech/reference/get_businesses.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses": {
+     "get": {
+      "tags": [
+       "Businesses"
+      ],
+      "summary": "Retrieve all businesses",
+      "description": "Retrieves all businesses associated with a brand",
+      "operationId": "get_businesses",
+      "parameters": [
+       {
+        "name": "page",
+        "in": "query",
+        "description": "page number requested to return",
+        "schema": {
+         "type": "integer",
+         "minimum": 0,
+         "exclusiveMinimum": true,
+         "default": 1
+        }
+       },
+       {
+        "name": "count",
+        "in": "query",
+        "description": "number of Business information in response",
+        "schema": {
+         "type": "integer"
+        }
+       },
+       {
+        "name": "brand_business_id",
+        "in": "query",
+        "description": "Return businesses that match the brand_business_id",
+        "schema": {
+         "type": "string",
+         "example": "ac6ee2d3-5a03-4043-a4aa-dda51836b9fd",
+         "nullable": true
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/paginated-business-response"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "AddressGet": {
+      "type": "object",
+      "properties": {
+       "address_id": {
+        "type": "string",
+        "description": "String in UUID format corresponds to address address_id of related customer_id"
+       },
+       "address_type": {
+        "type": "string",
+        "description": "Address type is one of the following : MAILING, PHYSICAL, REGISTERED",
+        "enum": [
+         "MAILING",
+         "PHYSICAL",
+         "REGISTERED"
+        ]
+       },
+       "street": {
+        "type": "string",
+        "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "345 California Ave."
+       },
+       "street2": {
+        "type": "string",
+        "description": "Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "Suit 600"
+       },
+       "city": {
+        "type": "string",
+        "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+        "example": "San Francisco",
+        "minLength": 2,
+        "maxLength": 40
+       },
+       "state": {
+        "type": "string",
+        "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.",
+        "example": "CA"
+       },
+       "zip_code": {
+        "type": "string",
+        "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.",
+        "example": "12345-1234"
+       },
+       "country": {
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.",
+        "example": "US"
+       },
+       "is_primary": {
+        "type": "boolean",
+        "description": "Is Primary Address?",
+        "example": true
+       },
+       "date_created": {
+        "type": "string"
+       },
+       "date_updated": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "address_id"
+      ]
+     },
+     "BusinessesGetSerializer": {
+      "type": "object",
+      "description": "",
+      "properties": {
+       "business_id": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "brand_business_id": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "ein": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "phone": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "email": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "website": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "legal_business_name": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "dba_business_name": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "business_type": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "date_updated": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "date_created": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "industry_type": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "number_of_employees": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "addresses": {
+        "minItems": 1,
+        "uniqueItems": true,
+        "type": "array",
+        "items": {
+         "allOf": [
+          {
+           "$ref": "#/components/schemas/AddressGet"
+          }
+         ]
+        }
+       },
+       "beneficial_owners": {
+        "type": "array",
+        "items": {
+         "allOf": [
+          {
+           "$ref": "#/components/schemas/BeneficialOwnerGetSerializer"
+          }
+         ]
+        }
+       }
+      },
+      "required": [
+       "business_id",
+       "ein",
+       "phone",
+       "email",
+       "website",
+       "legal_business_name",
+       "dba_business_name",
+       "business_type",
+       "date_updated",
+       "date_created",
+       "industry_type",
+       "number_of_employees",
+       "addresses",
+       "beneficial_owners"
+      ]
+     },
+     "BeneficialOwnerGetSerializer": {
+      "type": "object",
+      "properties": {
+       "dob": {
+        "type": "string",
+        "description": "Date of birth in YYYY-MM-DD format.",
+        "format": "string",
+        "example": "1980-04-04"
+       },
+       "first_name": {
+        "type": "string",
+        "description": "First name.<br />Has a 1 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "John"
+       },
+       "middle_name": {
+        "type": "string",
+        "description": "Middle name.<br />Has a 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "O'Shea"
+       },
+       "last_name": {
+        "type": "string",
+        "description": "Last name.<br />Has a 2 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "Doe"
+       },
+       "date_created": {
+        "type": "string"
+       },
+       "date_updated": {
+        "type": "string"
+       },
+       "addresses": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/AddressGet"
+        }
+       }
+      },
+      "required": [
+       "first_name",
+       "last_name",
+       "addresses"
+      ],
+      "x-examples": {
+       "example-1": {
+        "dob": "1980-04-04",
+        "first_name": "John",
+        "middle_name": "O'Shea",
+        "last_name": "Doe",
+        "addresses": [
+         {
+          "address_type": "MAILING",
+          "street": "345 California Ave.",
+          "street2": "Suit 600",
+          "city": "San Francisco",
+          "state": "CA",
+          "zip_code": "12345-1234",
+          "country": "US",
+          "is_primary": true
+         }
+        ]
+       }
+      }
+     }
+    },
+    "responses": {
+     "paginated-business-response": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "description": "",
+         "properties": {
+          "page_info": {
+           "type": "object",
+           "description": "",
+           "properties": {
+            "page": {
+             "type": "integer",
+             "example": 1
+            },
+            "page_size": {
+             "type": "integer",
+             "example": 1
+            },
+            "pages": {
+             "type": "integer",
+             "example": 1
+            }
+           }
+          },
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/BusinessesGetSerializer"
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_businesses.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses": {
+     "post": {
+      "tags": [
+       "Businesses"
+      ],
+      "summary": "Create a business",
+      "description": "Creates a business associated with a brand",
+      "operationId": "post_businesses",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/BusinessesPostSerializer"
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "201": {
+        "$ref": "#/components/responses/Business-response-write"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "Address": {
+      "title": "",
+      "type": "object",
+      "properties": {
+       "address_type": {
+        "type": "string",
+        "description": "Address type is one of the following : MAILING, PHYSICAL, REGISTERED",
+        "enum": [
+         "MAILING",
+         "PHYSICAL",
+         "REGISTERED"
+        ]
+       },
+       "street": {
+        "type": "string",
+        "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "345 California Ave."
+       },
+       "street2": {
+        "type": "string",
+        "description": "Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "Suit 600"
+       },
+       "city": {
+        "type": "string",
+        "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+        "example": "San Francisco",
+        "minLength": 2,
+        "maxLength": 40
+       },
+       "state": {
+        "type": "string",
+        "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.",
+        "example": "CA"
+       },
+       "zip_code": {
+        "type": "string",
+        "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.",
+        "example": "12345-1234"
+       },
+       "country": {
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.",
+        "example": "US"
+       },
+       "is_primary": {
+        "type": "boolean",
+        "description": "Is Primary Address?",
+        "example": true
+       }
+      },
+      "required": [
+       "address_type",
+       "street",
+       "city",
+       "state",
+       "zip_code",
+       "country",
+       "is_primary"
+      ]
+     },
+     "BusinessesPostSerializer": {
+      "type": "object",
+      "properties": {
+       "brand_business_id": {
+        "type": "string",
+        "description": "The brand's UUID for the business.",
+        "example": "ac6ee2d3-5a03-4043-a4aa-dda51836b9fd"
+       },
+       "ein": {
+        "type": "string",
+        "description": "The Tax Identification Number",
+        "example": "12-1234567"
+       },
+       "legal_business_name": {
+        "type": "string",
+        "description": "The legal business name",
+        "example": "John Doe Business Corporation"
+       },
+       "dba_business_name": {
+        "type": "string",
+        "description": "The doing-business-as name (trade name)",
+        "example": "John's"
+       },
+       "business_type": {
+        "type": "string",
+        "description": "The business type",
+        "example": "cooperative",
+        "enum": [
+         "cooperative",
+         "limited_liability_company",
+         "sole_proprietorship",
+         "partnership",
+         "limited_partnership",
+         "corporation",
+         "nonprofit_organization"
+        ]
+       },
+       "date_established": {
+        "type": "string",
+        "description": "Date of incorporation in YYYY-MM-DD format",
+        "format": "string",
+        "example": "2020-01-01T00:00:00.000Z"
+       },
+       "phone": {
+        "type": "string",
+        "description": "Phone number",
+        "example": "+14157485052"
+       },
+       "email": {
+        "type": "string",
+        "description": "Business contact email",
+        "example": "info@business.com"
+       },
+       "website": {
+        "type": "string",
+        "description": "The official website",
+        "example": "www.business.com"
+       },
+       "industry_type": {
+        "type": "string",
+        "description": "Type of business conducted",
+        "example": "Financial"
+       },
+       "number_of_employees": {
+        "type": "string",
+        "description": "Description of number of employees at firm, as a range or value",
+        "example": "0-50"
+       },
+       "addresses": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/Address"
+        }
+       },
+       "beneficial_owners": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/BeneficialOwnerPostSerializer"
+        }
+       }
+      },
+      "required": [
+       "legal_business_name"
+      ]
+     },
+     "BeneficialOwnerPostSerializer": {
+      "type": "object",
+      "properties": {
+       "dob": {
+        "type": "string",
+        "description": "Date of birth in YYYY-MM-DD format.",
+        "format": "string",
+        "example": "1980-04-04"
+       },
+       "first_name": {
+        "type": "string",
+        "description": "First name.<br />Has a 1 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "John"
+       },
+       "middle_name": {
+        "type": "string",
+        "description": "Middle name.<br />Has a 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "O'Shea"
+       },
+       "last_name": {
+        "type": "string",
+        "description": "Last name.<br />Has a 2 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "Doe"
+       },
+       "addresses": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/Address"
+        }
+       }
+      },
+      "required": [
+       "first_name",
+       "last_name",
+       "addresses"
+      ],
+      "x-examples": {
+       "example-1": {
+        "dob": "1980-04-04",
+        "first_name": "John",
+        "middle_name": "O'Shea",
+        "last_name": "Doe",
+        "addresses": [
+         {
+          "address_type": "MAILING",
+          "street": "345 California Ave.",
+          "street2": "Suit 600",
+          "city": "San Francisco",
+          "state": "CA",
+          "zip_code": "12345-1234",
+          "country": "US",
+          "is_primary": true
+         }
+        ]
+       }
+      }
+     }
+    },
+    "responses": {
+     "Business-response-write": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "business_id": {
+           "minLength": 1,
+           "type": "string"
+          },
+          "brand_business_id": {
+           "minLength": 1,
+           "type": "string"
+          },
+          "ein": {
+           "type": "string",
+           "minLength": 1
+          },
+          "phone": {
+           "type": "string",
+           "minLength": 1
+          },
+          "email": {
+           "type": "string",
+           "minLength": 1
+          },
+          "website": {
+           "type": "string",
+           "minLength": 1
+          },
+          "legal_business_name": {
+           "type": "string",
+           "minLength": 1
+          },
+          "dba_business_name": {
+           "type": "string",
+           "minLength": 1
+          },
+          "business_type": {
+           "type": "string",
+           "minLength": 1
+          },
+          "industry_type": {
+           "minLength": 1,
+           "type": "string"
+          },
+          "number_of_employees": {
+           "minLength": 1,
+           "type": "string"
+          },
+          "addresses": {
+           "type": "array",
+           "uniqueItems": true,
+           "minItems": 1,
+           "items": {
+            "type": "object",
+            "properties": {
+             "date_updated": {
+              "type": "string",
+              "minLength": 1
+             },
+             "date_created": {
+              "type": "string",
+              "minLength": 1
+             },
+             "address_id": {
+              "type": "string",
+              "minLength": 1
+             },
+             "address_type": {
+              "type": "string",
+              "minLength": 1
+             },
+             "street": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 40
+             },
+             "street2": {
+              "type": "string",
+              "maxLength": 40
+             },
+             "city": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 40,
+              "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces"
+             },
+             "state": {
+              "type": "string",
+              "minLength": 1
+             },
+             "zip_code": {
+              "type": "string",
+              "minLength": 1
+             },
+             "country": {
+              "type": "string",
+              "minLength": 1
+             },
+             "is_primary": {
+              "type": "boolean"
+             }
+            },
+            "required": [
+             "date_updated",
+             "date_created",
+             "address_id",
+             "address_type",
+             "street",
+             "street2",
+             "city",
+             "state",
+             "zip_code",
+             "country",
+             "is_primary"
+            ]
+           }
+          },
+          "beneficial_owners": {
+           "type": "array",
+           "uniqueItems": true,
+           "minItems": 1,
+           "items": {
+            "type": "object",
+            "properties": {
+             "first_name": {
+              "type": "string",
+              "minLength": 1
+             },
+             "last_name": {
+              "type": "string",
+              "minLength": 1
+             },
+             "dob": {
+              "type": "string",
+              "minLength": 1
+             },
+             "addresses": {
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+               "type": "object",
+               "properties": {
+                "address_type": {
+                 "type": "string",
+                 "minLength": 1
+                },
+                "street": {
+                 "type": "string",
+                 "minLength": 1,
+                 "maxLength": 40
+                },
+                "street2": {
+                 "type": "string",
+                 "maxLength": 40
+                },
+                "city": {
+                 "type": "string",
+                 "minLength": 1,
+                 "maxLength": 40,
+                 "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces"
+                },
+                "state": {
+                 "type": "string",
+                 "minLength": 1
+                },
+                "zip_code": {
+                 "type": "string",
+                 "minLength": 1
+                },
+                "country": {
+                 "type": "string",
+                 "minLength": 1
+                },
+                "is_primary": {
+                 "type": "boolean"
+                }
+               },
+               "required": [
+                "address_type",
+                "street",
+                "street2",
+                "city",
+                "state",
+                "zip_code",
+                "country",
+                "is_primary"
+               ]
+              }
+             }
+            },
+            "required": [
+             "first_name",
+             "last_name",
+             "dob"
+            ]
+           }
+          }
+         },
+         "required": [
+          "business_id",
+          "brand_business_id",
+          "ein",
+          "phone",
+          "email",
+          "website",
+          "legal_business_name",
+          "dba_business_name",
+          "business_type",
+          "industry_type",
+          "number_of_employees",
+          "addresses",
+          "beneficial_owners"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "ein": "12-1234567",
+           "phone": "+14085557788",
+           "email": "user@example.com",
+           "website": "https://www.specter.com",
+           "legal_business_name": "World Domination Inc.",
+           "dba_business_name": "World Domination Inc.",
+           "business_type": "limited_liability_company",
+           "industry_type": "Financial",
+           "number_of_employees": "0-50",
+           "addresses": [
+            {
+             "address_type": "MAILING",
+             "street": "345 California Ave.",
+             "street2": "Suit 600",
+             "city": "San Francisco",
+             "state": "CA",
+             "zip_code": "12345-1234",
+             "country": "US",
+             "is_primary": true
+            },
+            {
+             "address_type": "PHYSICAL",
+             "street": "123 California Ave.",
+             "street2": "Suit 100",
+             "city": "San Francisco",
+             "state": "CA",
+             "zip_code": "12345-1234",
+             "country": "US",
+             "is_primary": false
+            }
+           ],
+           "beneficial_owners": [
+            {
+             "first_name": "James",
+             "last_name": "Bond",
+             "dob": "1970-12-12",
+             "addresses": [
+              {
+               "address_type": "MAILING",
+               "street": "345 California Ave.",
+               "street2": "Suit 600",
+               "city": "San Francisco",
+               "state": "CA",
+               "zip_code": "12345-1234",
+               "country": "US",
+               "is_primary": true
+              }
+             ]
+            },
+            {
+             "first_name": "Le",
+             "last_name": "Chiffre",
+             "dob": "1980-04-04",
+             "addresses": [
+              {
+               "address_type": "MAILING",
+               "street": "345 California Ave.",
+               "street2": "Suit 600",
+               "city": "San Francisco",
+               "state": "CA",
+               "zip_code": "12345-1234",
+               "country": "US",
+               "is_primary": true
+              }
+             ]
+            }
+           ]
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_business.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}": {
+     "get": {
+      "tags": [
+       "Businesses"
+      ],
+      "summary": "Retrieve a business",
+      "description": "Retrieves a business associated with a brand",
+      "operationId": "get_business",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/Business-response"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "AddressGet": {
+      "type": "object",
+      "properties": {
+       "address_id": {
+        "type": "string",
+        "description": "String in UUID format corresponds to address address_id of related customer_id"
+       },
+       "address_type": {
+        "type": "string",
+        "description": "Address type is one of the following : MAILING, PHYSICAL, REGISTERED",
+        "enum": [
+         "MAILING",
+         "PHYSICAL",
+         "REGISTERED"
+        ]
+       },
+       "street": {
+        "type": "string",
+        "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "345 California Ave."
+       },
+       "street2": {
+        "type": "string",
+        "description": "Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "Suit 600"
+       },
+       "city": {
+        "type": "string",
+        "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+        "example": "San Francisco",
+        "minLength": 2,
+        "maxLength": 40
+       },
+       "state": {
+        "type": "string",
+        "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.",
+        "example": "CA"
+       },
+       "zip_code": {
+        "type": "string",
+        "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.",
+        "example": "12345-1234"
+       },
+       "country": {
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.",
+        "example": "US"
+       },
+       "is_primary": {
+        "type": "boolean",
+        "description": "Is Primary Address?",
+        "example": true
+       },
+       "date_created": {
+        "type": "string"
+       },
+       "date_updated": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "address_id"
+      ]
+     },
+     "BusinessesGetSerializer": {
+      "type": "object",
+      "description": "",
+      "properties": {
+       "business_id": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "brand_business_id": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "ein": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "phone": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "email": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "website": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "legal_business_name": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "dba_business_name": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "business_type": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "date_updated": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "date_created": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "industry_type": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "number_of_employees": {
+        "minLength": 1,
+        "type": "string"
+       },
+       "addresses": {
+        "minItems": 1,
+        "uniqueItems": true,
+        "type": "array",
+        "items": {
+         "allOf": [
+          {
+           "$ref": "#/components/schemas/AddressGet"
+          }
+         ]
+        }
+       },
+       "beneficial_owners": {
+        "type": "array",
+        "items": {
+         "allOf": [
+          {
+           "$ref": "#/components/schemas/BeneficialOwnerGetSerializer"
+          }
+         ]
+        }
+       }
+      },
+      "required": [
+       "business_id",
+       "ein",
+       "phone",
+       "email",
+       "website",
+       "legal_business_name",
+       "dba_business_name",
+       "business_type",
+       "date_updated",
+       "date_created",
+       "industry_type",
+       "number_of_employees",
+       "addresses",
+       "beneficial_owners"
+      ]
+     },
+     "BeneficialOwnerGetSerializer": {
+      "type": "object",
+      "properties": {
+       "dob": {
+        "type": "string",
+        "description": "Date of birth in YYYY-MM-DD format.",
+        "format": "string",
+        "example": "1980-04-04"
+       },
+       "first_name": {
+        "type": "string",
+        "description": "First name.<br />Has a 1 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "John"
+       },
+       "middle_name": {
+        "type": "string",
+        "description": "Middle name.<br />Has a 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "O'Shea"
+       },
+       "last_name": {
+        "type": "string",
+        "description": "Last name.<br />Has a 2 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "Doe"
+       },
+       "date_created": {
+        "type": "string"
+       },
+       "date_updated": {
+        "type": "string"
+       },
+       "addresses": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/AddressGet"
+        }
+       }
+      },
+      "required": [
+       "first_name",
+       "last_name",
+       "addresses"
+      ],
+      "x-examples": {
+       "example-1": {
+        "dob": "1980-04-04",
+        "first_name": "John",
+        "middle_name": "O'Shea",
+        "last_name": "Doe",
+        "addresses": [
+         {
+          "address_type": "MAILING",
+          "street": "345 California Ave.",
+          "street2": "Suit 600",
+          "city": "San Francisco",
+          "state": "CA",
+          "zip_code": "12345-1234",
+          "country": "US",
+          "is_primary": true
+         }
+        ]
+       }
+      }
+     }
+    },
+    "responses": {
+     "Business-response": {
+      "description": "",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/BusinessesGetSerializer"
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/delete_business.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}": {
+     "delete": {
+      "tags": [
+       "Businesses"
+      ],
+      "summary": "Delete a business",
+      "description": "Deletes a business associated with a brand",
+      "operationId": "delete_business",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "204": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "type": "object",
+           "properties": {}
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/patch_business.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}": {
+     "patch": {
+      "tags": [
+       "Businesses"
+      ],
+      "summary": "Update a business",
+      "description": "Updates a business associated with a brand",
+      "operationId": "patch_business",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/BusinessesPatchSerializer"
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/Business-response-write"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "BusinessesPatchSerializer": {
+      "title": "",
+      "type": "object",
+      "properties": {
+       "brand_business_id": {
+        "type": "string",
+        "description": "The brand's UUID for the business.",
+        "example": "ac6ee2d3-5a03-4043-a4aa-dda51836b9fd"
+       },
+       "ein": {
+        "type": "string",
+        "description": "The Tax Identification Number",
+        "example": "12-1234567"
+       },
+       "legal_business_name": {
+        "type": "string",
+        "description": "The legal business name",
+        "example": "John Doe Business Corporation"
+       },
+       "dba_business_name": {
+        "type": "string",
+        "description": "The doing-business-as name (trade name)",
+        "example": "John's"
+       },
+       "business_type": {
+        "type": "string",
+        "description": "The business type",
+        "example": "cooperative",
+        "enum": [
+         "cooperative",
+         "limited_liability_company",
+         "sole_proprietorship",
+         "partnership",
+         "limited_partnership",
+         "corporation",
+         "nonprofit_organization"
+        ]
+       },
+       "date_established": {
+        "type": "string",
+        "description": "Date of incorporation in YYYY-MM-DD format",
+        "format": "string",
+        "example": "2020-01-01T00:00:00.000Z"
+       },
+       "phone": {
+        "type": "string",
+        "description": "Phone number",
+        "example": "+14157485052"
+       },
+       "email": {
+        "type": "string",
+        "description": "Business contact email",
+        "example": "info@business.com"
+       },
+       "website": {
+        "type": "string",
+        "description": "The official website",
+        "example": "www.business.com"
+       },
+       "industry_type": {
+        "type": "string",
+        "description": "Type of business conducted",
+        "example": "Financial"
+       },
+       "number_of_employees": {
+        "type": "string",
+        "description": "Description of number of employees at firm, as a range or value",
+        "example": "0-50"
+       }
+      }
+     }
+    },
+    "responses": {
+     "Business-response-write": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "business_id": {
+           "minLength": 1,
+           "type": "string"
+          },
+          "brand_business_id": {
+           "minLength": 1,
+           "type": "string"
+          },
+          "ein": {
+           "type": "string",
+           "minLength": 1
+          },
+          "phone": {
+           "type": "string",
+           "minLength": 1
+          },
+          "email": {
+           "type": "string",
+           "minLength": 1
+          },
+          "website": {
+           "type": "string",
+           "minLength": 1
+          },
+          "legal_business_name": {
+           "type": "string",
+           "minLength": 1
+          },
+          "dba_business_name": {
+           "type": "string",
+           "minLength": 1
+          },
+          "business_type": {
+           "type": "string",
+           "minLength": 1
+          },
+          "industry_type": {
+           "minLength": 1,
+           "type": "string"
+          },
+          "number_of_employees": {
+           "minLength": 1,
+           "type": "string"
+          },
+          "addresses": {
+           "type": "array",
+           "uniqueItems": true,
+           "minItems": 1,
+           "items": {
+            "type": "object",
+            "properties": {
+             "date_updated": {
+              "type": "string",
+              "minLength": 1
+             },
+             "date_created": {
+              "type": "string",
+              "minLength": 1
+             },
+             "address_id": {
+              "type": "string",
+              "minLength": 1
+             },
+             "address_type": {
+              "type": "string",
+              "minLength": 1
+             },
+             "street": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 40
+             },
+             "street2": {
+              "type": "string",
+              "maxLength": 40
+             },
+             "city": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 40,
+              "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces"
+             },
+             "state": {
+              "type": "string",
+              "minLength": 1
+             },
+             "zip_code": {
+              "type": "string",
+              "minLength": 1
+             },
+             "country": {
+              "type": "string",
+              "minLength": 1
+             },
+             "is_primary": {
+              "type": "boolean"
+             }
+            },
+            "required": [
+             "date_updated",
+             "date_created",
+             "address_id",
+             "address_type",
+             "street",
+             "street2",
+             "city",
+             "state",
+             "zip_code",
+             "country",
+             "is_primary"
+            ]
+           }
+          },
+          "beneficial_owners": {
+           "type": "array",
+           "uniqueItems": true,
+           "minItems": 1,
+           "items": {
+            "type": "object",
+            "properties": {
+             "first_name": {
+              "type": "string",
+              "minLength": 1
+             },
+             "last_name": {
+              "type": "string",
+              "minLength": 1
+             },
+             "dob": {
+              "type": "string",
+              "minLength": 1
+             },
+             "addresses": {
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 1,
+              "items": {
+               "type": "object",
+               "properties": {
+                "address_type": {
+                 "type": "string",
+                 "minLength": 1
+                },
+                "street": {
+                 "type": "string",
+                 "minLength": 1,
+                 "maxLength": 40
+                },
+                "street2": {
+                 "type": "string",
+                 "maxLength": 40
+                },
+                "city": {
+                 "type": "string",
+                 "minLength": 1,
+                 "maxLength": 40,
+                 "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces"
+                },
+                "state": {
+                 "type": "string",
+                 "minLength": 1
+                },
+                "zip_code": {
+                 "type": "string",
+                 "minLength": 1
+                },
+                "country": {
+                 "type": "string",
+                 "minLength": 1
+                },
+                "is_primary": {
+                 "type": "boolean"
+                }
+               },
+               "required": [
+                "address_type",
+                "street",
+                "street2",
+                "city",
+                "state",
+                "zip_code",
+                "country",
+                "is_primary"
+               ]
+              }
+             }
+            },
+            "required": [
+             "first_name",
+             "last_name",
+             "dob"
+            ]
+           }
+          }
+         },
+         "required": [
+          "business_id",
+          "brand_business_id",
+          "ein",
+          "phone",
+          "email",
+          "website",
+          "legal_business_name",
+          "dba_business_name",
+          "business_type",
+          "industry_type",
+          "number_of_employees",
+          "addresses",
+          "beneficial_owners"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "ein": "12-1234567",
+           "phone": "+14085557788",
+           "email": "user@example.com",
+           "website": "https://www.specter.com",
+           "legal_business_name": "World Domination Inc.",
+           "dba_business_name": "World Domination Inc.",
+           "business_type": "limited_liability_company",
+           "industry_type": "Financial",
+           "number_of_employees": "0-50",
+           "addresses": [
+            {
+             "address_type": "MAILING",
+             "street": "345 California Ave.",
+             "street2": "Suit 600",
+             "city": "San Francisco",
+             "state": "CA",
+             "zip_code": "12345-1234",
+             "country": "US",
+             "is_primary": true
+            },
+            {
+             "address_type": "PHYSICAL",
+             "street": "123 California Ave.",
+             "street2": "Suit 100",
+             "city": "San Francisco",
+             "state": "CA",
+             "zip_code": "12345-1234",
+             "country": "US",
+             "is_primary": false
+            }
+           ],
+           "beneficial_owners": [
+            {
+             "first_name": "James",
+             "last_name": "Bond",
+             "dob": "1970-12-12",
+             "addresses": [
+              {
+               "address_type": "MAILING",
+               "street": "345 California Ave.",
+               "street2": "Suit 600",
+               "city": "San Francisco",
+               "state": "CA",
+               "zip_code": "12345-1234",
+               "country": "US",
+               "is_primary": true
+              }
+             ]
+            },
+            {
+             "first_name": "Le",
+             "last_name": "Chiffre",
+             "dob": "1980-04-04",
+             "addresses": [
+              {
+               "address_type": "MAILING",
+               "street": "345 California Ave.",
+               "street2": "Suit 600",
+               "city": "San Francisco",
+               "state": "CA",
+               "zip_code": "12345-1234",
+               "country": "US",
+               "is_primary": true
+              }
+             ]
+            }
+           ]
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_business_addresses.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/addresses": {
+     "get": {
+      "tags": [
+       "Business address"
+      ],
+      "summary": "Retrieve all business addresses",
+      "description": "Retrieves all addresses associated with a business",
+      "operationId": "get_business_addresses",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "type": "object",
+           "properties": {}
+          },
+          "examples": {
+           "example": {
+            "value": {
+             "page_info": {
+              "page_size": 2,
+              "page": 1,
+              "pages": 1
+             },
+             "data": [
+              {
+               "date_updated": "2019-08-24T14:15:22Z",
+               "date_created": "2019-08-24T14:15:22Z",
+               "address_id": "12348579-5d05-4e3e-a5e3-e61e3a5b1234",
+               "address_type": "MAILING",
+               "street": "345 California Ave.",
+               "street2": "Suit 600",
+               "city": "San Francisco",
+               "state": "CA",
+               "zip_code": "12345-1234",
+               "country": "US",
+               "is_primary": true
+              },
+              {
+               "date_updated": "2019-08-24T14:15:22Z",
+               "date_created": "2019-08-24T14:15:22Z",
+               "address_id": "67898579-5d05-6789-a5e3-e61e3a5b6789",
+               "address_type": "PHYSICAL",
+               "street": "123 California Ave.",
+               "street2": "Suit 100",
+               "city": "San Francisco",
+               "state": "CA",
+               "zip_code": "12345-1234",
+               "country": "US",
+               "is_primary": false
+              }
+             ]
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_business_addresses.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/addresses": {
+     "post": {
+      "tags": [
+       "Business address"
+      ],
+      "summary": "Create a business address",
+      "description": "Creates an address associated with a business",
+      "operationId": "post_business_addresses",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/Address"
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "201": {
+        "$ref": "#/components/responses/Business-address-write"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "Address": {
+      "title": "",
+      "type": "object",
+      "properties": {
+       "address_type": {
+        "type": "string",
+        "description": "Address type is one of the following : MAILING, PHYSICAL, REGISTERED",
+        "enum": [
+         "MAILING",
+         "PHYSICAL",
+         "REGISTERED"
+        ]
+       },
+       "street": {
+        "type": "string",
+        "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "345 California Ave."
+       },
+       "street2": {
+        "type": "string",
+        "description": "Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "Suit 600"
+       },
+       "city": {
+        "type": "string",
+        "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+        "example": "San Francisco",
+        "minLength": 2,
+        "maxLength": 40
+       },
+       "state": {
+        "type": "string",
+        "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.",
+        "example": "CA"
+       },
+       "zip_code": {
+        "type": "string",
+        "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.",
+        "example": "12345-1234"
+       },
+       "country": {
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.",
+        "example": "US"
+       },
+       "is_primary": {
+        "type": "boolean",
+        "description": "Is Primary Address?",
+        "example": true
+       }
+      },
+      "required": [
+       "address_type",
+       "street",
+       "city",
+       "state",
+       "zip_code",
+       "country",
+       "is_primary"
+      ]
+     }
+    },
+    "responses": {
+     "Business-address-write": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "address_type": {
+           "type": "string",
+           "minLength": 1
+          },
+          "street": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 40
+          },
+          "street2": {
+           "type": "string",
+           "maxLength": 40
+          },
+          "city": {
+           "type": "string",
+           "minLength": 2,
+           "maxLength": 40,
+           "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces"
+          },
+          "state": {
+           "type": "string",
+           "minLength": 1
+          },
+          "zip_code": {
+           "type": "string",
+           "minLength": 1
+          },
+          "country": {
+           "type": "string",
+           "minLength": 1
+          },
+          "is_primary": {
+           "type": "boolean"
+          }
+         },
+         "required": [
+          "address_type",
+          "street",
+          "street2",
+          "city",
+          "state",
+          "zip_code",
+          "country",
+          "is_primary"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "address_type": "MAILING",
+           "street": "345 California Ave.",
+           "street2": "Suit 600",
+           "city": "San Francisco",
+           "state": "CA",
+           "zip_code": "12345-1234",
+           "country": "US",
+           "is_primary": true
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_business_address.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/addresses/{address_id}": {
+     "get": {
+      "tags": [
+       "Business address"
+      ],
+      "summary": "Retrieve a business address",
+      "description": "Retrieves an address associated with a business",
+      "operationId": "get_business_address",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "address_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/Business-address"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "responses": {
+     "Business-address": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "date_created": {
+           "type": "string",
+           "minLength": 1
+          },
+          "address_id": {
+           "type": "string",
+           "minLength": 1
+          },
+          "address_type": {
+           "type": "string",
+           "minLength": 1
+          },
+          "street": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 40
+          },
+          "street2": {
+           "type": "string",
+           "maxLength": 40
+          },
+          "city": {
+           "type": "string",
+           "minLength": 1,
+           "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces"
+          },
+          "state": {
+           "type": "string",
+           "minLength": 1
+          },
+          "zip_code": {
+           "type": "string",
+           "minLength": 1
+          },
+          "country": {
+           "type": "string",
+           "minLength": 1
+          },
+          "is_primary": {
+           "type": "boolean"
+          }
+         },
+         "required": [
+          "date_created",
+          "address_id",
+          "address_type",
+          "street",
+          "street2",
+          "city",
+          "state",
+          "zip_code",
+          "country",
+          "is_primary"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "date_created": "2019-08-24T14:15:22Z",
+           "address_id": "12348579-5d05-4e3e-a5e3-e61e3a5b1234",
+           "address_type": "MAILING",
+           "street": "345 California Ave.",
+           "street2": "Suit 600",
+           "city": "San Francisco",
+           "state": "CA",
+           "zip_code": "12345-1234",
+           "country": "US",
+           "is_primary": true
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/delete_business_address.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/addresses/{address_id}": {
+     "delete": {
+      "tags": [
+       "Business address"
+      ],
+      "summary": "Delete a business address",
+      "description": "Deletes an address associated with a business",
+      "operationId": "delete_business_address",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "address_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "204": {
+        "description": "",
+        "content": {}
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/patch_business_address.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/addresses/{address_id}": {
+     "patch": {
+      "tags": [
+       "Business address"
+      ],
+      "summary": "Update a business address",
+      "description": "Updates an address associated with a business",
+      "operationId": "patch_business_address",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "address_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/Address"
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/Business-address-write"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "Address": {
+      "title": "",
+      "type": "object",
+      "properties": {
+       "address_type": {
+        "type": "string",
+        "description": "Address type is one of the following : MAILING, PHYSICAL, REGISTERED",
+        "enum": [
+         "MAILING",
+         "PHYSICAL",
+         "REGISTERED"
+        ]
+       },
+       "street": {
+        "type": "string",
+        "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "345 California Ave."
+       },
+       "street2": {
+        "type": "string",
+        "description": "Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "Suit 600"
+       },
+       "city": {
+        "type": "string",
+        "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+        "example": "San Francisco",
+        "minLength": 2,
+        "maxLength": 40
+       },
+       "state": {
+        "type": "string",
+        "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.",
+        "example": "CA"
+       },
+       "zip_code": {
+        "type": "string",
+        "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.",
+        "example": "12345-1234"
+       },
+       "country": {
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.",
+        "example": "US"
+       },
+       "is_primary": {
+        "type": "boolean",
+        "description": "Is Primary Address?",
+        "example": true
+       }
+      },
+      "required": [
+       "address_type",
+       "street",
+       "city",
+       "state",
+       "zip_code",
+       "country",
+       "is_primary"
+      ]
+     }
+    },
+    "responses": {
+     "Business-address-write": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "address_type": {
+           "type": "string",
+           "minLength": 1
+          },
+          "street": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 40
+          },
+          "street2": {
+           "type": "string",
+           "maxLength": 40
+          },
+          "city": {
+           "type": "string",
+           "minLength": 2,
+           "maxLength": 40,
+           "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces"
+          },
+          "state": {
+           "type": "string",
+           "minLength": 1
+          },
+          "zip_code": {
+           "type": "string",
+           "minLength": 1
+          },
+          "country": {
+           "type": "string",
+           "minLength": 1
+          },
+          "is_primary": {
+           "type": "boolean"
+          }
+         },
+         "required": [
+          "address_type",
+          "street",
+          "street2",
+          "city",
+          "state",
+          "zip_code",
+          "country",
+          "is_primary"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "address_type": "MAILING",
+           "street": "345 California Ave.",
+           "street2": "Suit 600",
+           "city": "San Francisco",
+           "state": "CA",
+           "zip_code": "12345-1234",
+           "country": "US",
+           "is_primary": true
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_beneficial_owners.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners": {
+     "get": {
+      "tags": [
+       "Beneficial owners"
+      ],
+      "summary": "Retrieve all beneficial owners",
+      "description": "Retrieves all beneficial owners associated with a business",
+      "operationId": "get_beneficial_owners",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "examples": {
+           "example": {
+            "value": {
+             "page_info": {
+              "page_size": 2,
+              "page": 1,
+              "pages": 1
+             },
+             "data": [
+              {
+               "beneficial_owner_id": "4943fc81-e7e8-43b5-8be6-9c43fcec505a",
+               "first_name": "David",
+               "last_name": "Letterman",
+               "date_created": "2019-08-24T14:15:22.000Z",
+               "date_updated": "2019-08-24T14:15:22.000Z",
+               "dob": "1980-04-04",
+               "address": [
+                {
+                 "address_id": "12348579-5d05-4e3e-a5e3-e61e3a5b1234",
+                 "address_type": "MAILING",
+                 "street": "345 California Ave.",
+                 "street2": "Suit 600",
+                 "city": "San Francisco",
+                 "state": "CA",
+                 "zip_code": "12345-1234",
+                 "country": "US",
+                 "is_primary": true
+                }
+               ]
+              },
+              {
+               "beneficial_owner_id": "29ec6db6-4e12-4521-8ba7-7afc5c4730dd",
+               "first_name": "Conan",
+               "last_name": "O'Brian",
+               "date_created": "2019-08-24T14:15:22.000Z",
+               "date_updated": "2019-08-24T14:15:22.000Z",
+               "dob": "1980-04-04",
+               "address": [
+                {
+                 "address_id": "12348579-5d05-4e3e-a5e3-e61e3a5b1234",
+                 "address_type": "MAILING",
+                 "street": "345 California Ave.",
+                 "street2": "Suit 600",
+                 "city": "San Francisco",
+                 "state": "CA",
+                 "zip_code": "12345-1234",
+                 "country": "US",
+                 "is_primary": true
+                }
+               ]
+              }
+             ]
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_beneficial_owners.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners": {
+     "post": {
+      "tags": [
+       "Beneficial owners"
+      ],
+      "summary": "Create a beneficial owner",
+      "description": "Creates a beneficial owner associated with a business",
+      "operationId": "post_beneficial_owners",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/BeneficialOwnerPostSerializer"
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "201": {
+        "$ref": "#/components/responses/beneficial-owner-write"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "Address": {
+      "title": "",
+      "type": "object",
+      "properties": {
+       "address_type": {
+        "type": "string",
+        "description": "Address type is one of the following : MAILING, PHYSICAL, REGISTERED",
+        "enum": [
+         "MAILING",
+         "PHYSICAL",
+         "REGISTERED"
+        ]
+       },
+       "street": {
+        "type": "string",
+        "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "345 California Ave."
+       },
+       "street2": {
+        "type": "string",
+        "description": "Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "Suit 600"
+       },
+       "city": {
+        "type": "string",
+        "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+        "example": "San Francisco",
+        "minLength": 2,
+        "maxLength": 40
+       },
+       "state": {
+        "type": "string",
+        "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.",
+        "example": "CA"
+       },
+       "zip_code": {
+        "type": "string",
+        "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.",
+        "example": "12345-1234"
+       },
+       "country": {
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.",
+        "example": "US"
+       },
+       "is_primary": {
+        "type": "boolean",
+        "description": "Is Primary Address?",
+        "example": true
+       }
+      },
+      "required": [
+       "address_type",
+       "street",
+       "city",
+       "state",
+       "zip_code",
+       "country",
+       "is_primary"
+      ]
+     },
+     "BeneficialOwnerPostSerializer": {
+      "type": "object",
+      "properties": {
+       "dob": {
+        "type": "string",
+        "description": "Date of birth in YYYY-MM-DD format.",
+        "format": "string",
+        "example": "1980-04-04"
+       },
+       "first_name": {
+        "type": "string",
+        "description": "First name.<br />Has a 1 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "John"
+       },
+       "middle_name": {
+        "type": "string",
+        "description": "Middle name.<br />Has a 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "O'Shea"
+       },
+       "last_name": {
+        "type": "string",
+        "description": "Last name.<br />Has a 2 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "Doe"
+       },
+       "addresses": {
+        "type": "array",
+        "items": {
+         "$ref": "#/components/schemas/Address"
+        }
+       }
+      },
+      "required": [
+       "first_name",
+       "last_name",
+       "addresses"
+      ],
+      "x-examples": {
+       "example-1": {
+        "dob": "1980-04-04",
+        "first_name": "John",
+        "middle_name": "O'Shea",
+        "last_name": "Doe",
+        "addresses": [
+         {
+          "address_type": "MAILING",
+          "street": "345 California Ave.",
+          "street2": "Suit 600",
+          "city": "San Francisco",
+          "state": "CA",
+          "zip_code": "12345-1234",
+          "country": "US",
+          "is_primary": true
+         }
+        ]
+       }
+      }
+     }
+    },
+    "responses": {
+     "beneficial-owner-write": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "first_name": {
+           "type": "string",
+           "minLength": 1
+          },
+          "last_name": {
+           "type": "string",
+           "minLength": 1
+          },
+          "dob": {
+           "type": "string",
+           "minLength": 1
+          },
+          "address": {
+           "type": "array",
+           "uniqueItems": true,
+           "minItems": 1,
+           "items": {
+            "required": [
+             "address_type",
+             "street",
+             "street2",
+             "city",
+             "state",
+             "zip_code",
+             "country",
+             "is_primary"
+            ],
+            "properties": {
+             "address_type": {
+              "type": "string",
+              "minLength": 1
+             },
+             "street": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 40
+             },
+             "street2": {
+              "type": "string",
+              "maxLength": 40
+             },
+             "city": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 40
+             },
+             "state": {
+              "type": "string",
+              "minLength": 1
+             },
+             "zip_code": {
+              "type": "string",
+              "minLength": 1
+             },
+             "country": {
+              "type": "string",
+              "minLength": 1
+             },
+             "is_primary": {
+              "type": "boolean"
+             }
+            }
+           }
+          }
+         },
+         "required": [
+          "first_name",
+          "last_name",
+          "dob",
+          "address"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "first_name": "New",
+           "last_name": "Owner",
+           "dob": "1999-10-10",
+           "address": [
+            {
+             "address_type": "PHYSICAL",
+             "street": "345 California St.",
+             "street2": "Suit 600",
+             "city": "San Francisco",
+             "state": "CA",
+             "zip_code": "94104-2657",
+             "country": "US",
+             "is_primary": true
+            }
+           ]
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_beneficial_owner.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners/{beneficial_owner_id}": {
+     "get": {
+      "tags": [
+       "Beneficial owners"
+      ],
+      "summary": "Retrieve a beneficial owner",
+      "description": "Retrieves a beneficial owner associated with a business",
+      "operationId": "get_beneficial_owner",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "beneficial_owner_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/beneficial-owner"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "responses": {
+     "beneficial-owner": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "properties": {
+          "id": {
+           "type": "string"
+          }
+         }
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "beneficial_owner_id": "12345678-5d05-4562-a5e3-e61e12345678",
+           "first_name": "New",
+           "last_name": "Owner",
+           "date_created": "2019-08-24T14:15:22Z",
+           "dob": "1999-10-10",
+           "address": [
+            {
+             "date_created": "2019-08-24T14:15:22Z",
+             "address_id": "12374791-5d05-4e3e-a5e3-e61e3817622134",
+             "address_type": "PHYSICAL",
+             "street": "345 California St.",
+             "street2": "Suit 600",
+             "city": "San Francisco",
+             "state": "CA",
+             "zip_code": "94104-2657",
+             "country": "US",
+             "is_primary": true
+            }
+           ]
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/delete_beneficial_owner.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners/{beneficial_owner_id}": {
+     "delete": {
+      "tags": [
+       "Beneficial owners"
+      ],
+      "summary": "Delete a beneficial owner",
+      "description": "Deletes a beneficial owner associated with a business",
+      "operationId": "delete_beneficial_owner",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "beneficial_owner_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "204": {
+        "description": "",
+        "content": {}
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/patch_beneficial_owner.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners/{beneficial_owner_id}": {
+     "patch": {
+      "tags": [
+       "Beneficial owners"
+      ],
+      "summary": "Update a beneficial owner",
+      "description": "Updates a beneficial owner associated with a business",
+      "operationId": "patch_beneficial_owner",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "beneficial_owner_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/BeneficialOwnerPatchSerializer"
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/beneficial-owner-write"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "BeneficialOwnerPatchSerializer": {
+      "type": "object",
+      "properties": {
+       "dob": {
+        "type": "string",
+        "description": "Date of birth in YYYY-MM-DD format.",
+        "format": "string",
+        "example": "1980-04-04"
+       },
+       "first_name": {
+        "type": "string",
+        "description": "First name.<br />Has a 1 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "John"
+       },
+       "middle_name": {
+        "type": "string",
+        "description": "Middle name.<br />Has a 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "Johnson"
+       },
+       "last_name": {
+        "type": "string",
+        "description": "Last name.<br />Has a 2 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.",
+        "example": "Doe"
+       }
+      }
+     }
+    },
+    "responses": {
+     "beneficial-owner-write": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "first_name": {
+           "type": "string",
+           "minLength": 1
+          },
+          "last_name": {
+           "type": "string",
+           "minLength": 1
+          },
+          "dob": {
+           "type": "string",
+           "minLength": 1
+          },
+          "address": {
+           "type": "array",
+           "uniqueItems": true,
+           "minItems": 1,
+           "items": {
+            "required": [
+             "address_type",
+             "street",
+             "street2",
+             "city",
+             "state",
+             "zip_code",
+             "country",
+             "is_primary"
+            ],
+            "properties": {
+             "address_type": {
+              "type": "string",
+              "minLength": 1
+             },
+             "street": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 40
+             },
+             "street2": {
+              "type": "string",
+              "maxLength": 40
+             },
+             "city": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 40
+             },
+             "state": {
+              "type": "string",
+              "minLength": 1
+             },
+             "zip_code": {
+              "type": "string",
+              "minLength": 1
+             },
+             "country": {
+              "type": "string",
+              "minLength": 1
+             },
+             "is_primary": {
+              "type": "boolean"
+             }
+            }
+           }
+          }
+         },
+         "required": [
+          "first_name",
+          "last_name",
+          "dob",
+          "address"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "first_name": "New",
+           "last_name": "Owner",
+           "dob": "1999-10-10",
+           "address": [
+            {
+             "address_type": "PHYSICAL",
+             "street": "345 California St.",
+             "street2": "Suit 600",
+             "city": "San Francisco",
+             "state": "CA",
+             "zip_code": "94104-2657",
+             "country": "US",
+             "is_primary": true
+            }
+           ]
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_beneficial_owner_kyc.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners/{beneficial_owner_id}/verification-kyc": {
+     "get": {
+      "tags": [
+       "Beneficial owners"
+      ],
+      "summary": "Retrieve KYC Status",
+      "description": "Retrieve the KYC status of a `Beneficial Owner`",
+      "operationId": "get_beneficial_owner_kyc",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "beneficial_owner_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "program_id",
+        "in": "query",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "examples": {
+           "example": {
+            "value": {
+             "customer_id": "d856bf10-d4a6-4153-b8f8-2b93072dd8da",
+             "brand_id": "ce027c9c-39c6-47f4-a12d-abb543f7cf63",
+             "kyc_status": "passed",
+             "results": {
+              "ofac": "passed",
+              "bureau": "passed",
+              "email": "passed",
+              "ip": "passed",
+              "mobile": "passed"
+             },
+             "health": {
+              "overall": "SERVICE_GOOD",
+              "ofac": "SERVICE_GOOD",
+              "bureau": "SERVICE_GOOD",
+              "email": "SERVICE_GOOD",
+              "ip": "SERVICE_GOOD",
+              "mobile": "SERVICE_GOOD"
+             },
+             "info": {
+              "ofac": {
+               "name_matched": false,
+               "dob_matched": false
+              },
+              "bureau": {
+               "application_status": "Pass"
+              },
+              "phone": {
+               "first_name_match": 100,
+               "last_name_match": 100,
+               "service_status": "ACTIVE",
+               "service_type": "CONTRACT",
+               "service_duration": "UNKNOWN",
+               "service_ported_duration": "NONE"
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_beneficial_owner_kyc.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners/{beneficial_owner_id}/verification-kyc": {
+     "post": {
+      "tags": [
+       "Beneficial owners"
+      ],
+      "summary": "Start KYC (Know-Your-Customer)",
+      "description": "Start a KYC verification for a `Beneficial Owner`",
+      "operationId": "post_beneficial_owner_kyc",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "beneficial_owner_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/KYCPostPayload"
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "201": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "examples": {
+           "example": {
+            "value": {
+             "customer_id": "2df10ec1-130f-41bb-b0cf-f3af48350eb7",
+             "kyc_status": "initialized"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "KYCPostPayload": {
+      "required": [
+       "email",
+       "ip",
+       "phone",
+       "phone_country_code",
+       "program_id",
+       "ssn"
+      ],
+      "type": "object",
+      "properties": {
+       "dob": {
+        "type": "string",
+        "description": "Date of birth in YYYY-MM-DD format.",
+        "format": "string",
+        "example": "1980-04-04"
+       },
+       "program_id": {
+        "type": "string",
+        "description": "String in acceptable UUID format that corresponds to a valid `Program` program_id.",
+        "example": "72585109-8222-4221-b15b-48e87ffed790"
+       },
+       "ssn": {
+        "type": "string",
+        "description": "Must be in ######### or ###-##-#### format",
+        "example": "123-45-6789"
+       },
+       "phone": {
+        "type": "string",
+        "description": "Numbers only or dash-separated are acceptable",
+        "example": "555-111-2222"
+       },
+       "phone_country_code": {
+        "type": "string",
+        "description": "Must be a string of 1-3 digits",
+        "example": "1"
+       },
+       "email": {
+        "type": "string",
+        "description": "Must be a valid email address",
+        "example": "customer@bond.tech"
+       },
+       "ip": {
+        "type": "string",
+        "description": "Must be dot separated",
+        "example": "257.134.1.57"
+       },
+       "kyc_retry_request": {
+        "type": "boolean",
+        "description": "If failure threshold has been reached, set this to `true` to request further attempts"
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_beneficial_owner_addresses.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners/{beneficial_owner_id}/addresses": {
+     "get": {
+      "tags": [
+       "Beneficial owners address"
+      ],
+      "summary": "Retrieve all beneficial owner addresses",
+      "description": "Retrieves all addresses associated with a beneficial owner",
+      "operationId": "get_beneficial_owner_addresses",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "beneficial_owner_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "examples": {
+           "example": {
+            "value": {
+             "page_info": {
+              "page_size": 2,
+              "page": 1,
+              "pages": 1
+             },
+             "data": [
+              {
+               "date_created": "2019-08-24T14:15:22.000Z",
+               "date_updated": "2020-06-24T14:15:22.000Z",
+               "address_id": "12348579-5d05-4e3e-a5e3-e61e3a5b1234",
+               "address_type": "MAILING",
+               "street": "345 California Ave.",
+               "street2": "Suit 600",
+               "city": "San Francisco",
+               "state": "CA",
+               "zip_code": "12345-1234",
+               "country": "US",
+               "is_primary": true
+              },
+              {
+               "date_created": "2019-08-24T14:15:22.000Z",
+               "date_updated": "2021-04-24T14:15:22.000Z",
+               "address_id": "12348579-5d05-4e3e-a5e3-e61e3a5b1234",
+               "address_type": "MAILING",
+               "street": "123 Oregon Ave.",
+               "street2": "Suit 100",
+               "city": "San Portier",
+               "state": "AL",
+               "zip_code": "12345-1234",
+               "country": "US",
+               "is_primary": false
+              }
+             ]
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_beneficial_owner_addresses.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners/{beneficial_owner_id}/addresses": {
+     "post": {
+      "tags": [
+       "Beneficial owners address"
+      ],
+      "summary": "Create a beneficial owner address",
+      "description": "Creates an address associated with a beneficial owner",
+      "operationId": "post_beneficial_owner_addresses",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "beneficial_owner_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/Address"
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "201": {
+        "$ref": "#/components/responses/Business-address"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "Address": {
+      "title": "",
+      "type": "object",
+      "properties": {
+       "address_type": {
+        "type": "string",
+        "description": "Address type is one of the following : MAILING, PHYSICAL, REGISTERED",
+        "enum": [
+         "MAILING",
+         "PHYSICAL",
+         "REGISTERED"
+        ]
+       },
+       "street": {
+        "type": "string",
+        "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "345 California Ave."
+       },
+       "street2": {
+        "type": "string",
+        "description": "Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "Suit 600"
+       },
+       "city": {
+        "type": "string",
+        "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+        "example": "San Francisco",
+        "minLength": 2,
+        "maxLength": 40
+       },
+       "state": {
+        "type": "string",
+        "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.",
+        "example": "CA"
+       },
+       "zip_code": {
+        "type": "string",
+        "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.",
+        "example": "12345-1234"
+       },
+       "country": {
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.",
+        "example": "US"
+       },
+       "is_primary": {
+        "type": "boolean",
+        "description": "Is Primary Address?",
+        "example": true
+       }
+      },
+      "required": [
+       "address_type",
+       "street",
+       "city",
+       "state",
+       "zip_code",
+       "country",
+       "is_primary"
+      ]
+     }
+    },
+    "responses": {
+     "Business-address": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "date_created": {
+           "type": "string",
+           "minLength": 1
+          },
+          "address_id": {
+           "type": "string",
+           "minLength": 1
+          },
+          "address_type": {
+           "type": "string",
+           "minLength": 1
+          },
+          "street": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 40
+          },
+          "street2": {
+           "type": "string",
+           "maxLength": 40
+          },
+          "city": {
+           "type": "string",
+           "minLength": 1,
+           "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces"
+          },
+          "state": {
+           "type": "string",
+           "minLength": 1
+          },
+          "zip_code": {
+           "type": "string",
+           "minLength": 1
+          },
+          "country": {
+           "type": "string",
+           "minLength": 1
+          },
+          "is_primary": {
+           "type": "boolean"
+          }
+         },
+         "required": [
+          "date_created",
+          "address_id",
+          "address_type",
+          "street",
+          "street2",
+          "city",
+          "state",
+          "zip_code",
+          "country",
+          "is_primary"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "date_created": "2019-08-24T14:15:22Z",
+           "address_id": "12348579-5d05-4e3e-a5e3-e61e3a5b1234",
+           "address_type": "MAILING",
+           "street": "345 California Ave.",
+           "street2": "Suit 600",
+           "city": "San Francisco",
+           "state": "CA",
+           "zip_code": "12345-1234",
+           "country": "US",
+           "is_primary": true
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_beneficial_owner_address.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners/{beneficial_owner_id}/addresses/{address_id}": {
+     "get": {
+      "tags": [
+       "Beneficial owners address"
+      ],
+      "summary": "Retrieve a beneficial owner address",
+      "description": "Retrieves an address associated with a beneficial owner",
+      "operationId": "get_beneficial_owner_address",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "beneficial_owner_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "address_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/Business-address"
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "responses": {
+     "Business-address": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "date_created": {
+           "type": "string",
+           "minLength": 1
+          },
+          "address_id": {
+           "type": "string",
+           "minLength": 1
+          },
+          "address_type": {
+           "type": "string",
+           "minLength": 1
+          },
+          "street": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 40
+          },
+          "street2": {
+           "type": "string",
+           "maxLength": 40
+          },
+          "city": {
+           "type": "string",
+           "minLength": 1,
+           "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces"
+          },
+          "state": {
+           "type": "string",
+           "minLength": 1
+          },
+          "zip_code": {
+           "type": "string",
+           "minLength": 1
+          },
+          "country": {
+           "type": "string",
+           "minLength": 1
+          },
+          "is_primary": {
+           "type": "boolean"
+          }
+         },
+         "required": [
+          "date_created",
+          "address_id",
+          "address_type",
+          "street",
+          "street2",
+          "city",
+          "state",
+          "zip_code",
+          "country",
+          "is_primary"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "date_created": "2019-08-24T14:15:22Z",
+           "address_id": "12348579-5d05-4e3e-a5e3-e61e3a5b1234",
+           "address_type": "MAILING",
+           "street": "345 California Ave.",
+           "street2": "Suit 600",
+           "city": "San Francisco",
+           "state": "CA",
+           "zip_code": "12345-1234",
+           "country": "US",
+           "is_primary": true
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/delete_beneficial_owner_address.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners/{beneficial_owner_id}/addresses/{address_id}": {
+     "delete": {
+      "tags": [
+       "Beneficial owners address"
+      ],
+      "summary": "Delete a beneficial owner address",
+      "description": "Delete an address associated with a beneficial owner",
+      "operationId": "delete_beneficial_owner_address",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "beneficial_owner_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "address_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "204": {
+        "description": "",
+        "content": {}
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/patch_beneficial_owner_address.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/beneficial_owners/{beneficial_owner_id}/addresses/{address_id}": {
+     "patch": {
+      "tags": [
+       "Beneficial owners address"
+      ],
+      "summary": "Update a beneficial owner address",
+      "description": "Update an address associated with a beneficial owner",
+      "operationId": "patch_beneficial_owner_address",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "beneficial_owner_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       },
+       {
+        "name": "address_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/BeneficialOwnerAddressPatchSerializer"
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/Business-address-write"
+       }
+      },
+      "x-codegen-request-body-name": "payload"
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "BeneficialOwnerAddressPatchSerializer": {
+      "type": "object",
+      "properties": {
+       "address_type": {
+        "type": "string",
+        "description": "Address type is one of the following : MAILING, PHYSICAL",
+        "enum": [
+         "MAILING",
+         "PHYSICAL"
+        ]
+       },
+       "street": {
+        "type": "string",
+        "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "345 California Ave."
+       },
+       "street2": {
+        "type": "string",
+        "description": "Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`",
+        "example": "Suit 600"
+       },
+       "city": {
+        "type": "string",
+        "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+        "example": "San Francisco",
+        "minLength": 2,
+        "maxLength": 40
+       },
+       "state": {
+        "type": "string",
+        "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.",
+        "example": "CA"
+       },
+       "zip_code": {
+        "type": "string",
+        "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.",
+        "example": "12345-1234"
+       },
+       "country": {
+        "type": "string",
+        "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.",
+        "example": "US"
+       },
+       "is_primary": {
+        "type": "boolean",
+        "description": "Is Primary Address?",
+        "example": true
+       }
+      }
+     }
+    },
+    "responses": {
+     "Business-address-write": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "address_type": {
+           "type": "string",
+           "minLength": 1
+          },
+          "street": {
+           "type": "string",
+           "minLength": 1,
+           "maxLength": 40
+          },
+          "street2": {
+           "type": "string",
+           "maxLength": 40
+          },
+          "city": {
+           "type": "string",
+           "minLength": 2,
+           "maxLength": 40,
+           "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces"
+          },
+          "state": {
+           "type": "string",
+           "minLength": 1
+          },
+          "zip_code": {
+           "type": "string",
+           "minLength": 1
+          },
+          "country": {
+           "type": "string",
+           "minLength": 1
+          },
+          "is_primary": {
+           "type": "boolean"
+          }
+         },
+         "required": [
+          "address_type",
+          "street",
+          "street2",
+          "city",
+          "state",
+          "zip_code",
+          "country",
+          "is_primary"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "address_type": "MAILING",
+           "street": "345 California Ave.",
+           "street2": "Suit 600",
+           "city": "San Francisco",
+           "state": "CA",
+           "zip_code": "12345-1234",
+           "country": "US",
+           "is_primary": true
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_kyb_2.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/kyb": {
+     "post": {
+      "tags": [
+       "KYB"
+      ],
+      "summary": "Start v2 KYB (Know-Your-Business)",
+      "description": "Start a KYB verification for a `Business` on given program",
+      "operationId": "post_kyb_2",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/KYBPostSerializer"
+         }
+        }
+       },
+       "required": true
+      },
+      "responses": {
+       "200": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "examples": {
+           "example": {
+            "value": {
+             "inquiry_id": "inq_ZgXs71DijBhW1k7uoBvQrCK2",
+             "url": "https://withpersona.com/verify?inquiry-id=inq_ZgXs71DijBhW1k7uoBvQrCK2"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "schemas": {
+     "KYBPostSerializer": {
+      "required": [
+       "business_id",
+       "program_id"
+      ],
+      "type": "object",
+      "properties": {
+       "business_id": {
+        "type": "string",
+        "description": "UUID of the business to be reviewed for KYB",
+        "example": "a1163ef7-f477-4c79-86cc-ba5e85ec3acb"
+       },
+       "program_id": {
+        "type": "string",
+        "description": "UUID of the program to be setup (sponsor bank on this program determines KYB type)",
+        "example": "da7f5c2a-6fa0-4033-be12-e29a793eaaaa"
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_kyb_resume.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/kyb/{inquiry_id}/resume": {
+     "post": {
+      "tags": [
+       "KYB"
+      ],
+      "summary": "Resume v2 KYB (Know-Your-Business)",
+      "description": "Resume a KYB verification for a given inquiry",
+      "operationId": "post_kyb_resume",
+      "parameters": [
+       {
+        "name": "inquiry_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "examples": {
+           "example": {
+            "value": {
+             "session_token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpcXNlX1VBTWZFRjJaUnpMOUJIVmdLQXN4S295RCIsImF1ZCI6InBlcnNvbmEtdmVyaWZ5IiwiaXNzIjoid2l0aHBlcnNvbmEuY29tIiwiaWF0IjoxNjg1NDc2MTUyLCJuYmYiOjE2ODU0NzYxNTIsImV4cCI6MTY4NjY4NTczNSwianRpIjoiZGZkYjRjNmEtOWNmNS00MjliLTlmNGMtM2Q5YmVhNjRkYTY3IiwiaW5xdWlyeV9pZCI6ImlucV9aZ1hzNzFEaWpCaFcxazd1b0J2UXJDSzIiLCJlbnZpcm9ubWVudF9pZCI6ImVudl9ldXN4N1hKM2M1VVFyTlVSNTFkRUhlaGMifQ.y7U3HkHR9WRpQRbhkQEoz50sAlz5MozAXcXR7Ip_5XA",
+             "url": "https://withpersona.com/verify?inquiry-id=inq_ZgXs71DijBhW1k7uoBvQrCK2&session-token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpcXNlX1VBTWZFRjJaUnpMOUJIVmdLQXN4S295RCIsImF1ZCI6InBlcnNvbmEtdmVyaWZ5IiwiaXNzIjoid2l0aHBlcnNvbmEuY29tIiwiaWF0IjoxNjg1NDc2MTUyLCJuYmYiOjE2ODU0NzYxNTIsImV4cCI6MTY4NjY4NTczNSwianRpIjoiZGZkYjRjNmEtOWNmNS00MjliLTlmNGMtM2Q5YmVhNjRkYTY3IiwiaW5xdWlyeV9pZCI6ImlucV9aZ1hzNzFEaWpCaFcxazd1b0J2UXJDSzIiLCJlbnZpcm9ubWVudF9pZCI6ImVudl9ldXN4N1hKM2M1VVFyTlVSNTFkRUhlaGMifQ.y7U3HkHR9WRpQRbhkQEoz50sAlz5MozAXcXR7Ip_5XA"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/get_kyb.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/verification-kyb": {
+     "get": {
+      "tags": [
+       "KYB"
+      ],
+      "summary": "Retrieve KYB Status",
+      "description": "Retrieve the KYB status of a `Business`",
+      "operationId": "get_kyb",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "examples": {
+           "example": {
+            "value": {
+             "business_id": "12348579-5d05-4e3e-a5e3-e61e3a5b1234",
+             "kyb_status": "warning",
+             "details": [
+              {
+               "code": "rejected_address",
+               "reason": "address verification failed"
+              },
+              {
+               "code": "rejected_tin",
+               "reason": "TIN verification failed"
+              },
+              {
+               "code": "rejected_name",
+               "reason": "name verification failed"
+              },
+              {
+               "code": "rejected_watchlist",
+               "reason": "watchlist verification failed."
+              }
+             ]
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_kyb.md",
+  "definition": {
+   "openapi": "3.0.1",
+   "info": {
+    "title": "Business",
+    "description": "Businesses",
+    "version": "0"
+   },
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "paths": {
+    "/businesses/{business_id}/verification-kyb": {
+     "post": {
+      "tags": [
+       "KYB"
+      ],
+      "summary": "Start KYB (Know-Your-Business)",
+      "description": "Start a KYB verification for a `Business`",
+      "operationId": "post_kyb",
+      "parameters": [
+       {
+        "name": "business_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+         "type": "string"
+        }
+       }
+      ],
+      "responses": {
+       "200": {
+        "description": "",
+        "content": {
+         "application/json": {
+          "examples": {
+           "example": {
+            "value": {
+             "business_id": "12348579-5d05-4e3e-a5e3-e61e3a5b1234",
+             "kyb_status": "initiated"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "name": "Identity",
+      "in": "header"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+     }
+    }
+   },
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+   },
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 243
+    }
+   }
+  }
+ }
+]

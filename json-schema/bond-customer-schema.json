@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-customer-schema.json",
+  "title": "Customer",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-customer-openapi.yml#/components/schemas/customer",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "brand_person_id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "bond_brand_id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "business_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "readOnly": true
+    },
+    "dob": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "string",
+      "description": "Birthday in YYYY-MM-DD format."
+    },
+    "first_name": {
+      "type": "string",
+      "description": "First name.<br />Has a 1 to 50-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes."
+    },
+    "middle_name": {
+      "type": "string",
+      "description": "Middle name.<br />Has a 50-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes."
+    },
+    "last_name": {
+      "type": "string",
+      "description": "Last name.<br />Has a 2 to 50-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes."
+    },
+    "ssn": {
+      "type": "string",
+      "description": "Redacted SSN. Format: XXX-XX-9999."
+    },
+    "phone": {
+      "type": "string",
+      "description": "Numbers only or dash-separated are acceptable"
+    },
+    "phone_country_code": {
+      "type": "string",
+      "description": "Must be a string of 1-3 digits"
+    },
+    "email": {
+      "type": "string",
+      "description": "Must be a valid email address"
+    },
+    "addresses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/address"
+      }
+    },
+    "date_created": {
+      "type": "string",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "first_name",
+    "addresses"
+  ],
+  "$defs": {
+    "address": {
+      "type": "object",
+      "title": "Address",
+      "properties": {
+        "address_id": {
+          "type": "string",
+          "description": "id for address resource",
+          "readOnly": true
+        },
+        "address_type": {
+          "type": "string",
+          "description": "Address type is one of the following : MAILING, PHYSICAL",
+          "enum": [
+            "MAILING",
+            "PHYSICAL"
+          ]
+        },
+        "street": {
+          "type": "string",
+          "description": "Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`"
+        },
+        "street2": {
+          "type": "string",
+          "description": "Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`"
+        },
+        "city": {
+          "type": "string",
+          "description": "Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces",
+          "minLength": 2,
+          "maxLength": 40
+        },
+        "state": {
+          "type": "string",
+          "description": "Has a 2-character limit for US address.<br />Has a 20-character limit for non US address."
+        },
+        "zip_code": {
+          "type": "string",
+          "description": "zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address."
+        },
+        "country": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit."
+        },
+        "is_primary": {
+          "type": "boolean",
+          "description": "Is Primary Address?"
+        },
+        "date_created": {
+          "type": "string",
+          "description": "Date time address was created",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "address_type",
+        "street",
+        "city",
+        "state",
+        "zip_code",
+        "country",
+        "is_primary"
+      ]
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-webhook-patch-schema.json",
+  "title": "webhook-patch",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-webhooks-openapi.yml#/components/schemas/webhook-patch",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "Webhook callback URL"
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional description of the webhook's intended use"
+    },
+    "events": {
+      "type": "array",
+      "description": "List of events enabled in the webhook subscription",
+      "items": {
+        "type": "string",
+        "enum": [
+          "account.autopay.failed",
+          "account.autopay.processed",
+          "account.autopay.scheduled",
+          "account.history.ready",
+          "account.statements.generated",
+          "account.statements.ready",
+          "card.created",
+          "card.status.active",
+          "card.status.closed",
+          "card.status.inactive",
+          "card.status.reissue",
+          "card.wallet.add",
+          "card.wallet.add_failure",
+          "credit.application.created",
+          "credit.application.submitted",
+          "credit.application.approved",
+          "credit.application.adverse_action",
+          "credit.application.resubmit_required",
+          "develop.api_key.created",
+          "kyb.verification.approved",
+          "kyb.verification.error",
+          "kyb.verification.initiated",
+          "kyb.verification.rejected",
+          "kyb.verification.warning",
+          "kyb.verification.under_review",
+          "kyc.verification.document_required",
+          "kyc.verification.error",
+          "kyc.verification.failure",
+          "kyc.verification.reenter_information",
+          "kyc.verification.success",
+          "kyc.verification.timeout",
+          "kyc.verification.under_review",
+          "portal.data_export",
+          "transactions"
+        ]
+      }
+    },
+    "version": {
+      "type": "string",
+      "description": "version of webhook event envelope"
+    },
+    "status": {
+      "type": "string",
+      "description": "status of webhook. `enabled` or `disabled`",
+      "enum": [
+        "STATUS_ENABLED",
+        "STATUS_DISABLED"
+      ]
+    }
+  }
+}

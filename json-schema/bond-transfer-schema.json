@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/bond/main/json-schema/bond-transfer-schema.json",
+  "title": "transfer",
+  "x-generated": "2026-10-14",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/bond-transfers-openapi.yml#/components/schemas/transfer",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "transfer_id": {
+          "type": "string"
+        },
+        "transaction_id": {
+          "type": "string"
+        },
+        "created_time": {
+          "type": "string",
+          "description": "System defined based on the date this transfer was created"
+        },
+        "updated_time": {
+          "type": "string",
+          "description": "System defined based on any updates that were made to this transfer"
+        },
+        "settled_time": {
+          "type": "string",
+          "description": "System defined based on the date this transfer settles."
+        },
+        "origination_account_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "account_id for the origination Account"
+        },
+        "destination_account_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "account_id for the destination Account"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Description for what the transfer is about, for ACH this is the memo field."
+        },
+        "amount": {
+          "type": "integer",
+          "description": "Amount in cents"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "submitted"
+          ],
+          "default": "submitted",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "created_time",
+        "updated_time",
+        "settled_time",
+        "origination_account_id",
+        "destination_account_id",
+        "amount"
+      ]
+    },
+    {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/transfer-ach"
+        }
+      ]
+    }
+  ],
+  "$defs": {
+    "transfer-ach": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "ach": {
+          "type": "object",
+          "required": [
+            "ach_class_code",
+            "same_day"
+          ],
+          "properties": {
+            "ach_class_code": {
+              "type": "string",
+              "minLength": 1,
+              "enum": [
+                "CCD",
+                "PPD",
+                "WEB"
+              ],
+              "description": "ACH Standard Entry Class (SEC) code"
+            },
+            "same_day": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      },
+      "required": [
+        "ach"
+      ]
+    }
+  }
+}

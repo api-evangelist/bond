@@ -1,0 +1,111 @@
+generated: '2026-10-14'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 9
+  own: 6
+  other_domain: 0
+  platform: 3
+  roles:
+  - api
+  - collections
+  - docs
+  - other
+  - portal
+  - sandbox
+  - source
+  - website
+hosts:
+- host: api.bond.tech
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: bond.tech
+  role: api
+  relation: own
+- host: bond.tech
+  found_by:
+  - pointer
+  types:
+  - TermsOfService
+  - PrivacyPolicy
+  - Website
+  serves: []
+  registrable_domain: bond.tech
+  role: website
+  relation: own
+- host: docs.bond.tech
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - Documentation
+  - APIReference
+  - GettingStarted
+  - LLMsTxt
+  serves:
+  - docs
+  registrable_domain: bond.tech
+  role: docs
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: portal.bond.tech
+  found_by:
+  - pointer
+  types:
+  - DeveloperPortal
+  - Login
+  serves: []
+  registrable_domain: bond.tech
+  role: portal
+  relation: own
+- host: sandbox.bond.tech
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: bond.tech
+  role: sandbox
+  relation: own
+- host: www.bond.tech
+  found_by:
+  - pointer
+  types:
+  - Compliance
+  - Website
+  - Blog
+  - Support
+  serves: []
+  registrable_domain: bond.tech
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.postman.com
+  found_by:
+  - pointer
+  types:
+  - Postman
+  serves: []
+  registrable_domain: postman.com
+  role: collections
+  relation: platform

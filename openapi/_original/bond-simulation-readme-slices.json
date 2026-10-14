@@ -1,0 +1,1076 @@
+[
+ {
+  "page": "https://docs.bond.tech/reference/post_authorization.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/simulate/authorization": {
+     "post": {
+      "summary": "Simulate Authorization",
+      "operationId": "post_authorization",
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/simulate-response"
+       }
+      },
+      "description": "Simulate a card transaction",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/simulate"
+         }
+        }
+       }
+      },
+      "tags": [
+       "Simulate"
+      ]
+     },
+     "parameters": []
+    }
+   },
+   "info": {
+    "title": "Simulation",
+    "version": "0",
+    "description": "Sandbox Simulations"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "components": {
+    "responses": {
+     "simulate-response": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "transaction_id": {
+           "type": "string",
+           "minLength": 1,
+           "example": "3fd4356b-a64b-4d2f-8699-cbb2b76e1d52"
+          },
+          "customer_id": {
+           "type": "string",
+           "minLength": 1,
+           "example": "08ebf96f-d3e2-4a50-8a52-d5677c3c9825"
+          },
+          "card_id": {
+           "type": "string",
+           "minLength": 1,
+           "example": "7c216d02-e5ca-4d88-b8da-90b912a34081"
+          },
+          "raw_statement_descriptor": {
+           "type": "string",
+           "minLength": 1,
+           "example": "Amazon.com Amzn.com/billWAUSA USA"
+          },
+          "account_id": {
+           "type": "string",
+           "minLength": 1,
+           "example": "4b9cecad-8081-49aa-ab71-d273d64fb50e"
+          },
+          "bond_brand_id": {
+           "type": "string",
+           "minLength": 1,
+           "example": "91b8a931-c86d-462b-9db5-eded20b26bd9"
+          },
+          "payment_rail": {
+           "type": "string",
+           "minLength": 1,
+           "example": "card"
+          },
+          "amount": {
+           "type": "string",
+           "minLength": 1,
+           "example": "-4.99"
+          },
+          "amount_in_cents": {
+           "type": "string",
+           "minLength": 1,
+           "example": "-499"
+          },
+          "currency_code": {
+           "type": "string",
+           "minLength": 1,
+           "example": "USD"
+          },
+          "exchange_rate": {},
+          "transaction_type": {
+           "type": "string",
+           "minLength": 1,
+           "example": "POS Purchase"
+          },
+          "cardholder_presence_indicator": {},
+          "original_transaction_id": {},
+          "merchant_name": {
+           "type": "string",
+           "minLength": 1,
+           "example": "Amazon.Com Amzn.Com/Billwausa Usa"
+          },
+          "merchant_id": {},
+          "merchant_address": {},
+          "merchant_country": {},
+          "merchant_city": {
+           "type": "string",
+           "minLength": 1
+          },
+          "merchant_state": {
+           "type": "string",
+           "minLength": 1
+          },
+          "merchant_zip_code": {
+           "type": "string",
+           "minLength": 1
+          },
+          "mcc": {
+           "type": "string",
+           "minLength": 1,
+           "example": "Online Shopping"
+          },
+          "settled_date": {
+           "type": "string",
+           "minLength": 1,
+           "example": "2021-07-20 22:29:00"
+          },
+          "new_balance": {
+           "type": "string",
+           "minLength": 1,
+           "example": "298.01"
+          },
+          "prior_balance": {
+           "type": "string",
+           "minLength": 1,
+           "example": "303"
+          },
+          "transaction_time": {
+           "type": "string",
+           "minLength": 1,
+           "example": "2021-07-20 22:29:00"
+          },
+          "date_created": {
+           "type": "string",
+           "minLength": 1,
+           "example": "2021-07-20 22:29:00"
+          },
+          "date_updated": {
+           "type": "string",
+           "minLength": 1,
+           "example": "2021-07-20 22:29:00"
+          },
+          "fee": {},
+          "rewards_rate": {},
+          "rewards": {},
+          "transaction_state": {
+           "type": "string",
+           "minLength": 1,
+           "example": "pending"
+          },
+          "origin_timestamp": {
+           "type": "string",
+           "minLength": 1,
+           "example": "2021-07-20 22:29:00"
+          },
+          "transaction_response_code": {},
+          "acquiring_institution_identification_code": {}
+         },
+         "required": [
+          "transaction_id",
+          "customer_id",
+          "card_id",
+          "raw_statement_descriptor",
+          "account_id",
+          "bond_brand_id",
+          "payment_rail",
+          "amount",
+          "amount_in_cents",
+          "currency_code",
+          "transaction_type",
+          "merchant_name",
+          "merchant_city",
+          "merchant_state",
+          "merchant_zip_code",
+          "mcc",
+          "settled_date",
+          "new_balance",
+          "prior_balance",
+          "transaction_time",
+          "date_created",
+          "date_updated",
+          "transaction_state",
+          "origin_timestamp"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "transaction_id": "3fd4356b-a64b-4d2f-8699-cbb2b76e1d52",
+           "customer_id": "08ebf96f-d3e2-4a50-8a52-d5677c3c9825",
+           "card_id": "7c216d02-e5ca-4d88-b8da-90b912a34081",
+           "raw_statement_descriptor": "Amazon.com Amzn.com/billWAUSA USA",
+           "account_id": "4b9cecad-8081-49aa-ab71-d273d64fb50e",
+           "bond_brand_id": "91b8a931-c86d-462b-9db5-eded20b26bd9",
+           "payment_rail": "card",
+           "amount": "-4.99",
+           "amount_in_cents": "-499",
+           "currency_code": "USD",
+           "exchange_rate": null,
+           "transaction_type": "POS Purchase",
+           "cardholder_presence_indicator": null,
+           "original_transaction_id": null,
+           "merchant_name": "Amazon.Com Amzn.Com/Billwausa Usa",
+           "merchant_id": null,
+           "merchant_address": null,
+           "merchant_country": null,
+           "merchant_city": "string",
+           "merchant_state": "string",
+           "merchant_zip_code": "string",
+           "mcc": "Online Shopping",
+           "settled_date": "2021-07-20 22:29:00",
+           "new_balance": "298.01",
+           "prior_balance": "303",
+           "transaction_time": "2021-07-20 22:29:00",
+           "date_created": "2021-07-20 22:29:00",
+           "date_updated": "2021-07-20 22:29:00",
+           "fee": null,
+           "rewards_rate": null,
+           "rewards": null,
+           "transaction_state": "pending",
+           "origin_timestamp": "2021-07-20 22:29:00",
+           "transaction_response_code": null,
+           "acquiring_institution_identification_code": null
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "simulate": {
+      "description": "",
+      "type": "object",
+      "x-examples": {
+       "example": {
+        "card_id": "{{card_id}}",
+        "amount": "4.99",
+        "currency": "USD",
+        "merchant_name": "Amazon.com Amzn.com/billWAUSA",
+        "merchant_city": "Amzn.com/bill",
+        "merchant_state": "WA",
+        "merchant_zip_code": "98109",
+        "mcc": "5462",
+        "mid": "987654321"
+       }
+      },
+      "x-internal": false,
+      "properties": {
+       "card_id": {
+        "type": "string",
+        "minLength": 1,
+        "description": ""
+       },
+       "amount": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Transaction amount as a decimal string using two digits of precision, e.g., \"10.00\"."
+       },
+       "transaction_datetime": {
+        "type": "string",
+        "description": "Date and time of transaction \nYYYY-MM-DD HH:MM"
+       },
+       "currency": {
+        "type": "string",
+        "minLength": 1,
+        "description": "ISO currency of simulated transaction"
+       },
+       "merchant_name": {
+        "type": "string",
+        "minLength": 1,
+        "description": "merchant name to be returned in transaction"
+       },
+       "merchant_city": {
+        "type": "string",
+        "minLength": 1,
+        "description": "merchant city to be returned in transaction"
+       },
+       "merchant_state": {
+        "type": "string",
+        "minLength": 1,
+        "description": "merchant state to be returned in transaction"
+       },
+       "merchant_zip_code": {
+        "type": "string",
+        "minLength": 1,
+        "description": "merchant zip code be returned in transaction\nzip code in 5-digit (12345)"
+       },
+       "mcc": {
+        "type": "string",
+        "minLength": 1,
+        "description": "merchant category code to be returned in transaction\nmcc code in 4-digit (1234)"
+       },
+       "mid": {
+        "type": "string",
+        "minLength": 1,
+        "description": "merchant identifier to be return in the transaction in X-digit (xxxx)"
+       }
+      },
+      "required": [
+       "card_id",
+       "amount",
+       "currency",
+       "merchant_name",
+       "merchant_city",
+       "merchant_state",
+       "merchant_zip_code",
+       "mcc",
+       "mid"
+      ]
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "tags": [
+    {
+     "name": "Simulate"
+    }
+   ],
+   "x-si-base": "./swagger.json",
+   "x-github-repo": "bond-tech/readme-api-reference",
+   "x-github-sha": "051e370e695935cc348188481246f03540c37859",
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 244
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_settle.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/simulate/settlement": {
+     "post": {
+      "summary": "Simulate Settlement",
+      "operationId": "post_settle",
+      "description": "Simulate transaction settlement",
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/settle"
+         }
+        }
+       }
+      },
+      "tags": [
+       "Simulate"
+      ],
+      "responses": {
+       "200": {
+        "$ref": "#/components/responses/simulate-response"
+       }
+      }
+     },
+     "parameters": []
+    }
+   },
+   "info": {
+    "title": "Simulation",
+    "version": "0",
+    "description": "Sandbox Simulations"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "components": {
+    "responses": {
+     "simulate-response": {
+      "description": "Example response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "description": "",
+         "type": "object",
+         "properties": {
+          "transaction_id": {
+           "type": "string",
+           "minLength": 1,
+           "example": "3fd4356b-a64b-4d2f-8699-cbb2b76e1d52"
+          },
+          "customer_id": {
+           "type": "string",
+           "minLength": 1,
+           "example": "08ebf96f-d3e2-4a50-8a52-d5677c3c9825"
+          },
+          "card_id": {
+           "type": "string",
+           "minLength": 1,
+           "example": "7c216d02-e5ca-4d88-b8da-90b912a34081"
+          },
+          "raw_statement_descriptor": {
+           "type": "string",
+           "minLength": 1,
+           "example": "Amazon.com Amzn.com/billWAUSA USA"
+          },
+          "account_id": {
+           "type": "string",
+           "minLength": 1,
+           "example": "4b9cecad-8081-49aa-ab71-d273d64fb50e"
+          },
+          "bond_brand_id": {
+           "type": "string",
+           "minLength": 1,
+           "example": "91b8a931-c86d-462b-9db5-eded20b26bd9"
+          },
+          "payment_rail": {
+           "type": "string",
+           "minLength": 1,
+           "example": "card"
+          },
+          "amount": {
+           "type": "string",
+           "minLength": 1,
+           "example": "-4.99"
+          },
+          "amount_in_cents": {
+           "type": "string",
+           "minLength": 1,
+           "example": "-499"
+          },
+          "currency_code": {
+           "type": "string",
+           "minLength": 1,
+           "example": "USD"
+          },
+          "exchange_rate": {},
+          "transaction_type": {
+           "type": "string",
+           "minLength": 1,
+           "example": "POS Purchase"
+          },
+          "cardholder_presence_indicator": {},
+          "original_transaction_id": {},
+          "merchant_name": {
+           "type": "string",
+           "minLength": 1,
+           "example": "Amazon.Com Amzn.Com/Billwausa Usa"
+          },
+          "merchant_id": {},
+          "merchant_address": {},
+          "merchant_country": {},
+          "merchant_city": {
+           "type": "string",
+           "minLength": 1
+          },
+          "merchant_state": {
+           "type": "string",
+           "minLength": 1
+          },
+          "merchant_zip_code": {
+           "type": "string",
+           "minLength": 1
+          },
+          "mcc": {
+           "type": "string",
+           "minLength": 1,
+           "example": "Online Shopping"
+          },
+          "settled_date": {
+           "type": "string",
+           "minLength": 1,
+           "example": "2021-07-20 22:29:00"
+          },
+          "new_balance": {
+           "type": "string",
+           "minLength": 1,
+           "example": "298.01"
+          },
+          "prior_balance": {
+           "type": "string",
+           "minLength": 1,
+           "example": "303"
+          },
+          "transaction_time": {
+           "type": "string",
+           "minLength": 1,
+           "example": "2021-07-20 22:29:00"
+          },
+          "date_created": {
+           "type": "string",
+           "minLength": 1,
+           "example": "2021-07-20 22:29:00"
+          },
+          "date_updated": {
+           "type": "string",
+           "minLength": 1,
+           "example": "2021-07-20 22:29:00"
+          },
+          "fee": {},
+          "rewards_rate": {},
+          "rewards": {},
+          "transaction_state": {
+           "type": "string",
+           "minLength": 1,
+           "example": "pending"
+          },
+          "origin_timestamp": {
+           "type": "string",
+           "minLength": 1,
+           "example": "2021-07-20 22:29:00"
+          },
+          "transaction_response_code": {},
+          "acquiring_institution_identification_code": {}
+         },
+         "required": [
+          "transaction_id",
+          "customer_id",
+          "card_id",
+          "raw_statement_descriptor",
+          "account_id",
+          "bond_brand_id",
+          "payment_rail",
+          "amount",
+          "amount_in_cents",
+          "currency_code",
+          "transaction_type",
+          "merchant_name",
+          "merchant_city",
+          "merchant_state",
+          "merchant_zip_code",
+          "mcc",
+          "settled_date",
+          "new_balance",
+          "prior_balance",
+          "transaction_time",
+          "date_created",
+          "date_updated",
+          "transaction_state",
+          "origin_timestamp"
+         ]
+        },
+        "examples": {
+         "example": {
+          "value": {
+           "transaction_id": "3fd4356b-a64b-4d2f-8699-cbb2b76e1d52",
+           "customer_id": "08ebf96f-d3e2-4a50-8a52-d5677c3c9825",
+           "card_id": "7c216d02-e5ca-4d88-b8da-90b912a34081",
+           "raw_statement_descriptor": "Amazon.com Amzn.com/billWAUSA USA",
+           "account_id": "4b9cecad-8081-49aa-ab71-d273d64fb50e",
+           "bond_brand_id": "91b8a931-c86d-462b-9db5-eded20b26bd9",
+           "payment_rail": "card",
+           "amount": "-4.99",
+           "amount_in_cents": "-499",
+           "currency_code": "USD",
+           "exchange_rate": null,
+           "transaction_type": "POS Purchase",
+           "cardholder_presence_indicator": null,
+           "original_transaction_id": null,
+           "merchant_name": "Amazon.Com Amzn.Com/Billwausa Usa",
+           "merchant_id": null,
+           "merchant_address": null,
+           "merchant_country": null,
+           "merchant_city": "string",
+           "merchant_state": "string",
+           "merchant_zip_code": "string",
+           "mcc": "Online Shopping",
+           "settled_date": "2021-07-20 22:29:00",
+           "new_balance": "298.01",
+           "prior_balance": "303",
+           "transaction_time": "2021-07-20 22:29:00",
+           "date_created": "2021-07-20 22:29:00",
+           "date_updated": "2021-07-20 22:29:00",
+           "fee": null,
+           "rewards_rate": null,
+           "rewards": null,
+           "transaction_state": "pending",
+           "origin_timestamp": "2021-07-20 22:29:00",
+           "transaction_response_code": null,
+           "acquiring_institution_identification_code": null
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "settle": {
+      "description": "",
+      "type": "object",
+      "x-examples": {
+       "example": {
+        "card_id": "{{card_id}}",
+        "amount": "4.99",
+        "currency": "USD",
+        "merchant_name": "Amazon.com Amzn.com/billWAUSA",
+        "merchant_city": "Amzn.com/bill",
+        "merchant_state": "WA",
+        "merchant_zip_code": "98109",
+        "mcc": "5462",
+        "mid": "987654321"
+       }
+      },
+      "x-internal": false,
+      "title": "",
+      "properties": {
+       "transaction_id": {
+        "type": "string",
+        "minLength": 1,
+        "description": "uuid of authorized transaction",
+        "format": "uuid"
+       },
+       "amount": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Transaction amount as a decimal string using two digits of precision, e.g., \"10.00\"."
+       }
+      },
+      "required": [
+       "transaction_id"
+      ]
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "tags": [
+    {
+     "name": "Simulate"
+    }
+   ],
+   "x-si-base": "./swagger.json",
+   "x-github-repo": "bond-tech/readme-api-reference",
+   "x-github-sha": "051e370e695935cc348188481246f03540c37859",
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 244
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_simulate_kyc_pass.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/simulate/kyc-pass": {
+     "post": {
+      "summary": "Simulate KYC Passed",
+      "operationId": "post_simulate_kyc_pass",
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "description": "",
+           "type": "object",
+           "properties": {
+            "customer_id": {
+             "type": "string",
+             "minLength": 1
+            },
+            "kyc_status": {
+             "type": "string",
+             "minLength": 1
+            }
+           },
+           "required": [
+            "customer_id",
+            "kyc_status"
+           ],
+           "x-examples": {
+            "example-1": {
+             "customer_id": "bbfb7316-1a41-4394-8421-219a68781ad8",
+             "kyc_status": "passed"
+            }
+           }
+          },
+          "examples": {
+           "example-1": {
+            "value": {
+             "customer_id": "bbfb7316-1a41-4394-8421-219a68781ad8",
+             "kyc_status": "passed"
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "tags": [
+       "Simulate"
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/kyc"
+         },
+         "examples": {
+          "example-1": {
+           "value": {
+            "customer_id": "43a3b9a1-221b-4b3a-a585-13eaff34f879",
+            "program_id": "377ab2f7-ad92-4c4b-86fb-a3464d029410"
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "info": {
+    "title": "Simulation",
+    "version": "0",
+    "description": "Sandbox Simulations"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "kyc": {
+      "title": "kyc",
+      "type": "object",
+      "properties": {
+       "customer_id": {
+        "type": "string",
+        "example": "43a3b9a1-221b-4b3a-a585-13eaff34f879",
+        "description": "Bond customer_id"
+       },
+       "program_id": {
+        "type": "string",
+        "example": "377ab2f7-ad92-4c4b-86fb-a3464d029410",
+        "description": "program_id for card program"
+       }
+      },
+      "required": [
+       "customer_id",
+       "program_id"
+      ],
+      "x-examples": {
+       "example-1": {
+        "customer_id": "43a3b9a1-221b-4b3a-a585-13eaff34f879",
+        "program_id": "377ab2f7-ad92-4c4b-86fb-a3464d029410"
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "tags": [
+    {
+     "name": "Simulate"
+    }
+   ],
+   "x-si-base": "./swagger.json",
+   "x-github-repo": "bond-tech/readme-api-reference",
+   "x-github-sha": "051e370e695935cc348188481246f03540c37859",
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 244
+    }
+   }
+  }
+ },
+ {
+  "page": "https://docs.bond.tech/reference/post_simulate_kyc_fail.md",
+  "definition": {
+   "openapi": "3.0.0",
+   "paths": {
+    "/simulate/kyc-fail": {
+     "post": {
+      "summary": "Simulate KYC Failed",
+      "operationId": "post_simulate_kyc_fail",
+      "responses": {
+       "200": {
+        "description": "OK",
+        "content": {
+         "application/json": {
+          "schema": {
+           "description": "",
+           "type": "object",
+           "x-examples": {
+            "example-1": {
+             "customer_id": "bbfb7316-1a41-4394-8421-219a68781ad8",
+             "kyc_status": "failed"
+            }
+           },
+           "properties": {
+            "customer_id": {
+             "type": "string",
+             "minLength": 1,
+             "example": "bbfb7316-1a41-4394-8421-219a68781ad8"
+            },
+            "kyc_status": {
+             "type": "string",
+             "minLength": 1,
+             "example": "failed"
+            }
+           }
+          },
+          "examples": {
+           "example-1": {
+            "value": {
+             "customer_id": "bbfb7316-1a41-4394-8421-219a68781ad8",
+             "kyc_status": "failed"
+            }
+           }
+          }
+         }
+        }
+       }
+      },
+      "tags": [
+       "Simulate"
+      ],
+      "requestBody": {
+       "content": {
+        "application/json": {
+         "schema": {
+          "$ref": "#/components/schemas/kyc"
+         }
+        }
+       }
+      }
+     },
+     "parameters": []
+    }
+   },
+   "info": {
+    "title": "Simulation",
+    "version": "0",
+    "description": "Sandbox Simulations"
+   },
+   "security": [
+    {
+     "identity": [],
+     "authorization": []
+    }
+   ],
+   "x-samples-languages": [
+    "curl",
+    "node",
+    "ruby",
+    "javascript",
+    "python",
+    "csharp",
+    "java"
+   ],
+   "servers": [
+    {
+     "url": "https://sandbox.bond.tech/api/v0"
+    }
+   ],
+   "components": {
+    "securitySchemes": {
+     "identity": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Identity"
+     },
+     "authorization": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+     }
+    },
+    "schemas": {
+     "kyc": {
+      "title": "kyc",
+      "type": "object",
+      "properties": {
+       "customer_id": {
+        "type": "string",
+        "example": "43a3b9a1-221b-4b3a-a585-13eaff34f879",
+        "description": "Bond customer_id"
+       },
+       "program_id": {
+        "type": "string",
+        "example": "377ab2f7-ad92-4c4b-86fb-a3464d029410",
+        "description": "program_id for card program"
+       }
+      },
+      "required": [
+       "customer_id",
+       "program_id"
+      ],
+      "x-examples": {
+       "example-1": {
+        "customer_id": "43a3b9a1-221b-4b3a-a585-13eaff34f879",
+        "program_id": "377ab2f7-ad92-4c4b-86fb-a3464d029410"
+       }
+      }
+     }
+    }
+   },
+   "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+   },
+   "tags": [
+    {
+     "name": "Simulate"
+    }
+   ],
+   "x-si-base": "./swagger.json",
+   "x-github-repo": "bond-tech/readme-api-reference",
+   "x-github-sha": "051e370e695935cc348188481246f03540c37859",
+   "_id": {
+    "buffer": {
+     "0": 98,
+     "1": 113,
+     "2": 147,
+     "3": 157,
+     "4": 139,
+     "5": 109,
+     "6": 64,
+     "7": 0,
+     "8": 75,
+     "9": 70,
+     "10": 96,
+     "11": 244
+    }
+   }
+  }
+ }
+]
