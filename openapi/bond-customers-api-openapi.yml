@@ -1,21 +1,15 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Customer
+  title: Customers API
   version: '0'
   description: Studio customers
+servers:
+- url: https://sandbox.bond.tech/api/v0
 security:
 - identity: []
   authorization: []
-x-samples-languages:
-- curl
-- node
-- ruby
-- javascript
-- python
-- csharp
-- java
-servers:
-- url: https://sandbox.bond.tech/api/v0
+tags:
+- name: Customers
 paths:
   /customers:
     get:
@@ -101,17 +95,14 @@ paths:
         description: page number requested to return
         schema:
           type: integer
-          minimum: 0
-          exclusiveMinimum: true
           default: 1
+          exclusiveMinimum: 0
       - name: per_page
         in: query
         description: number of Customer information in response<br />per_page is one of the following:<br />1, 2, 5, 10, 20, 50
         explode: true
         schema:
           type: integer
-          minimum: 0
-          exclusiveMinimum: true
           enum:
           - 1
           - 2
@@ -120,13 +111,15 @@ paths:
           - 20
           - 50
           default: 10
+          exclusiveMinimum: 0
       - name: brand_person_id
         in: query
         description: Return customers that match the brand_person_id
         schema:
-          type: string
+          type:
+          - string
+          - 'null'
           example: ac6ee2d3-5a03-4043-a4aa-dda51836b9fd
-          nullable: true
       tags:
       - Customers
   /customers/:
@@ -325,161 +318,144 @@ paths:
       operationId: delete_customers
       tags:
       - Customers
-  /customers/{customer_id}/inquiries/{inquiry_id}/resume:
-    parameters:
-    - name: customer_id
-      in: path
-      required: true
-      schema:
-        type: string
-    - name: inquiry_id
-      in: path
-      required: true
-      schema:
-        type: string
-    post:
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                x-examples:
-                  example-1:
-                    meta:
-                      session_token: pGPEDPZcBhh8EHhCNwWu58NfdLcBLv9KFpaj74qhGEfEHX4R4HzsxzLq2ifyCXxiddLkKq.XAaCvm7x_yfPa89A.cXNtzCaM9pqMBS5NZwJvkfI2Oh872qLqlMtgjrAAxuOuW1UvqY1mMTECn.D9wVDodF4vU7Z2Y8mtrP8JgVEL1uayHfuDtE26tiKn_OqoFOHd5HTUiDi.QW9TYgwe_h7f431hCrbN.mEjOicY7Oh_RiPhuaTWy4L4nOmrXtCIiAXuImjiMnQza0HjViRonO8VKeXoqvcwGRHrOwBSw_K4aoT9QbcuzrjwzCPKk5YkoP7d3cKpnL_yLL3WZ22Ji6Rar7wcfgKkql45q352TODZQBbJm
-                properties:
-                  meta:
-                    type: object
-                    properties:
-                      session_token:
-                        type: string
-                        minLength: 1
-                        example: pGPEDPZcBhh8EHhCNwWu58NfdLcBLv9KFpaj74qhGEfEHX4R4HzsxzLq2ifyCXxiddLkKq.XAaCvm7x_yfPa89A.cXNtzCaM9pqMBS5NZwJvkfI2Oh872qLqlMtgjrAAxuOuW1UvqY1mMTECn.D9wVDodF4vU7Z2Y8mtrP8JgVEL1uayHfuDtE26tiKn_OqoFOHd5HTUiDi.QW9TYgwe_h7f431hCrbN.mEjOicY7Oh_RiPhuaTWy4L4nOmrXtCIiAXuImjiMnQza0HjViRonO8VKeXoqvcwGRHrOwBSw_K4aoT9QbcuzrjwzCPKk5YkoP7d3cKpnL_yLL3WZ22Ji6Rar7wcfgKkql45q352TODZQBbJm
-                        readOnly: true
-                required:
-                - customer_id
-                - kyc_status
-              examples:
-                example:
-                  value:
-                    meta:
-                      session_token: pGPEDPZcBhh8EHhCNwWu58NfdLcBLv9KFpaj74qhGEfEHX4R4HzsxzLq2ifyCXxiddLkKq.XAaCvm7x_yfPa89A.cXNtzCaM9pqMBS5NZwJvkfI2Oh872qLqlMtgjrAAxuOuW1UvqY1mMTECn.D9wVDodF4vU7Z2Y8mtrP8JgVEL1uayHfuDtE26tiKn_OqoFOHd5HTUiDi.QW9TYgwe_h7f431hCrbN.mEjOicY7Oh_RiPhuaTWy4L4nOmrXtCIiAXuImjiMnQza0HjViRonO8VKeXoqvcwGRHrOwBSw_K4aoT9QbcuzrjwzCPKk5YkoP7d3cKpnL_yLL3WZ22Ji6Rar7wcfgKkql45q352TODZQBbJm
-        '422':
-          description: Unable to find matching Persona inquiry
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                x-examples:
-                  example-1:
-                    errors:
-                    - status: 404
-                      title: Record not found
-              examples:
-                example:
-                  value:
-                    errors:
-                    - status: 404
-                      title: Record not found
-      summary: Resume a Persona Inquiry
-      description: Obtain a new `session_token` for resuming a Persona inquiry. This is required if the Persona inquiry, inquiry session, or `session_token` has expired. This can also be used if the `session_token` has been lost.
-      operationId: post_resume_payload
-      tags:
-      - KYC
-  /customers/{customer_id}/verification-kyc:
-    parameters:
-    - name: customer_id
-      in: path
-      required: true
-      schema:
-        type: string
-    post:
-      responses:
-        '201':
-          description: ''
-          content:
-            application/json:
-              schema:
-                description: ''
-                type: object
-                x-examples:
-                  example-1:
-                    customer_id: 2df10ec1-130f-41bb-b0cf-f3af48350eb7
-                    kyc_status: submitted
-                properties:
-                  customer_id:
-                    type: string
-                    minLength: 1
-                    example: 2df10ec1-130f-41bb-b0cf-f3af48350eb7
-                    readOnly: true
-                  kyc_status:
-                    type: string
-                    minLength: 1
-                    example: submitted
-                    readOnly: true
-                required:
-                - customer_id
-                - kyc_status
-              examples:
-                example:
-                  value:
-                    customer_id: 2df10ec1-130f-41bb-b0cf-f3af48350eb7
-                    kyc_status: submitted
-      summary: Start KYC (Know-Your-Customer)
-      description: Start a KYC verification for a `Customer`
-      operationId: post_verification_kyc
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KYCPostPayload'
-        required: true
-      tags:
-      - KYC
-    get:
-      responses:
-        '200':
-          description: ''
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-              examples:
-                passed:
-                  value:
-                    customer_id: d856bf10-d4a6-4153-b8f8-2b93072dd8da
-                    brand_id: ce027c9c-39c6-47f4-a12d-abb543f7cf63
-                    kyc_status: passed
-                document_required:
-                  value:
-                    customer_id: d856bf10-d4a6-4153-b8f8-2b93072dd8da
-                    brand_id: ce027c9c-39c6-47f4-a12d-abb543f7cf63
-                    kyc_status: document_required
-                    documents:
-                    - document_type: proof_of_address
-                      status: required
-                      upload_link: https://sample.link
-      summary: Retrieve KYC Status
-      description: Retrieve the KYC status of a `Customer`
-      operationId: get_verification_kyc
-      tags:
-      - KYC
 components:
-  securitySchemes:
-    identity:
-      type: apiKey
-      in: header
-      name: Identity
-    authorization:
-      type: apiKey
-      in: header
-      name: Authorization
   schemas:
+    address-write:
+      type: object
+      description: ''
+      title: Address-write
+      x-examples:
+        example:
+          address_type: MAILING
+          street: 345 California Ave.
+          street2: Suite 600
+          city: San Francisco
+          state: CA
+          zip_code: 12345-1234
+          country: US
+          is_primary: true
+      properties:
+        address_type:
+          type: string
+          description: 'Address type is one of the following : `MAILING`, `PHYSICAL`'
+          enum:
+          - MAILING
+          - PHYSICAL
+        street:
+          type: string
+          description: 'Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`'
+          example: 345 California Ave.
+        street2:
+          type: string
+          description: 'Has a 40-character limit, inclusive. Must start with an alphanumeric, and may only contain alphanumerics and the special characters `. , _ - #`'
+          example: Suite 600
+        city:
+          type: string
+          description: Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces
+          example: San Francisco
+          minLength: 2
+          maxLength: 40
+        state:
+          type: string
+          description: Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.
+          example: CA
+        zip_code:
+          type: string
+          description: zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.
+          example: 12345-1234
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.
+          example: US
+        is_primary:
+          type: boolean
+          description: Is Primary Address?
+          example: true
+      required:
+      - address_type
+      - street
+      - city
+      - state
+      - zip_code
+      - country
+      - is_primary
+    customer-write:
+      type: object
+      x-examples:
+        example:
+          brand_person_id: ac6ee2d3-5a03-4043-a4aa-dda51836b9fd
+          dob: '1997-12-25'
+          first_name: James
+          middle_name: Herbert
+          last_name: Bond
+          ssn: XXX-XX-9999
+          phone: 555-111-2222
+          phone_country_code: '1'
+          email: james@mi6.gov.uk
+          addresses:
+          - address_type: MAILING
+            street: 345 California Ave.
+            street2: Suite 600
+            city: San Francisco
+            state: CA
+            zip_code: 12345-1234
+            country: US
+            is_primary: true
+      title: customer-write
+      properties:
+        brand_person_id:
+          type: string
+          example: ac6ee2d3-5a03-4043-a4aa-dda51836b9fd
+          readOnly: true
+        business_id:
+          type:
+          - string
+          - 'null'
+          example: 'null'
+          readOnly: true
+        dob:
+          type:
+          - string
+          - 'null'
+          format: string
+          description: Birthday in YYYY-MM-DD format.
+          example: '1997-12-25'
+        first_name:
+          type: string
+          description: First name.<br />Has a 1 to 50-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: James
+        middle_name:
+          type: string
+          description: Middle name.<br />Has a 50-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: Herbert
+        last_name:
+          type: string
+          description: Last name.<br />Has a 2 to 50-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: Bond
+        ssn:
+          type: string
+          description: 'Redacted SSN. Format: XXX-XX-9999.'
+          example: XXX-XX-9999
+        phone:
+          type: string
+          description: Numbers only or dash-separated are acceptable
+          example: 555-111-2222
+        phone_country_code:
+          type: string
+          description: Must be a string of 1-3 digits
+          example: '1'
+        email:
+          type: string
+          description: Must be a valid email address
+          example: james@mi6.gov.uk
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/address-write'
+      required:
+      - first_name
+      - last_name
+      - addresses
     customer:
       type: object
       x-examples:
@@ -521,16 +497,18 @@ components:
           example: 8c7e08c8-0320-444c-b834-007cd9e18c0e
           readOnly: true
         business_id:
-          type: string
+          type:
+          - string
+          - 'null'
           example: 'null'
-          nullable: true
           readOnly: true
         dob:
-          type: string
+          type:
+          - string
+          - 'null'
           format: string
           description: Birthday in YYYY-MM-DD format.
           example: '1997-12-25'
-          nullable: true
         first_name:
           type: string
           description: First name.<br />Has a 1 to 50-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
@@ -570,6 +548,68 @@ components:
       required:
       - first_name
       - addresses
+    customer-patch:
+      type: object
+      x-examples:
+        example:
+          brand_person_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+          first_name: James
+          middle_name: Herbert
+          last_name: Bond
+          dob: '1968-04-13'
+          ssn: XXX-XX-6789
+          addresses:
+          - id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+            address_type: MAILING
+            street: 345 California Ave.
+            street2: Suite 600
+            city: San Francisco
+            state: CA
+            zip_code: 12345-1234
+            country: US
+            is_primary: true
+      title: customer-patch
+      properties:
+        dob:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: Birthday in YYYY-MM-DD format.
+          example: '1968-04-13'
+        first_name:
+          type: string
+          description: First name.<br />Has a 1 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: James
+        middle_name:
+          type: string
+          description: Middle name.<br />Has a 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: Herbert
+        last_name:
+          type: string
+          description: Last name.<br />Has a 2 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: Bond
+        phone:
+          type: string
+          description: Numbers only or dash-separated are acceptable
+          example: 555-111-2222
+        phone_country_code:
+          type: string
+          description: Must be a string of 1-3 digits
+          example: '1'
+        email:
+          type: string
+          description: Must be a valid email address
+          example: james@mi6.gov.uk
+        ssn:
+          type: string
+          description: 'Must be in ######### or ###-##-#### format'
+          example: 741-55-7293
+        addresses:
+          type: array
+          description: At least one address
+          items:
+            $ref: '#/components/schemas/address'
     address:
       type: object
       title: Address
@@ -640,238 +680,23 @@ components:
       - zip_code
       - country
       - is_primary
-    customer-write:
-      type: object
-      x-examples:
-        example:
-          brand_person_id: ac6ee2d3-5a03-4043-a4aa-dda51836b9fd
-          dob: '1997-12-25'
-          first_name: James
-          middle_name: Herbert
-          last_name: Bond
-          ssn: XXX-XX-9999
-          phone: 555-111-2222
-          phone_country_code: '1'
-          email: james@mi6.gov.uk
-          addresses:
-          - address_type: MAILING
-            street: 345 California Ave.
-            street2: Suite 600
-            city: San Francisco
-            state: CA
-            zip_code: 12345-1234
-            country: US
-            is_primary: true
-      title: customer-write
-      properties:
-        brand_person_id:
-          type: string
-          example: ac6ee2d3-5a03-4043-a4aa-dda51836b9fd
-          readOnly: true
-        business_id:
-          type: string
-          example: 'null'
-          nullable: true
-          readOnly: true
-        dob:
-          type: string
-          format: string
-          description: Birthday in YYYY-MM-DD format.
-          example: '1997-12-25'
-          nullable: true
-        first_name:
-          type: string
-          description: First name.<br />Has a 1 to 50-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
-          example: James
-        middle_name:
-          type: string
-          description: Middle name.<br />Has a 50-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
-          example: Herbert
-        last_name:
-          type: string
-          description: Last name.<br />Has a 2 to 50-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
-          example: Bond
-        ssn:
-          type: string
-          description: 'Redacted SSN. Format: XXX-XX-9999.'
-          example: XXX-XX-9999
-        phone:
-          type: string
-          description: Numbers only or dash-separated are acceptable
-          example: 555-111-2222
-        phone_country_code:
-          type: string
-          description: Must be a string of 1-3 digits
-          example: '1'
-        email:
-          type: string
-          description: Must be a valid email address
-          example: james@mi6.gov.uk
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/address-write'
-      required:
-      - first_name
-      - last_name
-      - addresses
-    address-write:
-      type: object
-      description: ''
-      title: Address-write
-      x-examples:
-        example:
-          address_type: MAILING
-          street: 345 California Ave.
-          street2: Suite 600
-          city: San Francisco
-          state: CA
-          zip_code: 12345-1234
-          country: US
-          is_primary: true
-      properties:
-        address_type:
-          type: string
-          description: 'Address type is one of the following : `MAILING`, `PHYSICAL`'
-          enum:
-          - MAILING
-          - PHYSICAL
-        street:
-          type: string
-          description: 'Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`'
-          example: 345 California Ave.
-        street2:
-          type: string
-          description: 'Has a 40-character limit, inclusive. Must start with an alphanumeric, and may only contain alphanumerics and the special characters `. , _ - #`'
-          example: Suite 600
-        city:
-          type: string
-          description: Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces
-          example: San Francisco
-          minLength: 2
-          maxLength: 40
-        state:
-          type: string
-          description: Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.
-          example: CA
-        zip_code:
-          type: string
-          description: zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.
-          example: 12345-1234
-        country:
-          type: string
-          description: ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.
-          example: US
-        is_primary:
-          type: boolean
-          description: Is Primary Address?
-          example: true
-      required:
-      - address_type
-      - street
-      - city
-      - state
-      - zip_code
-      - country
-      - is_primary
-    customer-patch:
-      type: object
-      x-examples:
-        example:
-          brand_person_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
-          first_name: James
-          middle_name: Herbert
-          last_name: Bond
-          dob: '1968-04-13'
-          ssn: XXX-XX-6789
-          addresses:
-          - id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
-            address_type: MAILING
-            street: 345 California Ave.
-            street2: Suite 600
-            city: San Francisco
-            state: CA
-            zip_code: 12345-1234
-            country: US
-            is_primary: true
-      title: customer-patch
-      properties:
-        dob:
-          type: string
-          format: date
-          description: Birthday in YYYY-MM-DD format.
-          example: '1968-04-13'
-          nullable: true
-        first_name:
-          type: string
-          description: First name.<br />Has a 1 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
-          example: James
-        middle_name:
-          type: string
-          description: Middle name.<br />Has a 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
-          example: Herbert
-        last_name:
-          type: string
-          description: Last name.<br />Has a 2 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
-          example: Bond
-        phone:
-          type: string
-          description: Numbers only or dash-separated are acceptable
-          example: 555-111-2222
-        phone_country_code:
-          type: string
-          description: Must be a string of 1-3 digits
-          example: '1'
-        email:
-          type: string
-          description: Must be a valid email address
-          example: james@mi6.gov.uk
-        ssn:
-          type: string
-          description: 'Must be in ######### or ###-##-#### format'
-          example: 741-55-7293
-        addresses:
-          type: array
-          description: At least one address
-          items:
-            $ref: '#/components/schemas/address'
-    KYCPostPayload:
-      type: object
-      description: ''
-      title: ''
-      properties:
-        program_id:
-          type: string
-          description: String in acceptable UUID format that corresponds to a valid `Program` program_id.
-          example: 72585109-8222-4221-b15b-48e87ffed790
-        ssn:
-          type: string
-          description: 'Must be in ######### or ###-##-#### format'
-          example: 741-55-7293
-        phone:
-          type: string
-          description: Numbers only or dash-separated are acceptable
-          example: 555-111-2222
-        phone_country_code:
-          type: string
-          description: Must be a string of 1-3 digits
-          example: '1'
-        email:
-          type: string
-          description: Must be a valid email address
-          example: james@mi6.gov.uk
-        dob:
-          type: string
-          description: Birthday in YYYY-MM-DD format.
-          example: '1997-12-25'
-        ip:
-          type: string
-          description: '<b><sup>Conditionally required based on program configuration</sup></b>
-
-            Must be dot separated'
-          example: 24.54.101.22
-      required:
-      - program_id
+  securitySchemes:
+    identity:
+      type: apiKey
+      in: header
+      name: Identity
+    authorization:
+      type: apiKey
+      in: header
+      name: Authorization
+x-samples-languages:
+- curl
+- node
+- ruby
+- javascript
+- python
+- csharp
+- java
 x-provenance:
   method: searched
   source: https://docs.bond.tech/reference

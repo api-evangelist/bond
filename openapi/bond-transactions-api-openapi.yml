@@ -1,6 +1,6 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Ledger
+  title: Ledger Transactions API
   version: 0.1.0
 servers:
 - url: https://sandbox.bond.tech/api/v0
@@ -8,6 +8,8 @@ servers:
 security:
 - identity: []
   authorization: []
+tags:
+- name: Transactions
 paths:
   /transactions:
     get:
@@ -188,42 +190,24 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ACH:
-      title: ACH
+    ValidationError:
+      title: ValidationError
       required:
-      - card_id
-      - external_account_id
-      - class_code
-      - direction
-      - network
-      - description
+      - loc
+      - msg
+      - type
       type: object
       properties:
-        card_id:
-          title: Card Id
+        loc:
+          title: Location
+          type: array
+          items:
+            type: string
+        msg:
+          title: Message
           type: string
-          format: uuid
-        external_account_id:
-          title: External Account Id
-          type: string
-          format: uuid
-        class_code:
-          title: Class Code
-          type: string
-        direction:
-          title: Direction
-          type: string
-        network:
-          title: Network
-          type: string
-        description:
-          title: Description
-          type: string
-        failure_reason:
-          title: Failure Reason
-          type: string
-        return_code:
-          title: Return Code
+        type:
+          title: Error Type
           type: string
     Card:
       title: Card
@@ -335,15 +319,43 @@ components:
       - card_id
       - mcc_description
       - statement_descriptor
-    HTTPValidationError:
-      title: HTTPValidationError
+    ACH:
+      title: ACH
+      required:
+      - card_id
+      - external_account_id
+      - class_code
+      - direction
+      - network
+      - description
       type: object
       properties:
-        detail:
-          title: Detail
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationError'
+        card_id:
+          title: Card Id
+          type: string
+          format: uuid
+        external_account_id:
+          title: External Account Id
+          type: string
+          format: uuid
+        class_code:
+          title: Class Code
+          type: string
+        direction:
+          title: Direction
+          type: string
+        network:
+          title: Network
+          type: string
+        description:
+          title: Description
+          type: string
+        failure_reason:
+          title: Failure Reason
+          type: string
+        return_code:
+          title: Return Code
+          type: string
     PaginatedTransactions:
       title: PaginatedTransactions
       type: object
@@ -404,6 +416,15 @@ components:
             $ref: '#/components/schemas/TransactionSchema'
       required:
       - transactions
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
     TransactionSchema:
       title: TransactionSchema
       type: object
@@ -496,25 +517,6 @@ components:
       - amount
       - created_time
       - updated_time
-    ValidationError:
-      title: ValidationError
-      required:
-      - loc
-      - msg
-      - type
-      type: object
-      properties:
-        loc:
-          title: Location
-          type: array
-          items:
-            type: string
-        msg:
-          title: Message
-          type: string
-        type:
-          title: Error Type
-          type: string
   securitySchemes:
     identity:
       type: apiKey

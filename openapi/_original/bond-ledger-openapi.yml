@@ -1,0 +1,541 @@
+# x-archived-from: bond-ledger-openapi.yml
+# x-archived-on: 2026-10-16
+openapi: 3.0.2
+info:
+  title: Ledger
+  version: 0.1.0
+servers:
+- url: https://sandbox.bond.tech/api/v0
+  description: Demo environment
+security:
+- identity: []
+  authorization: []
+paths:
+  /transactions:
+    get:
+      tags:
+      - Transactions
+      summary: Get transactions
+      description: Get all transactions available to a brand with pagination and optional filtering.
+      operationId: get_transactions
+      parameters:
+      - required: false
+        schema:
+          title: Customer Id
+          type: string
+          format: uuid
+        name: customer_id
+        in: query
+        description: UUID (36 characters)
+      - required: false
+        schema:
+          title: Account Id
+          type: string
+          format: uuid
+        name: account_id
+        in: query
+        description: UUID (36 characters)
+      - schema:
+          type: string
+        name: payment_type
+        in: query
+        description: '`ach` `card` or `account`'
+      - required: false
+        schema:
+          title: Start Date
+          type: string
+          format: date
+        name: start_date
+        in: query
+        description: '`YYYY-MM-DD` format'
+      - required: false
+        schema:
+          title: End Date
+          type: string
+          format: date
+        name: end_date
+        in: query
+        description: '`YYYY-MM-DD` format'
+      - description: Page number
+        required: false
+        schema:
+          title: Page
+          type: integer
+          description: Page number
+          default: 1
+        name: page
+        in: query
+      - description: Items per page
+        required: false
+        schema:
+          title: Count
+          type: integer
+          description: Items per page
+          default: 10
+        name: count
+        in: query
+      - schema:
+          type: string
+        in: query
+        name: order_by
+        description: 'possible values: desc/asc'
+      - schema:
+          type: string
+        in: query
+        name: transaction_state
+        description: '`failed` `declined` `pending` `cancelled` `completed` `returned`'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTransactions'
+              examples:
+                example:
+                  value:
+                    page: 1
+                    pages: 1
+                    count: 1
+                    next_page: 0
+                    transactions:
+                    - transaction_id: 0fec1e58-b197-4052-99cf-2218496c5482
+                      bond_brand_id: 9bfee014-1774-4b22-941c-b188c7f3d2e1
+                      customer_id: 160c0c4b-9966-4dc1-a916-8407eb10d74e
+                      account_id: 449e7a5c-69d3-4b8a-aaaf-5c9b713ebc65
+                      payment_type: card
+                      transaction_type: POS Purchase
+                      previous_transaction_id: 2c61460f-e4af-48d9-b027-e2612f09e376
+                      state: completed
+                      amount: '306.00'
+                      currency: USD
+                      created_time: '2019-08-24T14:15:22Z'
+                      updated_time: '2019-08-24T14:15:22Z'
+                      details:
+                        card_id: 66f6e46c-f6a1-4af8-a1bd-49666bc01304
+                        external_account_id: bf68a995-67db-4b76-88a8-1ca00e9bbd80
+                        class_code: string
+                        direction: string
+                        network: string
+                        description: string
+                        failure_reason: string
+                        return_code: string
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /transactions/{transaction_id}:
+    get:
+      tags:
+      - Transactions
+      summary: Get a transaction by id
+      description: Get details for a single transaction.
+      operationId: get_transaction_id
+      parameters:
+      - required: true
+        schema:
+          title: Transaction Id
+          type: string
+          format: uuid
+        name: transaction_id
+        in: path
+        description: UUID (36 characters)
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionSchema'
+              examples:
+                example:
+                  value:
+                    transaction_id: b9b8da9a-5ff2-4e5c-84ee-587b7d092f6b
+                    bond_brand_id: 8ed5c9fe-581b-490a-9dcb-3302db235a4b
+                    customer_id: 6493109c-7cb5-4f21-9d19-d9c3901d452d
+                    account_id: 9dc86a8a-4c12-4107-84a8-e7cf6a76586f
+                    payment_type: card
+                    transaction_type: credit
+                    previous_transaction_id: null
+                    state: pending
+                    amount: '5.30'
+                    currency: USD
+                    created_time: '2021-02-02T22:27:13+00:00'
+                    updated_time: '2021-03-02T20:39:56+00:00'
+                    details:
+                      card_id: 71efc729-830f-455f-9525-281c19bb4bb4
+                      mcc: '3542'
+                      mcc_description: matrix dynamic eyeballs
+                      currency: USD
+                      exchange_rate: '1.0'
+                      merchant_id: 9le8DI5z8am54O3b
+                      merchant_name: Baldwin, Wright and Martinez
+                      merchant_city: New Nathanshire
+                      merchant_state: Missouri
+                      merchant_country: Colombia
+                      merchant_postal_code: '34100'
+                      merchant_currency: USD
+                      merchant_amount: '5.30'
+                      cardholder_presence: true
+                      statement_descriptor: 'Target #4744'
+                      arn: 000091556011
+                      fraud_rule_triggered: spend_velocity
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ACH:
+      title: ACH
+      required:
+      - card_id
+      - external_account_id
+      - class_code
+      - direction
+      - network
+      - description
+      type: object
+      properties:
+        card_id:
+          title: Card Id
+          type: string
+          format: uuid
+        external_account_id:
+          title: External Account Id
+          type: string
+          format: uuid
+        class_code:
+          title: Class Code
+          type: string
+        direction:
+          title: Direction
+          type: string
+        network:
+          title: Network
+          type: string
+        description:
+          title: Description
+          type: string
+        failure_reason:
+          title: Failure Reason
+          type: string
+        return_code:
+          title: Return Code
+          type: string
+    Card:
+      title: Card
+      type: object
+      x-examples:
+        example:
+          card_id: acebee76-b45c-4f62-8451-1d81806474ac
+          mcc: '3542'
+          mcc_description: Department Stores
+          currency: USD
+          exchange_rate: 1
+          merchant_id: 9le8DI5z8am54O3b
+          merchant_name: Target
+          merchant_city: New Nathanshire
+          merchant_state: Missouri
+          merchant_country: Colombia
+          merchant_postal_code: '34100'
+          cardholder_presence: true
+          statement_descriptor: 'Target #4744'
+          arn: 000091556011
+          fraud_rule_triggered: spend_velocity
+          merchant_currency: USD
+          merchant_amount: '5.30'
+      description: ''
+      properties:
+        card_id:
+          type: string
+          title: Card Id
+          format: uuid
+          example: acebee76-b45c-4f62-8451-1d81806474ac
+          readOnly: true
+        mcc:
+          type: string
+          title: Mcc
+          example: '3542'
+          readOnly: true
+        mcc_description:
+          type: string
+          title: Mcc Description
+          example: Department Stores
+          readOnly: true
+        currency:
+          type: string
+          title: Currency
+          example: USD
+          readOnly: true
+        exchange_rate:
+          type: number
+          title: Exchange Rate
+          example: 1
+          readOnly: true
+        merchant_id:
+          type: string
+          title: Merchant Id
+          example: 9le8DI5z8am54O3b
+          readOnly: true
+        merchant_name:
+          type: string
+          title: Merchant Name
+          example: Target
+          readOnly: true
+        merchant_city:
+          type: string
+          title: Merchant City
+          example: New Nathanshire
+          readOnly: true
+        merchant_state:
+          type: string
+          title: Merchant State
+          example: Missouri
+          readOnly: true
+        merchant_country:
+          type: string
+          title: Merchant Country
+          example: Colombia
+          readOnly: true
+        merchant_postal_code:
+          type: string
+          title: Merchant Postal Code
+          example: '34100'
+          readOnly: true
+        cardholder_presence:
+          title: Cardholder Presence
+          type: boolean
+        statement_descriptor:
+          type: string
+          title: Statement Descriptor
+          example: 'Target #4744'
+          readOnly: true
+        arn:
+          type: string
+          title: Arn
+          example: 000091556011
+          readOnly: true
+        fraud_rule_triggered:
+          type: string
+          title: Fraud Rule Triggered
+          example: spend_velocity
+          readOnly: true
+        merchant_currency:
+          type: string
+          example: USD
+          readOnly: true
+        merchant_amount:
+          type: string
+          example: '5.30'
+          readOnly: true
+      required:
+      - card_id
+      - mcc_description
+      - statement_descriptor
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    PaginatedTransactions:
+      title: PaginatedTransactions
+      type: object
+      description: 'Intended to work together with api.data.pagination.PaginationResult.
+
+        Subclasses may contain an `items` field which is a list of data items.'
+      x-examples:
+        example-1:
+          page: 1
+          pages: 1
+          count: 10
+          next_page: 0
+          transactions:
+          - transaction_id: 0fec1e58-b197-4052-99cf-2218496c5482
+            bond_brand_id: 9bfee014-1774-4b22-941c-b188c7f3d2e1
+            customer_id: 160c0c4b-9966-4dc1-a916-8407eb10d74e
+            account_id: 449e7a5c-69d3-4b8a-aaaf-5c9b713ebc65
+            payment_type: card
+            transaction_type: POS Purchase
+            previous_transaction_id: 2c61460f-e4af-48d9-b027-e2612f09e376
+            state: completed
+            amount: '306.00'
+            currency: USD
+            created_time: '2019-08-24T14:15:22Z'
+            updated_time: '2019-08-24T14:15:22Z'
+            details:
+              card_id: 66f6e46c-f6a1-4af8-a1bd-49666bc01304
+              external_account_id: bf68a995-67db-4b76-88a8-1ca00e9bbd80
+              class_code: string
+              direction: string
+              network: string
+              description: string
+              failure_reason: string
+              return_code: string
+      properties:
+        page:
+          type: integer
+          title: Page
+          default: 1
+          example: 1
+        pages:
+          type: integer
+          title: Pages
+          default: 1
+          example: 1
+        count:
+          type: integer
+          title: Count
+          default: 10
+          example: 1
+        next_page:
+          title: Next Page
+          type: integer
+        transactions:
+          title: Transactions
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionSchema'
+      required:
+      - transactions
+    TransactionSchema:
+      title: TransactionSchema
+      type: object
+      x-examples:
+        example:
+          transaction_id: 0fec1e58-b197-4052-99cf-2218496c5482
+          bond_brand_id: 9bfee014-1774-4b22-941c-b188c7f3d2e1
+          customer_id: 160c0c4b-9966-4dc1-a916-8407eb10d74e
+          account_id: 449e7a5c-69d3-4b8a-aaaf-5c9b713ebc65
+          payment_type: card
+          transaction_type: POS Purchase
+          previous_transaction_id: 2c61460f-e4af-48d9-b027-e2612f09e376
+          state: completed
+          amount: '306.00'
+          currency: USD
+          created_time: '2019-08-24T14:15:22Z'
+          updated_time: '2019-08-24T14:15:22Z'
+          details:
+            card_id: 8d9e5d4e-9aa6-47b5-93d5-8be7062e58b8
+            mcc: '5462'
+            mcc_description: Bakeries
+            currency: USD
+            merchant_name: Amazon.Com Amzn.Com/Billwausa Usa
+            merchant_city: Amzn.com/bill
+            merchant_state: WA
+            statement_descriptor: Amazon.com Amzn.com/billWAUSA USA
+      properties:
+        transaction_id:
+          title: Transaction Id
+          type: string
+          format: uuid
+        bond_brand_id:
+          title: Bond Brand Id
+          type: string
+          format: uuid
+        customer_id:
+          title: Customer Id
+          type: string
+          format: uuid
+        account_id:
+          title: Account Id
+          type: string
+          format: uuid
+        payment_type:
+          type: string
+          title: Payment Type
+          example: card
+          readOnly: true
+        transaction_type:
+          type: string
+          title: Transaction Type
+          example: POS Purchase
+          readOnly: true
+        previous_transaction_id:
+          title: Previous Transaction Id
+          type: string
+          format: uuid
+        state:
+          type: string
+          title: State
+          example: completed
+          readOnly: true
+        amount:
+          type: string
+          title: Amount
+          example: '306.00'
+        currency:
+          type: string
+          title: Currency
+          example: USD
+        created_time:
+          title: Created Time
+          type: string
+          format: date-time
+        updated_time:
+          title: Updated Time
+          type: string
+          format: date-time
+        details:
+          title: Details
+          anyOf:
+          - $ref: '#/components/schemas/ACH'
+          - $ref: '#/components/schemas/Card'
+      required:
+      - transaction_id
+      - bond_brand_id
+      - customer_id
+      - account_id
+      - payment_type
+      - amount
+      - created_time
+      - updated_time
+    ValidationError:
+      title: ValidationError
+      required:
+      - loc
+      - msg
+      - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            type: string
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+  securitySchemes:
+    identity:
+      type: apiKey
+      in: header
+      name: Identity
+    authorization:
+      type: apiKey
+      in: header
+      name: Authorization
+x-provenance:
+  method: searched
+  source: https://docs.bond.tech/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.bond.tech/reference/get_transaction_id.md
+  - https://docs.bond.tech/reference/get_transactions.md
+  merge:
+    pages: 2
+    deduped: 7
+    conflicts_kept_first: 0

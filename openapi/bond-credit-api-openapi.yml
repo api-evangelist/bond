@@ -1,23 +1,18 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Credit
+  title: Credit API
   version: '0'
   description: Credit
+servers:
+- url: https://sandbox.bond.tech/api/v0.1
 security:
 - identity: []
   authorization: []
-x-samples-languages:
-- curl
-- node
-- ruby
-- javascript
-- python
-- csharp
-- java
-servers:
-- url: https://sandbox.bond.tech/api/v0.1
+tags:
+- name: Credit
 paths:
   /credit/applications:
+    parameters: []
     post:
       summary: Create credit application
       operationId: post-credit-applications
@@ -68,7 +63,6 @@ paths:
                       security_deposit_account_id: null
       tags:
       - Credit
-    parameters: []
     get:
       summary: Get credit applications
       operationId: get-credit-applications
@@ -336,21 +330,56 @@ paths:
                       email: james@mi6.gov.uk
                     accounts:
                       security_deposit_account_id: null
-      description: 'Submit a credit application. All fields on the application must be populated before submitting. The customer must have passed KYC for the program in question. '
+      description: Submit a credit application. All fields on the application must be populated before submitting. The customer must have passed KYC for the program in question.
       parameters: []
       tags:
       - Credit
 components:
-  securitySchemes:
-    identity:
-      type: apiKey
-      in: header
-      name: Identity
-    authorization:
-      type: apiKey
-      in: header
-      name: Authorization
   schemas:
+    CreditApplicationGetMultiple:
+      description: ''
+      type: object
+      x-examples:
+        Multiple Application:
+          has_more: true
+          data:
+          - application_id: 2629182a-3aeb-4834-846a-1688d4649bb9
+            program_id: 54f7882b-6b95-4cde-a7eb-775b9468bcb1
+            date_created: '2021-11-15T00:17:56.842105Z'
+            date_updated: '2021-11-15T00:17:56.842105Z'
+            application_status: created
+            applicant:
+              customer_id: 05a8054f-8259-4e30-8d1d-d286081987bd
+              employment_status: employed
+              address_id: bb5fa77d-fd66-4e31-81c0-eaf549b0c797
+              total_annual_income: 5000050
+              monthly_housing_payment: 1000
+              terms_accepted: true
+              currency: USD
+              first_name: James
+              middle_name: Herbert
+              last_name: Bond
+              date_of_birth: '1997-12-25'
+              street: 45 California St.
+              street2: Suite 600
+              city: San Francisco
+              state: CA
+              country: US
+              zip_code: '94105'
+              ssn: tok_sandbox_xoZzhoxaCXHb823bZp3x2e
+              email: james@mi6.gov.uk
+            accounts:
+              security_deposit_account_id: null
+      title: ''
+      properties:
+        has_more:
+          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/credit-application'
+      required:
+      - has_more
     credit-application-write:
       description: ''
       type: object
@@ -562,60 +591,17 @@ components:
           type: object
           properties:
             security_deposit_account_id:
-              type: string
+              type:
+              - string
+              - 'null'
               example: 173121d8-f05e-4bb6-b280-b5b761d2214f
               default: null
-              nullable: true
       required:
       - program_id
       - date_created
       - date_updated
       - application_status
       - applicant
-    CreditApplicationGetMultiple:
-      description: ''
-      type: object
-      x-examples:
-        Multiple Application:
-          has_more: true
-          data:
-          - application_id: 2629182a-3aeb-4834-846a-1688d4649bb9
-            program_id: 54f7882b-6b95-4cde-a7eb-775b9468bcb1
-            date_created: '2021-11-15T00:17:56.842105Z'
-            date_updated: '2021-11-15T00:17:56.842105Z'
-            application_status: created
-            applicant:
-              customer_id: 05a8054f-8259-4e30-8d1d-d286081987bd
-              employment_status: employed
-              address_id: bb5fa77d-fd66-4e31-81c0-eaf549b0c797
-              total_annual_income: 5000050
-              monthly_housing_payment: 1000
-              terms_accepted: true
-              currency: USD
-              first_name: James
-              middle_name: Herbert
-              last_name: Bond
-              date_of_birth: '1997-12-25'
-              street: 45 California St.
-              street2: Suite 600
-              city: San Francisco
-              state: CA
-              country: US
-              zip_code: '94105'
-              ssn: tok_sandbox_xoZzhoxaCXHb823bZp3x2e
-              email: james@mi6.gov.uk
-            accounts:
-              security_deposit_account_id: null
-      title: ''
-      properties:
-        has_more:
-          type: boolean
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/credit-application'
-      required:
-      - has_more
     credit-application-patch:
       description: ''
       type: object
@@ -688,6 +674,23 @@ components:
       - date_updated
       - service
       - reasons
+  securitySchemes:
+    identity:
+      type: apiKey
+      in: header
+      name: Identity
+    authorization:
+      type: apiKey
+      in: header
+      name: Authorization
+x-samples-languages:
+- curl
+- node
+- ruby
+- javascript
+- python
+- csharp
+- java
 x-provenance:
   method: searched
   source: https://docs.bond.tech/reference

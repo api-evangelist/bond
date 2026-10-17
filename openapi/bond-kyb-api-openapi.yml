@@ -1,0 +1,183 @@
+openapi: 3.2.0
+info:
+  title: Business KYB API
+  description: Businesses
+  version: '0'
+servers:
+- url: https://sandbox.bond.tech/api/v0
+security:
+- identity: []
+  authorization: []
+tags:
+- name: KYB
+paths:
+  /businesses/{business_id}/verification-kyb:
+    get:
+      tags:
+      - KYB
+      summary: Retrieve KYB Status
+      description: Retrieve the KYB status of a `Business`
+      operationId: get_kyb
+      parameters:
+      - name: business_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    business_id: 12348579-5d05-4e3e-a5e3-e61e3a5b1234
+                    kyb_status: warning
+                    details:
+                    - code: rejected_address
+                      reason: address verification failed
+                    - code: rejected_tin
+                      reason: TIN verification failed
+                    - code: rejected_name
+                      reason: name verification failed
+                    - code: rejected_watchlist
+                      reason: watchlist verification failed.
+    post:
+      tags:
+      - KYB
+      summary: Start KYB (Know-Your-Business)
+      description: Start a KYB verification for a `Business`
+      operationId: post_kyb
+      parameters:
+      - name: business_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    business_id: 12348579-5d05-4e3e-a5e3-e61e3a5b1234
+                    kyb_status: initiated
+  /kyb:
+    post:
+      tags:
+      - KYB
+      summary: Start v2 KYB (Know-Your-Business)
+      description: Start a KYB verification for a `Business` on given program
+      operationId: post_kyb_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KYBPostSerializer'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    inquiry_id: inq_ZgXs71DijBhW1k7uoBvQrCK2
+                    url: https://withpersona.com/verify?inquiry-id=inq_ZgXs71DijBhW1k7uoBvQrCK2
+  /kyb/{inquiry_id}/resume:
+    post:
+      tags:
+      - KYB
+      summary: Resume v2 KYB (Know-Your-Business)
+      description: Resume a KYB verification for a given inquiry
+      operationId: post_kyb_resume
+      parameters:
+      - name: inquiry_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              examples:
+                example:
+                  value:
+                    session_token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpcXNlX1VBTWZFRjJaUnpMOUJIVmdLQXN4S295RCIsImF1ZCI6InBlcnNvbmEtdmVyaWZ5IiwiaXNzIjoid2l0aHBlcnNvbmEuY29tIiwiaWF0IjoxNjg1NDc2MTUyLCJuYmYiOjE2ODU0NzYxNTIsImV4cCI6MTY4NjY4NTczNSwianRpIjoiZGZkYjRjNmEtOWNmNS00MjliLTlmNGMtM2Q5YmVhNjRkYTY3IiwiaW5xdWlyeV9pZCI6ImlucV9aZ1hzNzFEaWpCaFcxazd1b0J2UXJDSzIiLCJlbnZpcm9ubWVudF9pZCI6ImVudl9ldXN4N1hKM2M1VVFyTlVSNTFkRUhlaGMifQ.y7U3HkHR9WRpQRbhkQEoz50sAlz5MozAXcXR7Ip_5XA
+                    url: https://withpersona.com/verify?inquiry-id=inq_ZgXs71DijBhW1k7uoBvQrCK2&session-token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpcXNlX1VBTWZFRjJaUnpMOUJIVmdLQXN4S295RCIsImF1ZCI6InBlcnNvbmEtdmVyaWZ5IiwiaXNzIjoid2l0aHBlcnNvbmEuY29tIiwiaWF0IjoxNjg1NDc2MTUyLCJuYmYiOjE2ODU0NzYxNTIsImV4cCI6MTY4NjY4NTczNSwianRpIjoiZGZkYjRjNmEtOWNmNS00MjliLTlmNGMtM2Q5YmVhNjRkYTY3IiwiaW5xdWlyeV9pZCI6ImlucV9aZ1hzNzFEaWpCaFcxazd1b0J2UXJDSzIiLCJlbnZpcm9ubWVudF9pZCI6ImVudl9ldXN4N1hKM2M1VVFyTlVSNTFkRUhlaGMifQ.y7U3HkHR9WRpQRbhkQEoz50sAlz5MozAXcXR7Ip_5XA
+components:
+  schemas:
+    KYBPostSerializer:
+      required:
+      - business_id
+      - program_id
+      type: object
+      properties:
+        business_id:
+          type: string
+          description: UUID of the business to be reviewed for KYB
+          example: a1163ef7-f477-4c79-86cc-ba5e85ec3acb
+        program_id:
+          type: string
+          description: UUID of the program to be setup (sponsor bank on this program determines KYB type)
+          example: da7f5c2a-6fa0-4033-be12-e29a793eaaaa
+  securitySchemes:
+    identity:
+      type: apiKey
+      name: Identity
+      in: header
+    authorization:
+      type: apiKey
+      name: Authorization
+      in: header
+x-samples-languages:
+- curl
+- node
+- ruby
+- javascript
+- python
+- csharp
+- java
+x-provenance:
+  method: searched
+  source: https://docs.bond.tech/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.bond.tech/reference/delete_beneficial_owner.md
+  - https://docs.bond.tech/reference/delete_beneficial_owner_address.md
+  - https://docs.bond.tech/reference/delete_business.md
+  - https://docs.bond.tech/reference/delete_business_address.md
+  - https://docs.bond.tech/reference/get_beneficial_owner.md
+  - https://docs.bond.tech/reference/get_beneficial_owner_address.md
+  - https://docs.bond.tech/reference/get_beneficial_owner_addresses.md
+  - https://docs.bond.tech/reference/get_beneficial_owner_kyc.md
+  - https://docs.bond.tech/reference/get_beneficial_owners.md
+  - https://docs.bond.tech/reference/get_business.md
+  - https://docs.bond.tech/reference/get_business_address.md
+  - https://docs.bond.tech/reference/get_business_addresses.md
+  - https://docs.bond.tech/reference/get_businesses.md
+  - https://docs.bond.tech/reference/get_kyb.md
+  - https://docs.bond.tech/reference/patch_beneficial_owner.md
+  - https://docs.bond.tech/reference/patch_beneficial_owner_address.md
+  - https://docs.bond.tech/reference/patch_business.md
+  - https://docs.bond.tech/reference/patch_business_address.md
+  - https://docs.bond.tech/reference/post_beneficial_owner_addresses.md
+  - https://docs.bond.tech/reference/post_beneficial_owner_kyc.md
+  - https://docs.bond.tech/reference/post_beneficial_owners.md
+  - https://docs.bond.tech/reference/post_business_addresses.md
+  - https://docs.bond.tech/reference/post_businesses.md
+  - https://docs.bond.tech/reference/post_kyb.md
+  - https://docs.bond.tech/reference/post_kyb_2.md
+  - https://docs.bond.tech/reference/post_kyb_resume.md
+  merge:
+    pages: 26
+    deduped: 64
+    conflicts_kept_first: 0

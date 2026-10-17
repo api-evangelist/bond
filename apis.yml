@@ -159,9 +159,11 @@ common:
 apis:
 - aid: bond:bond-customers-kyc-api
   name: Bond Customers & KYC API
-  description: Create, retrieve, update, and delete individual consumer customer resources for a brand and run Know-Your-Customer (KYC) identity
-    verification against them. Endpoints start and retrieve KYC status, resume Persona inquiries with fresh session tokens, and manage customer
-    addresses. This is the identity foundation every downstream account, card, and transfer flow builds on in Bond's United States banking-as-a-service
+  description: >-
+    Create, retrieve, update, and delete individual consumer customer resources for a brand and run Know-Your-Customer
+    (KYC) identity verification against them. Endpoints start and retrieve KYC status, resume Persona
+    inquiries with fresh session tokens, and manage customer addresses. This is the identity foundation
+    every downstream account, card, and transfer flow builds on in Bond's United States banking-as-a-service
     platform.
   humanURL: https://docs.bond.tech/reference/get_customers
   baseURL: https://api.bond.tech/api/v0.1/
@@ -181,9 +183,11 @@ apis:
     url: authentication/bond-authentication.yml
 - aid: bond:bond-businesses-kyb-api
   name: Bond Businesses & KYB API
-  description: Manage commercial customer entities for embedded business banking — create and update businesses, business addresses, and beneficial
-    owners with their addresses, then run Know-Your-Business (KYB) and beneficial-owner KYC verification (v1 and v2 KYB, plus resume flows). Supports
-    the full commercial onboarding and compliance path required to open business deposit and card accounts in the United States.
+  description: >-
+    Manage commercial customer entities for embedded business banking — create and update businesses,
+    business addresses, and beneficial owners with their addresses, then run Know-Your-Business (KYB)
+    and beneficial-owner KYC verification (v1 and v2 KYB, plus resume flows). Supports the full commercial
+    onboarding and compliance path required to open business deposit and card accounts in the United States.
   humanURL: https://docs.bond.tech/reference/get_businesses
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -207,10 +211,12 @@ apis:
     url: https://docs.bond.tech/docs/business-onboarding-overview
 - aid: bond:bond-cards-api
   name: Bond Cards API
-  description: Issue and manage physical, virtual, debit, secured charge, and credit-builder cards. Create cards and card accounts, retrieve and
-    update card details, reissue and activate physical cards, close cards, and set and manage card restrictions such as maximum transaction amounts.
-    A companion card-management web SDK handles PCI-scoped rendering of card numbers and PIN set/reset without the sensitive data touching your
-    servers.
+  description: >-
+    Issue and manage physical, virtual, debit, secured charge, and credit-builder cards. Create cards
+    and card accounts, retrieve and update card details, reissue and activate physical cards, close cards,
+    and set and manage card restrictions such as maximum transaction amounts. A companion card-management
+    web SDK handles PCI-scoped rendering of card numbers and PIN set/reset without the sensitive data
+    touching your servers.
   humanURL: https://docs.bond.tech/reference/get_cards
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -229,10 +235,12 @@ apis:
     url: https://docs.bond.tech/docs/web-sdk-documentation
 - aid: bond:bond-accounts-statements-api
   name: Bond Accounts & Statements API
-  description: Open and manage consumer and commercial deposit accounts, credit accounts, and security-deposit accounts, with documented account
-    types, account states, and account lifecycle management. Generate and retrieve deposit-account and credit-account statements for customers.
-    These flows sit on top of Bond's pre-integrated partner-bank relationships and back the consumer and commercial banking products brands build
-    in the United States.
+  description: >-
+    Open and manage consumer and commercial deposit accounts, credit accounts, and security-deposit accounts,
+    with documented account types, account states, and account lifecycle management. Generate and retrieve
+    deposit-account and credit-account statements for customers. These flows sit on top of Bond's pre-integrated
+    partner-bank relationships and back the consumer and commercial banking products brands build in the
+    United States.
   humanURL: https://docs.bond.tech/docs/account-overview
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -256,9 +264,11 @@ apis:
     url: https://docs.bond.tech/docs/statements-1
 - aid: bond:bond-transfers-api
   name: Bond Transfers API
-  description: Move money between accounts with ACH transfers and account-to-account fund transfers, and link and manage external bank accounts
-    using Plaid before initiating transfers. Documents the ACH transfer model, funding of security-deposit accounts, external-account linking
-    and removal, and the complete set of ACH return codes brands must handle in the United States payments environment.
+  description: >-
+    Move money between accounts with ACH transfers and account-to-account fund transfers, and link and
+    manage external bank accounts using Plaid before initiating transfers. Documents the ACH transfer
+    model, funding of security-deposit accounts, external-account linking and removal, and the complete
+    set of ACH return codes brands must handle in the United States payments environment.
   humanURL: https://docs.bond.tech/docs/account-transfers
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -277,9 +287,11 @@ apis:
     url: errors/bond-ach-return-codes.yml
 - aid: bond:bond-ledger-transactions-api
   name: Bond Ledger (Transactions) API
-  description: Retrieve all transactions available to a brand with pagination and optional filtering, and fetch details for a single transaction
-    by id. Documents the transaction lifecycle and states, payment types, transaction types, response payload references, and MCC (merchant category)
-    codes so brands can present accurate, real-time ledger and spend data to their United States banking customers.
+  description: >-
+    Retrieve all transactions available to a brand with pagination and optional filtering, and fetch details
+    for a single transaction by id. Documents the transaction lifecycle and states, payment types, transaction
+    types, response payload references, and MCC (merchant category) codes so brands can present accurate,
+    real-time ledger and spend data to their United States banking customers.
   humanURL: https://docs.bond.tech/reference/get_transactions
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -303,9 +315,12 @@ apis:
     url: https://docs.bond.tech/docs/transactions-overview
 - aid: bond:bond-credit-api
   name: Bond Credit API
-  description: Open and service credit accounts for credit-builder and secured charge card programs — submit credit applications, surface credit-account
-    data to customers, handle instant funding for credit-builder cards, and manage adverse-action notices required under United States fair-lending
-    regulation. Documented as a distinct product area alongside Bond's deposit and card offerings within the embedded-finance platform.
+  description: >-
+    Open and service credit accounts for credit-builder and secured charge card programs — submit credit
+    applications, surface credit-account data to customers, handle instant funding for credit-builder
+    cards, and manage adverse-action notices required under United States fair-lending regulation. Documented
+    as a distinct product area alongside Bond's deposit and card offerings within the embedded-finance
+    platform.
   humanURL: https://docs.bond.tech/docs/opening-a-credit-account
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -322,9 +337,12 @@ apis:
     url: https://docs.bond.tech/docs/credit-builder-card-overview
 - aid: bond:bond-webhooks-api
   name: Bond Webhooks API
-  description: Subscribe to and manage webhook event notifications so applications react in real time to KYC/KYB status changes, card events,
-    transactions, and account activity. Create, retrieve, update, and delete webhook subscriptions, choose the events you receive, verify inbound
-    request signatures, and test delivery in the sandbox. This is the event backbone for Bond's asynchronous banking workflows in the United States.
+  description: >-
+    Subscribe to and manage webhook event notifications so applications react in real time to KYC/KYB
+    status changes, card events, transactions, and account activity. Create, retrieve, update, and delete
+    webhook subscriptions, choose the events you receive, verify inbound request signatures, and test
+    delivery in the sandbox. This is the event backbone for Bond's asynchronous banking workflows in the
+    United States.
   humanURL: https://docs.bond.tech/reference/get_webhooks
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
@@ -350,9 +368,12 @@ apis:
     url: asyncapi/bond-webhooks.yml
 - aid: bond:bond-simulation-api
   name: Bond Simulation (Sandbox) API
-  description: Sandbox-only endpoints for deterministically testing banking flows before going live — simulate a card transaction authorization,
-    simulate transaction settlement, and force KYC pass or fail outcomes, plus documented triggers for KYC and KYB scenarios such as document-request
-    and rejection paths. Lets United States fintech developers exercise the full lifecycle without touching real money or real identity providers.
+  description: >-
+    Sandbox-only endpoints for deterministically testing banking flows before going live — simulate a
+    card transaction authorization, simulate transaction settlement, and force KYC pass or fail outcomes,
+    plus documented triggers for KYC and KYB scenarios such as document-request and rejection paths. Lets
+    United States fintech developers exercise the full lifecycle without touching real money or real identity
+    providers.
   humanURL: https://docs.bond.tech/reference/post_authorization
   baseURL: https://sandbox.bond.tech/api/v0.1/
   tags:
@@ -369,16 +390,16 @@ apis:
     url: https://docs.bond.tech/docs/sandbox-vs-production
   - type: Sandbox
     url: sandbox/bond-sandbox.yml
-- aid: bond:bond-accounts
+- aid: bond:bond-accounts-api
   name: Bond Accounts API
-  description: The Accounts API from Bond — 6 operation(s) for accounts.
+  description: The Accounts API from Bond — 4 operation(s) for accounts.
   humanURL: https://docs.bond.tech/reference/get_customers
   baseURL: https://api.bond.tech/api/v0.1/
   tags:
   - Accounts
   properties:
   - type: OpenAPI
-    url: openapi/bond-accounts-openapi.yml
+    url: openapi/bond-accounts-api-openapi.yml
   - type: JSONSchema
     url: json-schema/bond-account-docs-schema.json
   - type: JSONSchema
@@ -387,16 +408,6 @@ apis:
     url: json-schema/bond-account-write-schema.json
   - type: JSONSchema
     url: json-schema/bond-account-patch-schema.json
-- aid: bond:bond-business
-  name: Bond Business Openapi.Yml API
-  description: The Business Openapi.Yml API from Bond — 12 operation(s) for business openapi.yml.
-  humanURL: https://docs.bond.tech/reference/get_customers
-  baseURL: https://api.bond.tech/api/v0.1/
-  tags:
-  - Business Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/bond-business-openapi.yml
   - type: JSONSchema
     url: json-schema/bond-businesses-post-serializer-schema.json
   - type: JSONSchema
@@ -409,16 +420,6 @@ apis:
     url: json-schema/bond-beneficial-owner-post-serializer-schema.json
   - type: JSONSchema
     url: json-schema/bond-kycpost-payload-schema.json
-- aid: bond:bond-cards
-  name: Bond Cards Openapi.Yml API
-  description: The Cards Openapi.Yml API from Bond — 7 operation(s) for cards openapi.yml.
-  humanURL: https://docs.bond.tech/reference/get_customers
-  baseURL: https://api.bond.tech/api/v0.1/
-  tags:
-  - Cards Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/bond-cards-openapi.yml
   - type: JSONSchema
     url: json-schema/bond-card-schema.json
   - type: JSONSchema
@@ -431,16 +432,6 @@ apis:
     url: json-schema/bond-card-reissue-schema.json
   - type: JSONSchema
     url: json-schema/bond-card-write-patch-schema.json
-- aid: bond:bond-credit
-  name: Bond Credit Openapi.Yml API
-  description: The Credit Openapi.Yml API from Bond — 4 operation(s) for credit openapi.yml.
-  humanURL: https://docs.bond.tech/reference/get_customers
-  baseURL: https://api.bond.tech/api/v0.1/
-  tags:
-  - Credit Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/bond-credit-openapi.yml
   - type: JSONSchema
     url: json-schema/bond-credit-application-schema.json
   - type: JSONSchema
@@ -451,16 +442,6 @@ apis:
     url: json-schema/bond-adverse-actions-get-schema.json
   - type: JSONSchema
     url: json-schema/bond-credit-application-patch-schema.json
-- aid: bond:bond-customer
-  name: Bond Customer Openapi.Yml API
-  description: The Customer Openapi.Yml API from Bond — 5 operation(s) for customer openapi.yml.
-  humanURL: https://docs.bond.tech/reference/get_customers
-  baseURL: https://api.bond.tech/api/v0.1/
-  tags:
-  - Customer Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/bond-customer-openapi.yml
   - type: JSONSchema
     url: json-schema/bond-customer-schema.json
   - type: JSONSchema
@@ -468,61 +449,19 @@ apis:
   - type: JSONSchema
     url: json-schema/bond-customer-patch-schema.json
   - type: JSONSchema
-    url: json-schema/bond-kycpost-payload-schema.json
-- aid: bond:bond-ledger
-  name: Bond Ledger Openapi.Yml API
-  description: The Ledger Openapi.Yml API from Bond — 2 operation(s) for ledger openapi.yml.
-  humanURL: https://docs.bond.tech/reference/get_customers
-  baseURL: https://api.bond.tech/api/v0.1/
-  tags:
-  - Ledger Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/bond-ledger-openapi.yml
-  - type: JSONSchema
     url: json-schema/bond-transaction-schema-schema.json
   - type: JSONSchema
     url: json-schema/bond-paginated-transactions-schema.json
-- aid: bond:bond-simulation
-  name: Bond Simulate API
-  description: The Simulate API from Bond — 4 operation(s) for simulate.
-  humanURL: https://docs.bond.tech/reference/get_customers
-  baseURL: https://api.bond.tech/api/v0.1/
-  tags:
-  - Simulate
-  properties:
-  - type: OpenAPI
-    url: openapi/bond-simulation-openapi.yml
   - type: JSONSchema
     url: json-schema/bond-simulate-schema.json
   - type: JSONSchema
     url: json-schema/bond-settle-schema.json
   - type: JSONSchema
     url: json-schema/bond-kyc-schema.json
-- aid: bond:bond-transfers
-  name: Bond Transfers Openapi.Yml API
-  description: The Transfers Openapi.Yml API from Bond — 1 operation(s) for transfers openapi.yml.
-  humanURL: https://docs.bond.tech/reference/get_customers
-  baseURL: https://api.bond.tech/api/v0.1/
-  tags:
-  - Transfers Openapi.Yml
-  properties:
-  - type: OpenAPI
-    url: openapi/bond-transfers-openapi.yml
   - type: JSONSchema
     url: json-schema/bond-transfer-schema.json
   - type: JSONSchema
     url: json-schema/bond-transfer-write-schema.json
-- aid: bond:bond-webhooks
-  name: Bond Webhooks API
-  description: The Webhooks API from Bond — 2 operation(s) for webhooks.
-  humanURL: https://docs.bond.tech/reference/get_customers
-  baseURL: https://api.bond.tech/api/v0.1/
-  tags:
-  - Webhooks
-  properties:
-  - type: OpenAPI
-    url: openapi/bond-webhooks-openapi.yml
   - type: JSONSchema
     url: json-schema/bond-webhook-post-schema.json
   - type: JSONSchema
@@ -531,7 +470,1207 @@ apis:
     url: json-schema/bond-all-webhooks-schema.json
   - type: JSONSchema
     url: json-schema/bond-webhook-schema.json
-
+- aid: bond:bond-beneficial-owners-address-api
+  name: Bond Beneficial owners address API
+  description: >-
+    The Beneficial owners address API from Bond — 2 operation(s) for beneficial owners address.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Beneficial owners address
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-beneficial-owners-address-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-beneficial-owners-api
+  name: Bond Beneficial owners API
+  description: The Beneficial owners API from Bond — 3 operation(s) for beneficial owners.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Beneficial owners
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-beneficial-owners-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-business-address-api
+  name: Bond Business address API
+  description: The Business address API from Bond — 2 operation(s) for business address.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Business address
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-business-address-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-businesses-api
+  name: Bond Businesses API
+  description: The Businesses API from Bond — 2 operation(s) for businesses.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Businesses
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-businesses-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-card-restrictions-api
+  name: Bond Card restrictions API
+  description: The Card restrictions API from Bond — 2 operation(s) for card restrictions.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Card restrictions
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-card-restrictions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-cards-api
+  name: Bond Cards API
+  description: The Cards API from Bond — 5 operation(s) for cards.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-cards-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-credit-api
+  name: Bond Credit API
+  description: The Credit API from Bond — 4 operation(s) for credit.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Credit
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-credit-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-customers-api
+  name: Bond Customers API
+  description: The Customers API from Bond — 3 operation(s) for customers.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-customers-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-kyb-api
+  name: Bond KYB API
+  description: The KYB API from Bond — 3 operation(s) for kyb.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - KYB
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-kyb-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-kyc-api
+  name: Bond KYC API
+  description: The KYC API from Bond — 2 operation(s) for kyc.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - KYC
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-kyc-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-simulate-api
+  name: Bond Simulate API
+  description: The Simulate API from Bond — 4 operation(s) for simulate.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Simulate
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-simulate-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-statements-api
+  name: Bond Statements API
+  description: The Statements API from Bond — 2 operation(s) for statements.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Statements
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-statements-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-transactions-api
+  name: Bond Transactions API
+  description: The Transactions API from Bond — 2 operation(s) for transactions.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-transactions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-transfer-api
+  name: Bond Transfer API
+  description: The Transfer API from Bond — 1 operation(s) for transfer.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Transfer
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-transfer-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
+- aid: bond:bond-webhooks-api
+  name: Bond Webhooks API
+  description: The Webhooks API from Bond — 2 operation(s) for webhooks.
+  humanURL: https://docs.bond.tech/reference/get_customers
+  baseURL: https://api.bond.tech/api/v0.1/
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/bond-webhooks-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/bond-account-docs-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-statement-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-account-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-businesses-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-address-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-address-patch-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-beneficial-owner-post-serializer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kycpost-payload-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-restriction-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-reissue-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-card-write-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-get-multiple-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-adverse-actions-get-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-credit-application-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-customer-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transaction-schema-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-paginated-transactions-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-simulate-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-settle-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-kyc-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-transfer-write-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-post-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-patch-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-all-webhooks-schema.json
+  - type: JSONSchema
+    url: json-schema/bond-webhook-schema.json
 x-enrichment:
   date: '2026-07-23'
   status: deepened

@@ -1,0 +1,589 @@
+openapi: 3.2.0
+info:
+  title: Cards API
+  version: '1'
+  description: Cards API
+servers:
+- url: https://sandbox.bond.tech/api/v0.1
+security:
+- identity: []
+  authorization: []
+tags:
+- name: Cards
+paths:
+  /cards:
+    post:
+      summary: Create a card
+      description: Creates a new card and card account
+      operationId: post_cards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/card-write-post'
+            examples:
+              Create Card:
+                value:
+                  account_id: 1c667427-5521-4ffd-ac59-16ab73dc133e
+                  card_design_id: '12'
+                  card_mailing_address:
+                    street: 345 California St.
+                    street2: Suite 600
+                    city: San Francisco
+                    state: CA
+                    zip_code: 94104
+        required: true
+      tags:
+      - Cards
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card'
+              examples:
+                card response:
+                  value:
+                    card_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    customer_id: c8940088-21e8-451c-987c-0a0398db3ee5
+                    account_id: 26bdeb70-157c-4c44-a04a-3727793b9779
+                    expiry_date: tok_live_7g3eARzeEBJw89rJRCHqHv
+                    last_four: '6270'
+                    card_number: tok_live_q7kwTYb5YCYznpgRHHTs9p
+                    cvv: tok_live_c94od3AsFWYQ1ecaaMYtFU
+                    status: active
+                    card_design_id: null
+    get:
+      summary: Retrieve all cards
+      operationId: get_cards
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  page:
+                    type: integer
+                  pages:
+                    type: integer
+                  count:
+                    type: integer
+                  has_more:
+                    type: boolean
+                  cards:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      $ref: '#/components/schemas/card'
+                required:
+                - page
+                - pages
+                - count
+                - cards
+              examples:
+                example:
+                  value:
+                    page: 1
+                    pages: 1
+                    count: 5
+                    has_more: false
+                    cards:
+                    - card_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                      date_updated: '2020-08-16T19:39:34Z'
+                      date_created: '2020-08-15T19:39:34Z'
+                      customer_id: c8940088-21e8-451c-987c-0a0398db3ee5
+                      account_id: 26bdeb70-157c-4c44-a04a-3727793b9779
+                      expiry_date: tok_live_7g3eARzeEBJw89rJRCHqHv
+                      last_four: '6270'
+                      card_number: tok_live_q7kwTYb5YCYznpgRHHTs9p
+                      cvv: tok_live_c94od3AsFWYQ1ecaaMYtFU
+                      status: active
+                      card_design_id: null
+      description: Get all cards.
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: customer_id
+        description: UUID (36 characters)
+      - schema:
+          type: string
+        in: query
+        name: business_id
+        description: UUID (36 characters)
+      - schema:
+          type: string
+        in: query
+        name: show_closed
+        description: 'Possible values: true/false. Default false'
+      - description: Page number
+        required: false
+        schema:
+          title: Page
+          type: integer
+          description: Page number
+          default: 1
+        name: page
+        in: query
+      - description: Items per page
+        required: false
+        schema:
+          title: Count
+          type: integer
+          description: Items per page
+          default: 10
+        name: count
+        in: query
+      - schema:
+          type: string
+        in: query
+        name: order_by
+        description: 'By date created. Possible values: desc/asc'
+      tags:
+      - Cards
+  /cards/{card_id}:
+    parameters:
+    - name: card_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieve a card
+      description: Retrieves info about a card
+      operationId: get_cards_id
+      tags:
+      - Cards
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card'
+              examples:
+                card response:
+                  value:
+                    card_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    customer_id: c8940088-21e8-451c-987c-0a0398db3ee5
+                    account_id: 26bdeb70-157c-4c44-a04a-3727793b9779
+                    expiry_date: tok_live_7g3eARzeEBJw89rJRCHqHv
+                    last_four: '6270'
+                    card_number: tok_live_q7kwTYb5YCYznpgRHHTs9p
+                    cvv: tok_live_c94od3AsFWYQ1ecaaMYtFU
+                    status: active
+                    card_design_id: null
+    patch:
+      summary: Update Card
+      operationId: patch_cards
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card'
+              examples:
+                patch response:
+                  value:
+                    card_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    customer_id: c8940088-21e8-451c-987c-0a0398db3ee5
+                    account_id: 26bdeb70-157c-4c44-a04a-3727793b9779
+                    expiry_date: tok_live_7g3eARzeEBJw89rJRCHqHv
+                    last_four: '6270'
+                    card_number: tok_live_q7kwTYb5YCYznpgRHHTs9p
+                    cvv: tok_live_c94od3AsFWYQ1ecaaMYtFU
+                    status: active
+                    card_design_id: null
+      description: Updates info about a card
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/card-write-patch'
+            examples:
+              example:
+                value:
+                  status: active
+      tags:
+      - Cards
+  /cards/{card_id}/activate:
+    parameters:
+    - name: card_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Activate Physical Card
+      operationId: post_cards_activate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card'
+              examples:
+                successful response:
+                  value:
+                    card_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    customer_id: c8940088-21e8-451c-987c-0a0398db3ee5
+                    account_id: 26bdeb70-157c-4c44-a04a-3727793b9779
+                    expiry_date: tok_live_7g3eARzeEBJw89rJRCHqHv
+                    last_four: '6270'
+                    card_number: tok_live_q7kwTYb5YCYznpgRHHTs9p
+                    cvv: tok_live_c94od3AsFWYQ1ecaaMYtFU
+                    status: active
+                    card_design_id: null
+      tags:
+      - Cards
+      description: Activate a card
+  /cards/{card_id}/close:
+    parameters:
+    - name: card_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Close a Card
+      operationId: post_cards_close
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card'
+              examples:
+                Card Closed:
+                  value:
+                    card_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    customer_id: c8940088-21e8-451c-987c-0a0398db3ee5
+                    account_id: 26bdeb70-157c-4c44-a04a-3727793b9779
+                    expiry_date: tok_live_7g3eARzeEBJw89rJRCHqHv
+                    last_four: '6270'
+                    card_number: tok_live_q7kwTYb5YCYznpgRHHTs9p
+                    cvv: tok_live_c94od3AsFWYQ1ecaaMYtFU
+                    status: closed
+                    card_design_id: null
+      tags:
+      - Cards
+      description: Close a card
+  /cards/{card_id}/reissue:
+    parameters:
+    - name: card_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/card'
+              examples:
+                successful response:
+                  value:
+                    card_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    customer_id: c8940088-21e8-451c-987c-0a0398db3ee5
+                    account_id: 26bdeb70-157c-4c44-a04a-3727793b9779
+                    expiry_date: tok_live_7g3eARzeEBJw89rJRCHqHv
+                    last_four: '6270'
+                    card_number: tok_live_q7kwTYb5YCYznpgRHHTs9p
+                    cvv: tok_live_c94od3AsFWYQ1ecaaMYtFU
+                    status: reissue
+                    card_design_id: null
+      summary: Reissue a card
+      description: Reissues a card
+      operationId: post_cards_reissue
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/card-reissue'
+        required: true
+      tags:
+      - Cards
+components:
+  schemas:
+    address-write:
+      type: object
+      description: ''
+      title: Address-write
+      x-examples:
+        example:
+          street: 345 California Ave.
+          street2: Suite 600
+          city: San Francisco
+          state: CA
+          zip_code: 12345
+          country: US
+      properties:
+        street:
+          type: string
+          description: 'Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`'
+          example: 345 California Ave.
+        street2:
+          type: string
+          description: 'Has a 40-character limit, inclusive. Must start with an alphanumeric, and may only contain alphanumerics and the special characters `. , _ - #`'
+          example: Suite 600
+        city:
+          type: string
+          description: Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces
+          example: San Francisco
+          minLength: 2
+          maxLength: 40
+        state:
+          type: string
+          description: Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.
+          example: CA
+        zip_code:
+          type: string
+          description: zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.
+          example: 12345-1234
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.
+          example: US
+      required:
+      - street
+      - city
+      - state
+      - zip_code
+      - country
+    card-write-post:
+      type: object
+      x-examples:
+        card:
+          account_id: 1c667427-5521-4ffd-ac59-16ab73dc133e
+          card_design_id: '12'
+          card_mailing_address:
+            street: 345 California St.
+            street2: Suite 600
+            city: San Francisco
+            state: CA
+            zip_code: 94104
+      title: card-write-post
+      description: POST
+      properties:
+        account_id:
+          type: string
+          example: 1c667427-5521-4ffd-ac59-16ab73dc133e
+          description: account_id for which the card will be associated to
+        credit_limit:
+          type: string
+          example: '100.00'
+          description: credit_limit for the card. Provide only when creating commercial secured cards.
+        card_design_id:
+          type: string
+          example: '12'
+          description: 'The visual design of card.
+
+            Please contact Support to start creating card designs.'
+        card_mailing_address:
+          $ref: '#/components/schemas/address-write'
+      required:
+      - account_id
+    card:
+      description: ''
+      x-examples:
+        individual card [secured credit]:
+          card_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+          date_updated: '2020-08-16T19:39:34Z'
+          date_created: '2020-08-15T19:39:34Z'
+          customer_id: c8940088-21e8-451c-987c-0a0398db3ee5
+          account_id: 26bdeb70-157c-4c44-a04a-3727793b9779
+          expiry_date: tok_live_7g3eARzeEBJw89rJRCHqHv
+          last_four: '6270'
+          card_number: tok_live_q7kwTYb5YCYznpgRHHTs9p
+          cvv: tok_live_c94od3AsFWYQ1ecaaMYtFU
+          status: active
+          card_design_id: '12'
+          date_physical_card_activated: '2020-10-15T19:39:34Z'
+        business card:
+          card_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+          date_updated: '2020-08-16T19:39:34Z'
+          date_created: '2020-08-15T19:39:34Z'
+          account_id: 26bdeb70-157c-4c44-a04a-3727793b9779
+          business_id: f65f3ff2-ff5a-46a0-a277-b5892aa5a690
+          program_id: 7f555932-153f-452c-95cc-aaa96f6d2dec
+          expiry_date: tok_live_7g3eARzeEBJw89rJRCHqHv
+          last_four: '6270'
+          card_number: tok_live_q7kwTYb5YCYznpgRHHTs9p
+          cvv: tok_live_c94od3AsFWYQ1ecaaMYtFU
+          status: active
+          card_design_id: '12'
+          date_physical_card_activated: '2020-10-15T19:39:34Z'
+        individual card [prepaid,unsecured]:
+          card_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+          customer_id: c8940088-21e8-451c-987c-0a0398db3ee5
+          account_id: 26bdeb70-157c-4c44-a04a-3727793b9779
+          business_id: f65f3ff2-ff5a-46a0-a277-b5892aa5a690
+          program_id: 7f555932-153f-452c-95cc-aaa96f6d2dec
+          expiry_date: tok_live_7g3eARzeEBJw89rJRCHqHv
+          last_four: '6270'
+          card_number: tok_live_q7kwTYb5YCYznpgRHHTs9p
+          cvv: tok_live_c94od3AsFWYQ1ecaaMYtFU
+          status: active
+          card_design_id: '12'
+          date_updated: '2020-08-16T19:39:34Z'
+          date_created: '2020-08-16T19:39:34Z'
+      title: card
+      type: object
+      properties:
+        card_id:
+          type: string
+          example: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+          readOnly: true
+        customer_id:
+          type:
+          - string
+          - 'null'
+          example: c8940088-21e8-451c-987c-0a0398db3ee5
+        account_id:
+          type:
+          - string
+          - 'null'
+          example: 26bdeb70-157c-4c44-a04a-3727793b9779
+          readOnly: true
+        business_id:
+          type:
+          - string
+          - 'null'
+          example: f65f3ff2-ff5a-46a0-a277-b5892aa5a690
+        card_number:
+          type: string
+          example: tok_live_q7kwTYb5YCYznpgRHHTs9p
+          readOnly: true
+        cvv:
+          type: string
+          example: tok_live_c94od3AsFWYQ1ecaaMYtFU
+          readOnly: true
+        expiry_date:
+          type: string
+          example: tok_live_7g3eARzeEBJw89rJRCHqHv
+          readOnly: true
+        last_four:
+          type: string
+          example: '6270'
+          readOnly: true
+        status:
+          type: string
+          example: active
+          enum:
+          - active
+          - inactive
+          - closed
+        card_design_id:
+          type: string
+          example: '12'
+          description: 'The visual design of card.
+
+            Please contact Support to start creating card designs.'
+          default: null
+        date_updated:
+          type: string
+          example: '2020-08-16T19:39:34Z'
+        date_created:
+          type: string
+          example: '2020-08-16T19:39:34Z'
+        date_physical_card_activated:
+          type: string
+    card-reissue:
+      type: object
+      properties:
+        reissue_type:
+          type: string
+          enum:
+          - same_card_number
+          - same_card_number_updated_expiry
+          - new_card_number
+        card_mailing_address:
+          $ref: '#/components/schemas/address-write'
+      required:
+      - reissue_type
+      x-examples:
+        example:
+          reissue_type: same_card_number
+          card_mailing_address:
+            street: 345 California St.
+            street2: Suite 600
+            city: San Francisco
+            state: CA
+            zip_code: 94104
+      title: card-reissue
+    card-write-patch:
+      type: object
+      x-examples:
+        card:
+          status: active
+      title: card-write-patch
+      description: PATCH
+      properties:
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+  securitySchemes:
+    identity:
+      type: apiKey
+      in: header
+      name: Identity
+    authorization:
+      type: apiKey
+      in: header
+      name: Authorization
+x-samples-languages:
+- curl
+- node
+- ruby
+- javascript
+- python
+- csharp
+- java
+x-provenance:
+  method: searched
+  source: https://docs.bond.tech/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.bond.tech/reference/delete_cards_restrictions.md
+  - https://docs.bond.tech/reference/get_cards.md
+  - https://docs.bond.tech/reference/get_cards_id.md
+  - https://docs.bond.tech/reference/get_cards_restrictions.md
+  - https://docs.bond.tech/reference/get_cards_restrictions_id.md
+  - https://docs.bond.tech/reference/patch_cards.md
+  - https://docs.bond.tech/reference/patch_cards_restrictions.md
+  - https://docs.bond.tech/reference/post_cards.md
+  - https://docs.bond.tech/reference/post_cards_activate.md
+  - https://docs.bond.tech/reference/post_cards_close.md
+  - https://docs.bond.tech/reference/post_cards_reissue.md
+  - https://docs.bond.tech/reference/post_cards_restrictions.md
+  merge:
+    pages: 12
+    deduped: 36
+    conflicts_kept_first: 0

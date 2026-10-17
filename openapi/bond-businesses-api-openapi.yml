@@ -1,0 +1,810 @@
+openapi: 3.2.0
+info:
+  title: Businesses API
+  description: Businesses
+  version: '0'
+servers:
+- url: https://sandbox.bond.tech/api/v0
+security:
+- identity: []
+  authorization: []
+tags:
+- name: Businesses
+paths:
+  /businesses:
+    get:
+      tags:
+      - Businesses
+      summary: Retrieve all businesses
+      description: Retrieves all businesses associated with a brand
+      operationId: get_businesses
+      parameters:
+      - name: page
+        in: query
+        description: page number requested to return
+        schema:
+          type: integer
+          default: 1
+          exclusiveMinimum: 0
+      - name: count
+        in: query
+        description: number of Business information in response
+        schema:
+          type: integer
+      - name: brand_business_id
+        in: query
+        description: Return businesses that match the brand_business_id
+        schema:
+          type:
+          - string
+          - 'null'
+          example: ac6ee2d3-5a03-4043-a4aa-dda51836b9fd
+      responses:
+        '200':
+          $ref: '#/components/responses/paginated-business-response'
+    post:
+      tags:
+      - Businesses
+      summary: Create a business
+      description: Creates a business associated with a brand
+      operationId: post_businesses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessesPostSerializer'
+        required: true
+      responses:
+        '201':
+          $ref: '#/components/responses/Business-response-write'
+  /businesses/{business_id}:
+    get:
+      tags:
+      - Businesses
+      summary: Retrieve a business
+      description: Retrieves a business associated with a brand
+      operationId: get_business
+      parameters:
+      - name: business_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/Business-response'
+    delete:
+      tags:
+      - Businesses
+      summary: Delete a business
+      description: Deletes a business associated with a brand
+      operationId: delete_business
+      parameters:
+      - name: business_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+    patch:
+      tags:
+      - Businesses
+      summary: Update a business
+      description: Updates a business associated with a brand
+      operationId: patch_business
+      parameters:
+      - name: business_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessesPatchSerializer'
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Business-response-write'
+components:
+  schemas:
+    BusinessesGetSerializer:
+      type: object
+      description: ''
+      properties:
+        business_id:
+          minLength: 1
+          type: string
+        brand_business_id:
+          minLength: 1
+          type: string
+        ein:
+          minLength: 1
+          type: string
+        phone:
+          minLength: 1
+          type: string
+        email:
+          minLength: 1
+          type: string
+        website:
+          minLength: 1
+          type: string
+        legal_business_name:
+          minLength: 1
+          type: string
+        dba_business_name:
+          minLength: 1
+          type: string
+        business_type:
+          minLength: 1
+          type: string
+        date_updated:
+          minLength: 1
+          type: string
+        date_created:
+          minLength: 1
+          type: string
+        industry_type:
+          minLength: 1
+          type: string
+        number_of_employees:
+          minLength: 1
+          type: string
+        addresses:
+          minItems: 1
+          uniqueItems: true
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/AddressGet'
+        beneficial_owners:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/BeneficialOwnerGetSerializer'
+      required:
+      - business_id
+      - ein
+      - phone
+      - email
+      - website
+      - legal_business_name
+      - dba_business_name
+      - business_type
+      - date_updated
+      - date_created
+      - industry_type
+      - number_of_employees
+      - addresses
+      - beneficial_owners
+    BeneficialOwnerGetSerializer:
+      type: object
+      properties:
+        dob:
+          type: string
+          description: Date of birth in YYYY-MM-DD format.
+          format: string
+          example: '1980-04-04'
+        first_name:
+          type: string
+          description: First name.<br />Has a 1 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: John
+        middle_name:
+          type: string
+          description: Middle name.<br />Has a 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: O'Shea
+        last_name:
+          type: string
+          description: Last name.<br />Has a 2 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: Doe
+        date_created:
+          type: string
+        date_updated:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddressGet'
+      required:
+      - first_name
+      - last_name
+      - addresses
+      x-examples:
+        example-1:
+          dob: '1980-04-04'
+          first_name: John
+          middle_name: O'Shea
+          last_name: Doe
+          addresses:
+          - address_type: MAILING
+            street: 345 California Ave.
+            street2: Suit 600
+            city: San Francisco
+            state: CA
+            zip_code: 12345-1234
+            country: US
+            is_primary: true
+    AddressGet:
+      type: object
+      properties:
+        address_id:
+          type: string
+          description: String in UUID format corresponds to address address_id of related customer_id
+        address_type:
+          type: string
+          description: 'Address type is one of the following : MAILING, PHYSICAL, REGISTERED'
+          enum:
+          - MAILING
+          - PHYSICAL
+          - REGISTERED
+        street:
+          type: string
+          description: 'Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`'
+          example: 345 California Ave.
+        street2:
+          type: string
+          description: 'Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`'
+          example: Suit 600
+        city:
+          type: string
+          description: Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces
+          example: San Francisco
+          minLength: 2
+          maxLength: 40
+        state:
+          type: string
+          description: Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.
+          example: CA
+        zip_code:
+          type: string
+          description: zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.
+          example: 12345-1234
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.
+          example: US
+        is_primary:
+          type: boolean
+          description: Is Primary Address?
+          example: true
+        date_created:
+          type: string
+        date_updated:
+          type: string
+      required:
+      - address_id
+    BeneficialOwnerPostSerializer:
+      type: object
+      properties:
+        dob:
+          type: string
+          description: Date of birth in YYYY-MM-DD format.
+          format: string
+          example: '1980-04-04'
+        first_name:
+          type: string
+          description: First name.<br />Has a 1 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: John
+        middle_name:
+          type: string
+          description: Middle name.<br />Has a 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: O'Shea
+        last_name:
+          type: string
+          description: Last name.<br />Has a 2 to 20-character limit. Must start with an alphabet and may only contain alphabets, spaces, and apostrophes.
+          example: Doe
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+      required:
+      - first_name
+      - last_name
+      - addresses
+      x-examples:
+        example-1:
+          dob: '1980-04-04'
+          first_name: John
+          middle_name: O'Shea
+          last_name: Doe
+          addresses:
+          - address_type: MAILING
+            street: 345 California Ave.
+            street2: Suit 600
+            city: San Francisco
+            state: CA
+            zip_code: 12345-1234
+            country: US
+            is_primary: true
+    Address:
+      title: ''
+      type: object
+      properties:
+        address_type:
+          type: string
+          description: 'Address type is one of the following : MAILING, PHYSICAL, REGISTERED'
+          enum:
+          - MAILING
+          - PHYSICAL
+          - REGISTERED
+        street:
+          type: string
+          description: 'Has a 1 to 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`'
+          example: 345 California Ave.
+        street2:
+          type: string
+          description: 'Has a 40-character limit. May only contain alphanumerics and the special characters `. , _ - #`'
+          example: Suit 600
+        city:
+          type: string
+          description: Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces
+          example: San Francisco
+          minLength: 2
+          maxLength: 40
+        state:
+          type: string
+          description: Has a 2-character limit for US address.<br />Has a 20-character limit for non US address.
+          example: CA
+        zip_code:
+          type: string
+          description: zip code in 5-digit (12345) or 9-digit (12345-1234) format for US address.<br />Has a 2 to 20-character limit for non US address.
+          example: 12345-1234
+        country:
+          type: string
+          description: ISO 3166-1 alpha-2 country code.<br />Has a 2-character limit.
+          example: US
+        is_primary:
+          type: boolean
+          description: Is Primary Address?
+          example: true
+      required:
+      - address_type
+      - street
+      - city
+      - state
+      - zip_code
+      - country
+      - is_primary
+    BusinessesPatchSerializer:
+      title: ''
+      type: object
+      properties:
+        brand_business_id:
+          type: string
+          description: The brand's UUID for the business.
+          example: ac6ee2d3-5a03-4043-a4aa-dda51836b9fd
+        ein:
+          type: string
+          description: The Tax Identification Number
+          example: 12-1234567
+        legal_business_name:
+          type: string
+          description: The legal business name
+          example: John Doe Business Corporation
+        dba_business_name:
+          type: string
+          description: The doing-business-as name (trade name)
+          example: John's
+        business_type:
+          type: string
+          description: The business type
+          example: cooperative
+          enum:
+          - cooperative
+          - limited_liability_company
+          - sole_proprietorship
+          - partnership
+          - limited_partnership
+          - corporation
+          - nonprofit_organization
+        date_established:
+          type: string
+          description: Date of incorporation in YYYY-MM-DD format
+          format: string
+          example: '2020-01-01T00:00:00.000Z'
+        phone:
+          type: string
+          description: Phone number
+          example: '+14157485052'
+        email:
+          type: string
+          description: Business contact email
+          example: info@business.com
+        website:
+          type: string
+          description: The official website
+          example: www.business.com
+        industry_type:
+          type: string
+          description: Type of business conducted
+          example: Financial
+        number_of_employees:
+          type: string
+          description: Description of number of employees at firm, as a range or value
+          example: 0-50
+    BusinessesPostSerializer:
+      type: object
+      properties:
+        brand_business_id:
+          type: string
+          description: The brand's UUID for the business.
+          example: ac6ee2d3-5a03-4043-a4aa-dda51836b9fd
+        ein:
+          type: string
+          description: The Tax Identification Number
+          example: 12-1234567
+        legal_business_name:
+          type: string
+          description: The legal business name
+          example: John Doe Business Corporation
+        dba_business_name:
+          type: string
+          description: The doing-business-as name (trade name)
+          example: John's
+        business_type:
+          type: string
+          description: The business type
+          example: cooperative
+          enum:
+          - cooperative
+          - limited_liability_company
+          - sole_proprietorship
+          - partnership
+          - limited_partnership
+          - corporation
+          - nonprofit_organization
+        date_established:
+          type: string
+          description: Date of incorporation in YYYY-MM-DD format
+          format: string
+          example: '2020-01-01T00:00:00.000Z'
+        phone:
+          type: string
+          description: Phone number
+          example: '+14157485052'
+        email:
+          type: string
+          description: Business contact email
+          example: info@business.com
+        website:
+          type: string
+          description: The official website
+          example: www.business.com
+        industry_type:
+          type: string
+          description: Type of business conducted
+          example: Financial
+        number_of_employees:
+          type: string
+          description: Description of number of employees at firm, as a range or value
+          example: 0-50
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        beneficial_owners:
+          type: array
+          items:
+            $ref: '#/components/schemas/BeneficialOwnerPostSerializer'
+      required:
+      - legal_business_name
+  responses:
+    Business-response:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BusinessesGetSerializer'
+    Business-response-write:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              business_id:
+                minLength: 1
+                type: string
+              brand_business_id:
+                minLength: 1
+                type: string
+              ein:
+                type: string
+                minLength: 1
+              phone:
+                type: string
+                minLength: 1
+              email:
+                type: string
+                minLength: 1
+              website:
+                type: string
+                minLength: 1
+              legal_business_name:
+                type: string
+                minLength: 1
+              dba_business_name:
+                type: string
+                minLength: 1
+              business_type:
+                type: string
+                minLength: 1
+              industry_type:
+                minLength: 1
+                type: string
+              number_of_employees:
+                minLength: 1
+                type: string
+              addresses:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    date_updated:
+                      type: string
+                      minLength: 1
+                    date_created:
+                      type: string
+                      minLength: 1
+                    address_id:
+                      type: string
+                      minLength: 1
+                    address_type:
+                      type: string
+                      minLength: 1
+                    street:
+                      type: string
+                      minLength: 1
+                      maxLength: 40
+                    street2:
+                      type: string
+                      maxLength: 40
+                    city:
+                      type: string
+                      minLength: 2
+                      maxLength: 40
+                      description: Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces
+                    state:
+                      type: string
+                      minLength: 1
+                    zip_code:
+                      type: string
+                      minLength: 1
+                    country:
+                      type: string
+                      minLength: 1
+                    is_primary:
+                      type: boolean
+                  required:
+                  - date_updated
+                  - date_created
+                  - address_id
+                  - address_type
+                  - street
+                  - street2
+                  - city
+                  - state
+                  - zip_code
+                  - country
+                  - is_primary
+              beneficial_owners:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                      minLength: 1
+                    last_name:
+                      type: string
+                      minLength: 1
+                    dob:
+                      type: string
+                      minLength: 1
+                    addresses:
+                      type: array
+                      uniqueItems: true
+                      minItems: 1
+                      items:
+                        type: object
+                        properties:
+                          address_type:
+                            type: string
+                            minLength: 1
+                          street:
+                            type: string
+                            minLength: 1
+                            maxLength: 40
+                          street2:
+                            type: string
+                            maxLength: 40
+                          city:
+                            type: string
+                            minLength: 1
+                            maxLength: 40
+                            description: Has a 2 to 40-character limit. May contain only alphanumerics, `-`, `_`,`.`, and spaces
+                          state:
+                            type: string
+                            minLength: 1
+                          zip_code:
+                            type: string
+                            minLength: 1
+                          country:
+                            type: string
+                            minLength: 1
+                          is_primary:
+                            type: boolean
+                        required:
+                        - address_type
+                        - street
+                        - street2
+                        - city
+                        - state
+                        - zip_code
+                        - country
+                        - is_primary
+                  required:
+                  - first_name
+                  - last_name
+                  - dob
+            required:
+            - business_id
+            - brand_business_id
+            - ein
+            - phone
+            - email
+            - website
+            - legal_business_name
+            - dba_business_name
+            - business_type
+            - industry_type
+            - number_of_employees
+            - addresses
+            - beneficial_owners
+          examples:
+            example:
+              value:
+                ein: 12-1234567
+                phone: '+14085557788'
+                email: user@example.com
+                website: https://www.specter.com
+                legal_business_name: World Domination Inc.
+                dba_business_name: World Domination Inc.
+                business_type: limited_liability_company
+                industry_type: Financial
+                number_of_employees: 0-50
+                addresses:
+                - address_type: MAILING
+                  street: 345 California Ave.
+                  street2: Suit 600
+                  city: San Francisco
+                  state: CA
+                  zip_code: 12345-1234
+                  country: US
+                  is_primary: true
+                - address_type: PHYSICAL
+                  street: 123 California Ave.
+                  street2: Suit 100
+                  city: San Francisco
+                  state: CA
+                  zip_code: 12345-1234
+                  country: US
+                  is_primary: false
+                beneficial_owners:
+                - first_name: James
+                  last_name: Bond
+                  dob: '1970-12-12'
+                  addresses:
+                  - address_type: MAILING
+                    street: 345 California Ave.
+                    street2: Suit 600
+                    city: San Francisco
+                    state: CA
+                    zip_code: 12345-1234
+                    country: US
+                    is_primary: true
+                - first_name: Le
+                  last_name: Chiffre
+                  dob: '1980-04-04'
+                  addresses:
+                  - address_type: MAILING
+                    street: 345 California Ave.
+                    street2: Suit 600
+                    city: San Francisco
+                    state: CA
+                    zip_code: 12345-1234
+                    country: US
+                    is_primary: true
+    paginated-business-response:
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            description: ''
+            properties:
+              page_info:
+                type: object
+                description: ''
+                properties:
+                  page:
+                    type: integer
+                    example: 1
+                  page_size:
+                    type: integer
+                    example: 1
+                  pages:
+                    type: integer
+                    example: 1
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BusinessesGetSerializer'
+  securitySchemes:
+    identity:
+      type: apiKey
+      name: Identity
+      in: header
+    authorization:
+      type: apiKey
+      name: Authorization
+      in: header
+x-samples-languages:
+- curl
+- node
+- ruby
+- javascript
+- python
+- csharp
+- java
+x-provenance:
+  method: searched
+  source: https://docs.bond.tech/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.bond.tech/reference/delete_beneficial_owner.md
+  - https://docs.bond.tech/reference/delete_beneficial_owner_address.md
+  - https://docs.bond.tech/reference/delete_business.md
+  - https://docs.bond.tech/reference/delete_business_address.md
+  - https://docs.bond.tech/reference/get_beneficial_owner.md
+  - https://docs.bond.tech/reference/get_beneficial_owner_address.md
+  - https://docs.bond.tech/reference/get_beneficial_owner_addresses.md
+  - https://docs.bond.tech/reference/get_beneficial_owner_kyc.md
+  - https://docs.bond.tech/reference/get_beneficial_owners.md
+  - https://docs.bond.tech/reference/get_business.md
+  - https://docs.bond.tech/reference/get_business_address.md
+  - https://docs.bond.tech/reference/get_business_addresses.md
+  - https://docs.bond.tech/reference/get_businesses.md
+  - https://docs.bond.tech/reference/get_kyb.md
+  - https://docs.bond.tech/reference/patch_beneficial_owner.md
+  - https://docs.bond.tech/reference/patch_beneficial_owner_address.md
+  - https://docs.bond.tech/reference/patch_business.md
+  - https://docs.bond.tech/reference/patch_business_address.md
+  - https://docs.bond.tech/reference/post_beneficial_owner_addresses.md
+  - https://docs.bond.tech/reference/post_beneficial_owner_kyc.md
+  - https://docs.bond.tech/reference/post_beneficial_owners.md
+  - https://docs.bond.tech/reference/post_business_addresses.md
+  - https://docs.bond.tech/reference/post_businesses.md
+  - https://docs.bond.tech/reference/post_kyb.md
+  - https://docs.bond.tech/reference/post_kyb_2.md
+  - https://docs.bond.tech/reference/post_kyb_resume.md
+  merge:
+    pages: 26
+    deduped: 64
+    conflicts_kept_first: 0

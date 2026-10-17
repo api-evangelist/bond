@@ -1,0 +1,752 @@
+openapi: 3.2.0
+info:
+  title: Accounts API
+  version: '0.1'
+  description: ''
+servers:
+- url: https://sandbox.bond.tech/api/v0.1
+security:
+- identity: []
+  authorization: []
+tags:
+- name: Accounts
+paths:
+  /accounts:
+    parameters: []
+    get:
+      summary: Get all accounts
+      operationId: get-accounts
+      tags:
+      - Accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  page:
+                    type: integer
+                    example: 1
+                  pages:
+                    type: integer
+                    example: 1
+                  count:
+                    type: integer
+                    example: 1
+                  next_page:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/account-docs'
+              examples:
+                Accounts Response:
+                  value:
+                    page: 1
+                    pages: 1
+                    count: 1
+                    next_page: 0
+                    data:
+                    - account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                      date_updated: '2020-08-16T19:39:34Z'
+                      date_created: '2020-08-15T19:39:34Z'
+                      program_id: e242686d-3bb7-4543-8438-0aa682e14696
+                      customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                      type: deposit
+                      status: active
+                      description: string
+                      routing_number: '547897762'
+                      account_number: '574771265'
+                      balance:
+                        current_balance: 1000
+                        available_balance: 950
+                        previous_statement_balance: 17312
+                        locked_balance: 0
+                        currency: USD
+                      cards:
+                      - 7c45101a-82de-49e5-b01d-50151b54312d
+                      deposit: {}
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: customer_id
+        description: Filter for accounts with a customer_id
+      - schema:
+          type: string
+        in: query
+        name: business_id
+        description: Filter for accounts with a business_id
+      - schema:
+          type: string
+        in: query
+        name: page
+        description: page for result set
+      - schema:
+          type: string
+        in: query
+        name: count
+        description: count of entries to return
+    post:
+      summary: Create an account
+      operationId: post-accounts
+      tags:
+      - Accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account-docs'
+              examples:
+                Deposit Account:
+                  value:
+                    account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    program_id: e242686d-3bb7-4543-8438-0aa682e14696
+                    customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                    type: deposit
+                    status: active
+                    description: string
+                    routing_number: '547897762'
+                    account_number: '574771265'
+                    balance:
+                      current_balance: 1000
+                      available_balance: 950
+                      previous_statement_balance: 17312
+                      locked_balance: 0
+                      currency: USD
+                    cards:
+                    - 7c45101a-82de-49e5-b01d-50151b54312d
+                    deposit: {}
+                Business Deposit:
+                  value:
+                    account_id: 979e14cd-6fe4-4765-b7a4-d4eff102cc4a
+                    program_id: 3c23ab0e-cdef-47b5-aa7c-769bf6a3c1c9
+                    business_id: 590f65b1-98c7-4d22-bc90-4024023d4f3f
+                    type: deposit
+                    status: active
+                    description: bus_01
+                    routing_number: '547897762'
+                    account_number: '574771265'
+                    cards:
+                    - a0cdca3b-e667-4ead-b8d8-27f171406216
+                    date_updated: '2020-08-15T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    balance:
+                      current_balance: 45412
+                      available_balance: 48312
+                      previous_statement_balance: 17312
+                      locked_balance: 0
+                      currency: USD
+                    credit:
+                      credit_limit: 1000
+                      security_deposit_account_id: 46352399-d005-451a-b988-27b8c878503e
+                    deposit: {}
+                    security_deposit:
+                      credit_account: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account-write'
+            examples:
+              Consumer Deposit Account:
+                value:
+                  customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                  program_id: 0b9815c0-38db-4a56-b6b1-758c013b625b
+                  type: deposit
+                  description: HSA Account
+              Business Deposit Account:
+                value:
+                  business_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                  program_id: 0b9815c0-38db-4a56-b6b1-758c013b625b
+                  type: deposit
+                  description: Tax Savings Account
+              Commercial Security Deposit Account:
+                value:
+                  business_id: 7ceebb8f-d984-44cf-8878-89d17b25d9d2
+                  program_id: da7f5c2a-6fa0-4033-be12-e29a793eaaaa
+                  type: security_deposit
+                  description: Commercial Security Deposit Account
+  /accounts/processor_tokens:
+    post:
+      summary: Create an account using a processor token
+      operationId: post-accounts-ptoken
+      tags:
+      - Accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                x-examples:
+                  external account:
+                    account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                    type: external
+                    status: active
+                    verification_status: instantly_verified
+                    link_type: plaid,
+                    linked_account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                allOf:
+                - properties:
+                    account_id:
+                      type: string
+                      example: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    linked_account_id:
+                      type: string
+                      example: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    type:
+                      type: string
+                      enum:
+                      - external
+                    link_type:
+                      type: string
+                      enum:
+                      - plaid
+                    customer_id:
+                      type:
+                      - string
+                      - 'null'
+                      example: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                    status:
+                      type: string
+                      enum:
+                      - active
+                      - inactive
+                      example: null
+                    verification_status:
+                      type: string
+                      enum:
+                      - instantly_verified
+                      example: null
+                    date_updated:
+                      type: string
+                      example: '2020-08-15T19:39:34Z'
+                      readOnly: true
+                    date_created:
+                      type: string
+                      example: '2020-08-15T19:39:34Z'
+                      readOnly: true
+                title: account-ptoken
+                type: object
+              examples:
+                External Account:
+                  value:
+                    account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                    type: external
+                    status: active
+                    verification_status: instantly_verified
+                    link_type: plaid,
+                    linked_account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer_id:
+                  type: string
+                  example: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                processor_token:
+                  type: string
+                  example: processor-sandbox-84b5b4d4-d256-417a-8871-391c76b99579
+            examples:
+              External Account:
+                value:
+                  customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                  processor_token: processor-sandbox-84b5b4d4-d256-417a-8871-391c76b99579
+      parameters: []
+  /accounts/{account_id}:
+    parameters:
+    - schema:
+        type: string
+      name: account_id
+      in: path
+      required: true
+    get:
+      summary: Get account by id
+      operationId: get-accounts-by-id
+      tags:
+      - Accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account-docs'
+              examples:
+                Deposit Account:
+                  value:
+                    account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    program_id: e242686d-3bb7-4543-8438-0aa682e14696
+                    customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                    type: deposit
+                    status: active
+                    description: string
+                    routing_number: '547897762'
+                    account_number: '574771265'
+                    balance:
+                      current_balance: 1000
+                      available_balance: 950
+                      previous_statement_balance: 17312
+                      locked_balance: 0
+                      currency: USD
+                    cards:
+                    - 7c45101a-82de-49e5-b01d-50151b54312d
+                    deposit: {}
+                Credit Account:
+                  value:
+                    account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                    type: credit
+                    status: active
+                    balance:
+                      current_balance: 45412
+                      available_balance: 48312
+                      previous_statement_balance: 17312
+                      locked_balance: 0
+                      currency: USD
+                    program_id: 232e9951-e03a-47b2-9c9a-64ec0c02b69f
+                    description: ''
+                    routing_number: '547897762'
+                    account_number: '574771265'
+                    cards:
+                    - 5145b38c-2d63-46be-bb68-3815d50ae4a6
+                    credit:
+                      credit_limit: 1000
+                      security_deposit_account_id: 3abc7efb-5827-48bb-8931-be6fe08f905c
+                Security Deposit Account:
+                  value:
+                    account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    program_id: e242686d-3bb7-4543-8438-0aa682e14696
+                    customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                    type: security_deposit
+                    status: active
+                    description: string
+                    routing_number: '547897762'
+                    account_number: '574771265'
+                    balance:
+                      current_balance: 500
+                      available_balance: 500
+                      previous_statement_balance: 17312
+                      locked_balance: 0
+                      currency: USD
+                    security_deposit:
+                      credit_account_id: e913d434-bda9-494e-b6df-adf46a52c1cc
+    patch:
+      summary: Update an account
+      operationId: patch-accounts
+      tags:
+      - Accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account-docs'
+              examples:
+                Deposit Account:
+                  value:
+                    account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    program_id: e242686d-3bb7-4543-8438-0aa682e14696
+                    customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                    type: deposit
+                    status: active
+                    description: string
+                    routing_number: '547897762'
+                    account_number: '574771265'
+                    balance:
+                      current_balance: 1000
+                      available_balance: 950
+                      previous_statement_balance: 17312
+                      locked_balance: 0
+                      currency: USD
+                    cards:
+                    - 7c45101a-82de-49e5-b01d-50151b54312d
+                    deposit: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account-patch'
+            examples:
+              Activate Account:
+                value:
+                  status: active
+  /accounts/{account_id}/close:
+    parameters:
+    - schema:
+        type: string
+      name: account_id
+      in: path
+      required: true
+    post:
+      summary: Close an Account
+      operationId: close-accounts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account-docs'
+              examples:
+                Deposit Account:
+                  value:
+                    account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+                    date_updated: '2020-08-16T19:39:34Z'
+                    date_created: '2020-08-15T19:39:34Z'
+                    program_id: e242686d-3bb7-4543-8438-0aa682e14696
+                    customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+                    type: deposit
+                    status: closed
+                    description: string
+                    routing_number: '547897762'
+                    account_number: '574771265'
+                    balance:
+                      current_balance: 1000
+                      available_balance: 950
+                      previous_statement_balance: 17312
+                      locked_balance: 0
+                      currency: USD
+                    cards:
+                    - 7c45101a-82de-49e5-b01d-50151b54312d
+                    deposit: {}
+      description: ''
+      tags:
+      - Accounts
+components:
+  schemas:
+    account-docs:
+      x-examples:
+        credit account:
+          account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+          date_updated: '2020-08-16T19:39:34Z'
+          date_created: '2020-08-15T19:39:34Z'
+          customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+          type: credit
+          status: active
+          balance:
+            current_balance: 45412
+            available_balance: 48312
+            previous_statement_balance: 17312
+            locked_balance: 0
+            currency: USD
+          program_id: 232e9951-e03a-47b2-9c9a-64ec0c02b69f
+          description: ''
+          routing_number: '547897762'
+          account_number: '574771265'
+          cards:
+          - 5145b38c-2d63-46be-bb68-3815d50ae4a6
+          credit:
+            credit_limit: 1000
+            security_deposit_account_id: 3abc7efb-5827-48bb-8931-be6fe08f905c
+        external account:
+          account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+          date_updated: '2020-08-16T19:39:34Z'
+          date_created: '2020-08-15T19:39:34Z'
+          customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+          type: external
+          status: active
+          balance:
+            current_balance: 0
+            available_balance: 0
+            previous_statement_balance: 17312
+            currency: USD
+          external:
+            plaid:
+              link_token: 9d4ddc45-8658-40eb-a216-a2140f497425
+              expiration: '2020-08-16T19:39:34Z'
+              status: active
+              verification_type: instant
+            bank_account:
+              bank_name: Chase
+              account_number: '751489274'
+              routing_number: '547815479'
+        deposit account:
+          account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+          date_updated: '2020-08-16T19:39:34Z'
+          date_created: '2020-08-15T19:39:34Z'
+          program_id: e242686d-3bb7-4543-8438-0aa682e14696
+          customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+          type: deposit
+          status: active
+          description: string
+          routing_number: '547897762'
+          account_number: '574771265'
+          balance:
+            current_balance: 1000
+            available_balance: 950
+            previous_statement_balance: 17312
+            locked_balance: 0
+            currency: USD
+          cards:
+          - 7c45101a-82de-49e5-b01d-50151b54312d
+          deposit: {}
+        security deposit account:
+          account_id: 057c6074-a02d-4a5a-bad9-bbc64b047df7
+          date_updated: '2020-08-16T19:39:34Z'
+          date_created: '2020-08-15T19:39:34Z'
+          program_id: e242686d-3bb7-4543-8438-0aa682e14696
+          customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+          type: security_deposit
+          status: active
+          description: string
+          routing_number: '547897762'
+          account_number: '574771265'
+          balance:
+            current_balance: 500
+            available_balance: 500
+            previous_statement_balance: 17312
+            locked_balance: 0
+            currency: USD
+          security_deposit:
+            credit_account: e913d434-bda9-494e-b6df-adf46a52c1cc
+      allOf:
+      - properties:
+          account_id:
+            type: string
+            example: 979e14cd-6fe4-4765-b7a4-d4eff102cc4a
+          program_id:
+            type:
+            - string
+            - 'null'
+            example: 3c23ab0e-cdef-47b5-aa7c-769bf6a3c1c9
+          customer_id:
+            type:
+            - string
+            - 'null'
+            example: dd3b3e26-cbd8-4dee-a133-1637eb488292
+          business_id:
+            type:
+            - string
+            - 'null'
+            example: 590f65b1-98c7-4d22-bc90-4024023d4f3f
+          type:
+            type: string
+            enum:
+            - deposit
+            - credit
+            - security_deposit
+            - external
+          status:
+            type: string
+            enum:
+            - active
+            - inactive
+            - frozen
+            - closed
+            example: active
+          description:
+            type: string
+            example: cust_01
+          routing_number:
+            type:
+            - string
+            - 'null'
+            example: '547897762'
+            readOnly: true
+          account_number:
+            type:
+            - string
+            - 'null'
+            example: '574771265'
+            readOnly: true
+          cards:
+            type: array
+            items:
+              type: string
+              example: a0cdca3b-e667-4ead-b8d8-27f171406216
+              readOnly: true
+            readOnly: true
+          date_updated:
+            type: string
+            example: '2020-08-15T19:39:34Z'
+            readOnly: true
+          date_created:
+            type: string
+            example: '2020-08-15T19:39:34Z'
+            readOnly: true
+          balance:
+            type: object
+            properties:
+              current_balance:
+                type: number
+                example: 45412
+                readOnly: true
+                description: 'Funds that have posted to the account, some or all of it may be available to be transferred out of the account.
+
+                  For credit accounts, the current balance is amount of funds that have been spent on the credit card.'
+              available_balance:
+                type: number
+                example: 48312
+                readOnly: true
+                description: 'Funds that are available to be transferred out of the account and includes any pending transactions.
+
+                  For credit accounts, the available balance is the current balance plus the pending transactions.'
+              locked_balance:
+                type: number
+                example: 48312
+                readOnly: true
+                description: 'Funds that are reserved to, for example, pay off the balance of a secured charge card. '
+              previous_statement_balance:
+                type: string
+                example: '17312'
+                readOnly: true
+                description: The current balance of the account as of the most recent statement generation date.
+              currency:
+                type: string
+                example: USD
+                readOnly: true
+      - properties:
+          credit:
+            $ref: '#/components/schemas/account-credit'
+      - properties:
+          deposit:
+            $ref: '#/components/schemas/account-deposit'
+      - properties:
+          security_deposit:
+            $ref: '#/components/schemas/account-security-deposit'
+      title: account
+      type: object
+    account-write:
+      type: object
+      x-examples:
+        example:
+          customer_id: 1114ae62-5fe1-4b21-b4fb-f2b158d8e21e
+          program_id: 0b9815c0-38db-4a56-b6b1-758c013b625b
+          type: deposit
+          description: HSA Account
+      title: account-write
+      properties:
+        customer_id:
+          type: string
+          example: c976768c-2258-4f1c-8abc-e88bac75dedf
+          description: 'customer_id is required for consumer accounts
+
+            <b>required for consumer accounts</b>'
+        business_id:
+          type: string
+          description: 'business_id is required for commercial accounts
+
+            <b>required for commercial accounts</b>'
+        program_id:
+          type: string
+          example: dcdb9663-65c8-48e4-bc12-aa092642dfd8
+          description: 'represents the program set up with a Bond bank partner. '
+        type:
+          type: string
+          enum:
+          - deposit
+          - security_deposit
+          description: designates what type of account will be created; security_deposit is only manually created for commercial secured credit; consumer secured credit is automatically created on approval
+        description:
+          type: string
+          example: HSA Account
+          description: 'label for account
+
+            <b>optional</b> '
+      required:
+      - customer_id
+      - business_id
+      - program_id
+      - type
+    account-patch:
+      type: object
+      x-examples:
+        example:
+          status: active
+      properties:
+        status:
+          type: string
+          enum:
+          - active
+          - inactive
+          example: active
+      title: account-patch
+    account-credit:
+      type: object
+      x-examples:
+        credit-account:
+          credit_limit: 1000
+          security_deposit_account_id: 3abc7efb-5827-48bb-8931-be6fe08f905c
+      title: account-credit
+      properties:
+        credit_limit:
+          type: integer
+          example: 1000
+          readOnly: true
+        security_deposit_account_id:
+          type:
+          - string
+          - 'null'
+          example: 46352399-d005-451a-b988-27b8c878503e
+          readOnly: true
+    account-deposit:
+      title: account-deposit
+      x-stoplight:
+        id: qn18lhs28ly7m
+      type: object
+    account-security-deposit:
+      type: object
+      x-examples:
+        example:
+          credit_account_id: ed686bcf-5361-4156-9e69-e6c3dd7cf092
+      title: account-security-deposit
+      properties:
+        credit_account_id:
+          type:
+          - string
+          - 'null'
+  securitySchemes:
+    identity:
+      type: apiKey
+      in: header
+      name: Identity
+    authorization:
+      type: apiKey
+      in: header
+      name: Authorization
+x-stoplight:
+  id: izs6c07rzrlxp
+x-provenance:
+  method: searched
+  source: https://docs.bond.tech/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.bond.tech/reference/close-accounts.md
+  - https://docs.bond.tech/reference/get-accounts-by-id.md
+  - https://docs.bond.tech/reference/get-accounts.md
+  - https://docs.bond.tech/reference/get-statements-yyyy-mm.md
+  - https://docs.bond.tech/reference/get-statements.md
+  - https://docs.bond.tech/reference/patch-accounts.md
+  - https://docs.bond.tech/reference/post-accounts-ptoken.md
+  - https://docs.bond.tech/reference/post-accounts.md
+  merge:
+    pages: 8
+    deduped: 37
+    conflicts_kept_first: 0

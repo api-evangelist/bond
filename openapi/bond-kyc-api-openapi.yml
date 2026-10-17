@@ -1,0 +1,232 @@
+openapi: 3.2.0
+info:
+  title: Customer KYC API
+  version: '0'
+  description: Studio customers
+servers:
+- url: https://sandbox.bond.tech/api/v0
+security:
+- identity: []
+  authorization: []
+tags:
+- name: KYC
+paths:
+  /customers/{customer_id}/inquiries/{inquiry_id}/resume:
+    parameters:
+    - name: customer_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: inquiry_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    meta:
+                      session_token: pGPEDPZcBhh8EHhCNwWu58NfdLcBLv9KFpaj74qhGEfEHX4R4HzsxzLq2ifyCXxiddLkKq.XAaCvm7x_yfPa89A.cXNtzCaM9pqMBS5NZwJvkfI2Oh872qLqlMtgjrAAxuOuW1UvqY1mMTECn.D9wVDodF4vU7Z2Y8mtrP8JgVEL1uayHfuDtE26tiKn_OqoFOHd5HTUiDi.QW9TYgwe_h7f431hCrbN.mEjOicY7Oh_RiPhuaTWy4L4nOmrXtCIiAXuImjiMnQza0HjViRonO8VKeXoqvcwGRHrOwBSw_K4aoT9QbcuzrjwzCPKk5YkoP7d3cKpnL_yLL3WZ22Ji6Rar7wcfgKkql45q352TODZQBbJm
+                properties:
+                  meta:
+                    type: object
+                    properties:
+                      session_token:
+                        type: string
+                        minLength: 1
+                        example: pGPEDPZcBhh8EHhCNwWu58NfdLcBLv9KFpaj74qhGEfEHX4R4HzsxzLq2ifyCXxiddLkKq.XAaCvm7x_yfPa89A.cXNtzCaM9pqMBS5NZwJvkfI2Oh872qLqlMtgjrAAxuOuW1UvqY1mMTECn.D9wVDodF4vU7Z2Y8mtrP8JgVEL1uayHfuDtE26tiKn_OqoFOHd5HTUiDi.QW9TYgwe_h7f431hCrbN.mEjOicY7Oh_RiPhuaTWy4L4nOmrXtCIiAXuImjiMnQza0HjViRonO8VKeXoqvcwGRHrOwBSw_K4aoT9QbcuzrjwzCPKk5YkoP7d3cKpnL_yLL3WZ22Ji6Rar7wcfgKkql45q352TODZQBbJm
+                        readOnly: true
+                required:
+                - customer_id
+                - kyc_status
+              examples:
+                example:
+                  value:
+                    meta:
+                      session_token: pGPEDPZcBhh8EHhCNwWu58NfdLcBLv9KFpaj74qhGEfEHX4R4HzsxzLq2ifyCXxiddLkKq.XAaCvm7x_yfPa89A.cXNtzCaM9pqMBS5NZwJvkfI2Oh872qLqlMtgjrAAxuOuW1UvqY1mMTECn.D9wVDodF4vU7Z2Y8mtrP8JgVEL1uayHfuDtE26tiKn_OqoFOHd5HTUiDi.QW9TYgwe_h7f431hCrbN.mEjOicY7Oh_RiPhuaTWy4L4nOmrXtCIiAXuImjiMnQza0HjViRonO8VKeXoqvcwGRHrOwBSw_K4aoT9QbcuzrjwzCPKk5YkoP7d3cKpnL_yLL3WZ22Ji6Rar7wcfgKkql45q352TODZQBbJm
+        '422':
+          description: Unable to find matching Persona inquiry
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    errors:
+                    - status: 404
+                      title: Record not found
+              examples:
+                example:
+                  value:
+                    errors:
+                    - status: 404
+                      title: Record not found
+      summary: Resume a Persona Inquiry
+      description: Obtain a new `session_token` for resuming a Persona inquiry. This is required if the Persona inquiry, inquiry session, or `session_token` has expired. This can also be used if the `session_token` has been lost.
+      operationId: post_resume_payload
+      tags:
+      - KYC
+  /customers/{customer_id}/verification-kyc:
+    parameters:
+    - name: customer_id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    customer_id: 2df10ec1-130f-41bb-b0cf-f3af48350eb7
+                    kyc_status: submitted
+                properties:
+                  customer_id:
+                    type: string
+                    minLength: 1
+                    example: 2df10ec1-130f-41bb-b0cf-f3af48350eb7
+                    readOnly: true
+                  kyc_status:
+                    type: string
+                    minLength: 1
+                    example: submitted
+                    readOnly: true
+                required:
+                - customer_id
+                - kyc_status
+              examples:
+                example:
+                  value:
+                    customer_id: 2df10ec1-130f-41bb-b0cf-f3af48350eb7
+                    kyc_status: submitted
+      summary: Start KYC (Know-Your-Customer)
+      description: Start a KYC verification for a `Customer`
+      operationId: post_verification_kyc
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KYCPostPayload'
+        required: true
+      tags:
+      - KYC
+    get:
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                passed:
+                  value:
+                    customer_id: d856bf10-d4a6-4153-b8f8-2b93072dd8da
+                    brand_id: ce027c9c-39c6-47f4-a12d-abb543f7cf63
+                    kyc_status: passed
+                document_required:
+                  value:
+                    customer_id: d856bf10-d4a6-4153-b8f8-2b93072dd8da
+                    brand_id: ce027c9c-39c6-47f4-a12d-abb543f7cf63
+                    kyc_status: document_required
+                    documents:
+                    - document_type: proof_of_address
+                      status: required
+                      upload_link: https://sample.link
+      summary: Retrieve KYC Status
+      description: Retrieve the KYC status of a `Customer`
+      operationId: get_verification_kyc
+      tags:
+      - KYC
+components:
+  schemas:
+    KYCPostPayload:
+      type: object
+      description: ''
+      title: ''
+      properties:
+        program_id:
+          type: string
+          description: String in acceptable UUID format that corresponds to a valid `Program` program_id.
+          example: 72585109-8222-4221-b15b-48e87ffed790
+        ssn:
+          type: string
+          description: 'Must be in ######### or ###-##-#### format'
+          example: 741-55-7293
+        phone:
+          type: string
+          description: Numbers only or dash-separated are acceptable
+          example: 555-111-2222
+        phone_country_code:
+          type: string
+          description: Must be a string of 1-3 digits
+          example: '1'
+        email:
+          type: string
+          description: Must be a valid email address
+          example: james@mi6.gov.uk
+        dob:
+          type: string
+          description: Birthday in YYYY-MM-DD format.
+          example: '1997-12-25'
+        ip:
+          type: string
+          description: '<b><sup>Conditionally required based on program configuration</sup></b>
+
+            Must be dot separated'
+          example: 24.54.101.22
+      required:
+      - program_id
+  securitySchemes:
+    identity:
+      type: apiKey
+      in: header
+      name: Identity
+    authorization:
+      type: apiKey
+      in: header
+      name: Authorization
+x-samples-languages:
+- curl
+- node
+- ruby
+- javascript
+- python
+- csharp
+- java
+x-provenance:
+  method: searched
+  source: https://docs.bond.tech/reference
+  harvested: '2026-10-14'
+  tool: harvest-readme-openapi.py
+  note: Assembled verbatim from the OpenAPI definition ReadMe embeds in each operation page of the provider's developer portal; paths and components merged by API title, nothing authored.
+  assembled_from:
+  - https://docs.bond.tech/reference/delete_customers.md
+  - https://docs.bond.tech/reference/get_customers.md
+  - https://docs.bond.tech/reference/get_customers_id.md
+  - https://docs.bond.tech/reference/get_verification_kyc.md
+  - https://docs.bond.tech/reference/patch_customers.md
+  - https://docs.bond.tech/reference/post_customers.md
+  - https://docs.bond.tech/reference/post_resume_payload.md
+  - https://docs.bond.tech/reference/post_verification_kyc.md
+  merge:
+    pages: 8
+    deduped: 23
+    conflicts_kept_first: 0
