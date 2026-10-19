@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.bond.tech/openapi/6271939d8b6d40004b4660ee",
+ "requested_url": "https://docs.bond.tech/openapi/6271939d8b6d40004b4660ee",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 19263,
+ "sha256": "d7445f726d933bf7ba3b77eb4e847a3968365c99ef2dcec57815b732c036f90e",
+ "fetched_at": "2026-10-19",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
